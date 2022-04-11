@@ -76,16 +76,12 @@
   font-size: 2.4em;
   margin-bottom: 0.5833333333em;
   margin-top: 0.5833333333em;
-  border-bottom: 1px solid hsl(0deg, 0%, 90%);
-  padding-bottom: 0.5833333333em;
   line-height: 1;
 }
 .wysiwyg h2 {
   font-size: 1.6em;
   margin-bottom: 0.875em;
   margin-top: 1.75em;
-  border-bottom: 1px solid hsl(0deg, 0%, 90%);
-  padding-bottom: 0.875em;
   line-height: 1.1;
 }
 .wysiwyg h3 {
