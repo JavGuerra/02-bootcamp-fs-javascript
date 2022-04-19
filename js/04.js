@@ -7,9 +7,11 @@ Fizz buzz
   imprimirá buzz. Si el número es múltiplo de 3 y de 5, imprimir fizzbuzz.
 */
 
+const INICIO = 1;
+const FINAL = 1000; // FINAL > INICIO
 let resultado = '0';
 
-for (let i = 1; i <= 1000; i++) {
+for (let i = INICIO; i <= FINAL; i++) {
   resultado += ', ';
 
   if (i % 3 == 0  ||  i % 5 == 0) {
