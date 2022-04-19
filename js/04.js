@@ -7,32 +7,18 @@ Fizz buzz
     imprimirá buzz. Si el número es múltiplo de 3 y de 5, imprimir fizzbuzz.
 */
 
-let resultado = "";
+let resultado = '';
 
 for (let i = 1; i <= 100; i++) {
+  resultado += ', ';
 
-  // Añade la coma y un espacio como separador
-  if (i > 1) {
-    resultado += ", ";
-  }
-
-  // ¿Es múltiplo de 3 y de 5?
-  if (i % 3 === 0 && i % 5 === 0) {
-
-    resultado += "fizzbuzz";
-
+  if (i % 3 == 0  ||  i % 5 == 0) {
+    if (i % 3 == 0) resultado += 'fizz';
+    if (i % 5 == 0) resultado += 'buzz';
   } else {
-
-    if (i % 3 === 0) {
-      resultado += "fizz";
-    } else if (i % 5 === 0) {
-      resultado += "buzz";
-    } else {
-      resultado += i;
-    }
-
+    resultado += i;
   }
 
-} // end for
+} // end for()
 
-console.log(resultado);
+console.log('Números' + resultado);
