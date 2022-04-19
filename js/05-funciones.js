@@ -10,30 +10,80 @@ número dado de veces
 si es primo y false si no lo es
 */
 
-function potenciacion(num1, num2 = 1) {
-  return parseInt(num1) ** parseInt(num2);
+/* -- Ejercicio 1 -- */
+
+// Anónimas autoejecutables
+(function (numero1, numero2 = 1) {console.log(numero1 ** numero2);})(2, 3); // Clásica
+((function (numero1, numero2 = 1) {console.log(numero1 ** numero2);})(2, 3)); // Crockford
++function (numero1, numero2 = 1) {console.log(numero1 ** numero2);}(2, 3); // Unitaria
+!function (numero1, numero2 = 1) {console.log(numero1 ** numero2);}(2, 3); // Facebook
+
+
+function potenciacion(numero1, numero2 = 1) {
+  return numero1 ** numero2;
 }
 
-function repetirString(cadena, num) {
+// Flecha
+let potenciacion2 = (numero1, numero2 = 1) => numero1 ** numero2;
+
+((numero1, numero2 = 1) => console.log(numero1 ** numero2))(2, 3); // Flecha autoejecutable
+
+
+/* -- Ejercicio 2 -- */
+
+function repetirString(cadena, numero) {
+  numero = parseInt(numero);
   let resultado = "";
-  if (parseInt(num) > 0) {
-    for (let i = 1; i <= parseInt(num); i++) resultado += cadena;
+  if (numero > 0) {
+    for (let i = 1; i <= numero; i++) resultado += cadena;
   }
   return resultado;
 }
 
-function esPrimo(num) {
-  let contador = 0;
-  for (i = 1; i <= parseInt(num); i++) {
-    if (parseInt(num) % i == 0) contador++;
-  }
-  return contador == 2;
+// Flecha
+let repetirString2 = (cadena, numero) => {
+    numero = parseInt(numero);
+    let resultado = "";
+    if (numero > 0) {
+      for (let i = 1; i <= numero; i++) resultado += cadena;
+    }
+    return resultado;
 }
 
-// Test
+let repetirString3 = (s, n) => s.repeat(n); // Borja
+
+
+/* -- Ejercicio 3 -- */
+
+function esPrimo(numero) {
+  numero = parseInt(numero);
+  let contador = 0;
+  for (let i = 1; i <= numero; i++) {
+    if (numero % i == 0) contador++;
+  }
+  return contador == 2; // Divisble por 2 números: 1 y si mismo.
+}
+
+// Flecha
+
+let esPrimo2 = numero => {
+    numero = parseInt(numero);
+    let contador = 0;
+    for (let i = 1; i <= numero; i++) {
+      if (numero % i == 0) contador++;
+    }
+    return contador == 2; // Divisble por 2 números: 1 y si mismo.
+}
+
+
+// Tests
 
 console.log(potenciacion(2, 3));
+console.log(potenciacion2(2, 3));
 
 console.log(repetirString("Hola", 2));
+console.log(repetirString2("Hola", 2));
+console.log(repetirString3("Hola", 2));
 
 console.log(esPrimo(1));
+console.log(esPrimo2(1));
