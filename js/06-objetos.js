@@ -15,7 +15,7 @@ let Perro = {
     nombre: '',
     raza: '',
     color: '',
-    edad: '',
+    edad: 0,
     ladrar: function() {console.log('Guau')}
 };
 
