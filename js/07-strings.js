@@ -11,13 +11,13 @@
 */
 
 
-cadena1 = cadena => cadena.toUpperCase().split(' ');
+const cadena1 = cadena => cadena.toUpperCase().split(' ');
 
 console.log(cadena1('Hola mundo'));
 
 
 
-cadena2 = (cadena, caracter) => {
+const cadena2 = (cadena, caracter) => {
   return cadena.replaceAll(caracter, 'X').replaceAll(' ', '').toUpperCase();
 };
 
@@ -25,8 +25,8 @@ console.log(cadena2('Mariposa Voladora', 'a'));
 
 
 
-cadena3 = cadena => {
-    let vocales = 'aeiou';
+const cadena3 = cadena => {
+    const vocales = 'aeiou';
     for (let i = 0; i <= 4; i++) {
         if (cadena.includes(vocales[i])) {
             cadena = cadena.replaceAll(vocales[i], 'X');
