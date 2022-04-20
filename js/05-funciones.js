@@ -12,16 +12,15 @@ si es primo y false si no lo es
 
 /* -- Ejercicio 1 -- */
 
+function potenciacion(numero1, numero2 = 1) {
+  return numero1 ** numero2;
+}
+
 // Anónimas autoejecutables
 (function (numero1, numero2 = 1) {console.log(numero1 ** numero2);})(2, 3); // Clásica
 ((function (numero1, numero2 = 1) {console.log(numero1 ** numero2);})(2, 3)); // Crockford
 +function (numero1, numero2 = 1) {console.log(numero1 ** numero2);}(2, 3); // Unitaria
 !function (numero1, numero2 = 1) {console.log(numero1 ** numero2);}(2, 3); // Facebook
-
-
-function potenciacion(numero1, numero2 = 1) {
-  return numero1 ** numero2;
-}
 
 // Flecha
 let potenciacion2 = (numero1, numero2 = 1) => numero1 ** numero2;
@@ -33,7 +32,7 @@ let potenciacion2 = (numero1, numero2 = 1) => numero1 ** numero2;
 
 function repetirString(cadena, numero) {
   numero = parseInt(numero);
-  let resultado = "";
+  let resultado = '';
   if (numero > 0) {
     for (let i = 1; i <= numero; i++) resultado += cadena;
   }
@@ -43,7 +42,7 @@ function repetirString(cadena, numero) {
 // Flecha
 let repetirString2 = (cadena, numero) => {
     numero = parseInt(numero);
-    let resultado = "";
+    let resultado = '';
     if (numero > 0) {
       for (let i = 1; i <= numero; i++) resultado += cadena;
     }
@@ -61,7 +60,7 @@ function esPrimo(numero) {
   for (let i = 1; i <= numero; i++) {
     if (numero % i == 0) contador++;
   }
-  return contador == 2; // Divisble por 2 números: 1 y si mismo.
+  return contador == 2; // Divisible por 2 números: 1 y si mismo.
 }
 
 // Flecha
@@ -76,14 +75,14 @@ let esPrimo2 = numero => {
 }
 
 
-// Tests
+/* -- Test -- */
 
 console.log(potenciacion(2, 3));
 console.log(potenciacion2(2, 3));
 
-console.log(repetirString("Hola", 2));
-console.log(repetirString2("Hola", 2));
-console.log(repetirString3("Hola", 2));
+console.log(repetirString('Hola', 2));
+console.log(repetirString2('Hola', 2));
+console.log(repetirString3('Hola', 2));
 
 console.log(esPrimo(1));
 console.log(esPrimo2(1));
