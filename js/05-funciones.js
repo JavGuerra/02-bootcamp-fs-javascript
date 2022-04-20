@@ -14,7 +14,7 @@ si es primo y false si no lo es
 
 function potenciacion(numero1, numero2 = 1) {
   let resultado = null;
-  if (!Number.isNaN(numero1) && !Number.isNaN(numero2)) {
+  if (!isNaN(numero1) && !isNaN(numero2)) {
     resultado = numero1 ** numero2;
   }
   return resultado;
@@ -36,7 +36,7 @@ let potenciacion2 = (numero1, numero2 = 1) => numero1 ** numero2;
 
 function repetirString(cadena, numero) {
   let resultado = '';
-  if (!Number.isNaN(numero)) {
+  if (!isNaN(numero)) {
     numero = parseInt(numero);
     if (numero > 0) {
       for (let i = 1; i <= numero; i++) resultado += cadena;
@@ -48,7 +48,7 @@ function repetirString(cadena, numero) {
 // Flecha
 let repetirString2 = (cadena, numero) => {
   let resultado = '';
-  if (!Number.isNaN(numero)) {
+  if (!isNaN(numero)) {
     numero = parseInt(numero);
     if (numero > 0) {
       for (let i = 1; i <= numero; i++) resultado += cadena;
@@ -63,8 +63,8 @@ let repetirString3 = (s, n) => s.repeat(n); // Borja
 /* -- Ejercicio 3 -- */
 
 function esPrimo(numero) {
-  let contador = 0;
-  if (!Number.isNaN(numero)) {
+  let contador = 0; // Número de veces que el módulo (%) es 0.
+  if (!isNaN(numero)) {
     numero = parseInt(numero);
     let i = 1;
     while (i <= numero && contador <= 2) {
@@ -78,8 +78,8 @@ function esPrimo(numero) {
 // Flecha
 
 let esPrimo2 = numero => {
-  let contador = 0;
-  if (!Number.isNaN(numero)) {
+  let contador = 0; // Número de veces que el módulo (%) es 0.
+  if (!isNaN(numero)) {
     numero = parseInt(numero);
     let i = 1;
     while (i <= numero && contador <= 2) {
@@ -102,3 +102,4 @@ console.log(repetirString3('Hola', 4));
 
 console.log(esPrimo(1));
 console.log(esPrimo2(3));
+
