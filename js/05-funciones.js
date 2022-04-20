@@ -63,7 +63,7 @@ let repetirString3 = (s, n) => s.repeat(n); // Borja
 /* -- Ejercicio 3 -- */
 
 function esPrimo(numero) {
-  let contador = 0; // Número de veces que el módulo (%) es 0.
+  let contador = 0; // Número de veces que el resto (%) es 0.
   if (!isNaN(numero)) {
     numero = parseInt(numero);
     let i = 1;
@@ -78,7 +78,7 @@ function esPrimo(numero) {
 // Flecha
 
 let esPrimo2 = numero => {
-  let contador = 0; // Número de veces que el módulo (%) es 0.
+  let contador = 0; // Número de veces que el resto (%) es 0.
   if (!isNaN(numero)) {
     numero = parseInt(numero);
     let i = 1;
