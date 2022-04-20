@@ -13,7 +13,11 @@ si es primo y false si no lo es
 /* -- Ejercicio 1 -- */
 
 function potenciacion(numero1, numero2 = 1) {
-  return numero1 ** numero2;
+  let resultado = null;
+  if (!Number.isNaN(numero1) && !Number.isNaN(numero2)) {
+    resultado = numero1 ** numero2;
+  }
+  return resultado;
 }
 
 // Anónimas autoejecutables
@@ -31,22 +35,26 @@ let potenciacion2 = (numero1, numero2 = 1) => numero1 ** numero2;
 /* -- Ejercicio 2 -- */
 
 function repetirString(cadena, numero) {
-  numero = parseInt(numero);
   let resultado = '';
-  if (numero > 0) {
-    for (let i = 1; i <= numero; i++) resultado += cadena;
+  if (!Number.isNaN(numero)) {
+    numero = parseInt(numero);
+    if (numero > 0) {
+      for (let i = 1; i <= numero; i++) resultado += cadena;
+    }
   }
   return resultado;
 }
 
 // Flecha
 let repetirString2 = (cadena, numero) => {
+  let resultado = '';
+  if (!Number.isNaN(numero)) {
     numero = parseInt(numero);
-    let resultado = '';
     if (numero > 0) {
       for (let i = 1; i <= numero; i++) resultado += cadena;
     }
-    return resultado;
+  }
+  return resultado;
 }
 
 let repetirString3 = (s, n) => s.repeat(n); // Borja
@@ -55,10 +63,12 @@ let repetirString3 = (s, n) => s.repeat(n); // Borja
 /* -- Ejercicio 3 -- */
 
 function esPrimo(numero) {
-  numero = parseInt(numero);
   let contador = 0;
-  for (let i = 1; i <= numero; i++) {
-    if (numero % i == 0) contador++;
+  if (!Number.isNaN(numero)) {
+    numero = parseInt(numero);
+    for (let i = 1; i <= numero; i++) {
+      if (numero % i == 0) contador++;
+    }
   }
   return contador == 2; // Divisible por 2 números: 1 y si mismo.
 }
@@ -66,12 +76,14 @@ function esPrimo(numero) {
 // Flecha
 
 let esPrimo2 = numero => {
+  let contador = 0;
+  if (!Number.isNaN(numero)) {
     numero = parseInt(numero);
-    let contador = 0;
     for (let i = 1; i <= numero; i++) {
       if (numero % i == 0) contador++;
     }
-    return contador == 2; // Divisble por 2 números: 1 y si mismo.
+  }
+  return contador == 2; // Divisible por 2 números: 1 y si mismo.
 }
 
 
