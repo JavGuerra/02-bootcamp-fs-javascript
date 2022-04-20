@@ -66,8 +66,10 @@ function esPrimo(numero) {
   let contador = 0;
   if (!Number.isNaN(numero)) {
     numero = parseInt(numero);
-    for (let i = 1; i <= numero; i++) {
+    let i = 1;
+    while (i <= numero && contador <= 2) {
       if (numero % i == 0) contador++;
+      i++;
     }
   }
   return contador == 2; // Divisible por 2 números: 1 y si mismo.
@@ -79,8 +81,10 @@ let esPrimo2 = numero => {
   let contador = 0;
   if (!Number.isNaN(numero)) {
     numero = parseInt(numero);
-    for (let i = 1; i <= numero; i++) {
+    let i = 1;
+    while (i <= numero && contador <= 2) {
       if (numero % i == 0) contador++;
+      i++;
     }
   }
   return contador == 2; // Divisible por 2 números: 1 y si mismo.
@@ -90,11 +94,11 @@ let esPrimo2 = numero => {
 /* -- Test -- */
 
 console.log(potenciacion(2, 3));
-console.log(potenciacion2(2, 3));
+console.log(potenciacion2(3, 2));
 
 console.log(repetirString('Hola', 2));
-console.log(repetirString2('Hola', 2));
-console.log(repetirString3('Hola', 2));
+console.log(repetirString2('Hola', 3));
+console.log(repetirString3('Hola', 4));
 
 console.log(esPrimo(1));
-console.log(esPrimo2(1));
+console.log(esPrimo2(3));
