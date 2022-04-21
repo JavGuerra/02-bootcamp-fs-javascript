@@ -25,9 +25,12 @@ console.log(cadena2('Mariposa Voladora', 'a'));
 
 
 
+// TODO en .includes(), probar a comprobar sólo las vocales en mińusculas...
+// ¿como averiguar si mayúsculas y minúsculas?
+
 const cadena3 = cadena => {
-    const vocales = 'aeiou';
-    for (let i = 0; i <= 4; i++) {
+    const vocales = 'aeiouAEIOU'; // acentos, diéresis... o .toLowercase()
+    for (let i = 0; i <= vocales.length; i++) {
         if (cadena.includes(vocales[i])) {
             cadena = cadena.replaceAll(vocales[i], 'X');
         }
@@ -35,4 +38,10 @@ const cadena3 = cadena => {
     return cadena;
 }
 
-console.log(cadena3('Hipotenusa'));
+console.log(cadena3('HipotenusA'));
+
+
+// Anatoli RegEx
+function sustituyeVocales(cadena) {
+    return cadena.replace(/a|e|i|o|u/gi, 'X');
+}
