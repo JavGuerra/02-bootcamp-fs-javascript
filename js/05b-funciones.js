@@ -37,7 +37,7 @@ let potenciacion2 = (numero1, numero2 = 1) => numero1 ** numero2;
 function repetirString(cadena, numero) {
   let resultado = '';
   if (!isNaN(numero)) {
-    numero = Math.floor(numero);
+    numero = Math.floor(Math.abs(numero));
     if (numero > 0) {
       for (let i = 1; i <= numero; i++) resultado += cadena;
     }
@@ -49,7 +49,7 @@ function repetirString(cadena, numero) {
 let repetirString2 = (cadena, numero) => {
   let resultado = '';
   if (!isNaN(numero)) {
-    numero = Math.floor(numero);
+    numero = Math.floor(Math.abs(numero));
     if (numero > 0) {
       for (let i = 1; i <= numero; i++) resultado += cadena;
     }
@@ -65,7 +65,7 @@ let repetirString3 = (s, n) => s.repeat(n); // Borja
 function esPrimo(numero) {
   let contador = 0; // Número de veces que el resto (%) es 0.
   if (!isNaN(numero)) {
-    numero = Math.floor(numero);
+    numero = Math.floor(Math.abs(numero));
     let i = 1;
     while (i <= numero && contador <= 2) {
       if (numero % i == 0) contador++;
@@ -80,7 +80,7 @@ function esPrimo(numero) {
 let esPrimo2 = numero => {
   let contador = 0; // Número de veces que el resto (%) es 0.
   if (!isNaN(numero)) {
-    numero = Math.floor(numero);
+    numero = Math.floor(Math.abs(numero));
     let i = 1;
     while (i <= numero && contador <= 2) {
       if (numero % i == 0) contador++;
@@ -102,4 +102,3 @@ console.log(repetirString3('Hola', 4));
 
 console.log(esPrimo(1));
 console.log(esPrimo2(3));
-
