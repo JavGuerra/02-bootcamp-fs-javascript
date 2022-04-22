@@ -25,28 +25,30 @@ let personas = [
 
 let personasAprobadas, resultado, pares, impares;
 
+const BURBUJA = (a, b) => a - b; // Método de ordenación de la burbuja
+
 let personas = [
-    { nombre: 'David', edad: 44, aprobado: true, nota: 7 },
-    { nombre: 'Maria', edad: 30, aprobado: false, nota: 3 },
-    { nombre: 'Pedro', edad: 33, aprobado: false, nota: 2 },
-    { nombre: 'Marcos', edad: 25, aprobado: true, nota: 6 }
+    { nombre: 'David',  edad: 44, aprobado: true,  nota: 7 },
+    { nombre: 'Maria',  edad: 30, aprobado: false, nota: 3 },
+    { nombre: 'Pedro',  edad: 33, aprobado: false, nota: 2 },
+    { nombre: 'Marcos', edad: 25, aprobado: true,  nota: 6 }
 ];
 
 let numeros = [ 43, 11, 18, 46, 44, 37, 42, 29, 9, 3, 37, 0, 40, 10, 38, 34, 25, 40, 4, 32 ];
 
-personasAprobadas = personas.filter(e => e.aprobado);
+personasAprobadas = personas.filter(el => el.aprobado);
 console.log(personasAprobadas);
 
-personasAprobadas = personas.filter(e => e.aprobado && e.edad >30);
+personasAprobadas = personas.filter(el => el.aprobado && e.edad >30);
 console.log(personasAprobadas);
 
-personas.forEach(e => e.aprobado = true);
+personas.forEach(el => el.aprobado = true);
 console.log(personas);
 
-resultado = personas.find(e => e.edad <30);
+resultado = personas.find(el => el.edad < 30);
 console.log(resultado);
 
-resultado = numeros.map(e => e + 10);
+resultado = numeros.map(el => el + 10);
 console.log(resultado);
 
 numeros.shift();
@@ -54,14 +56,12 @@ resultado = numeros.pop();
 console.log(resultado);
 console.log(numeros);
 
-const fc = (a, b) => a - b; // Ordenación de la burbuja
-
-pares = numeros.filter(e => e % 2 == 0).sort(fc);
+pares = numeros.filter(el => el % 2 == 0).sort(BURBUJA);
 console.log(pares);
-impares = numeros.filter(e => e % 2 != 0).sort(fc);
+impares = numeros.filter(el => el % 2 != 0).sort(BURBUJA);
 console.log(impares);
 
-resultado = pares.concat(impares).sort(fc);
+resultado = pares.concat(impares).sort(BURBUJA);
 console.log(resultado);
 
 resultado = resultado.slice(0, 2).concat(resultado.slice(4));
