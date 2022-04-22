@@ -25,7 +25,8 @@ let personas = [
 
 let personasAprobadas, resultado, pares, impares;
 
-const BURBUJA = (a, b) => a - b; // Método de ordenación de la burbuja
+const BURBUJA = (a, b) => a - b; // Método de ordenación de la burbuja para números
+// Para cadenas, usar: BURBUJA = (a, b) => a.localeCompare(b); Ver opciones de localeCompare.
 
 let personas = [
     { nombre: 'David',  edad: 44, aprobado: true,  nota: 7 },
