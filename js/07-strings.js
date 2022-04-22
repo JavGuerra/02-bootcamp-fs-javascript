@@ -45,3 +45,8 @@ console.log(cadena3('HipotenusA'));
 function sustituyeVocales(cadena) {
     return cadena.replace(/a|e|i|o|u/gi, 'X');
 }
+
+// Borja
+if (s.includes(vowels[i]) || s.includes(vowels[i].toUpperCase())) {
+    newString = newString.replaceAll(vowels[i], 'X');
+}
