@@ -23,10 +23,8 @@ let personas = [
   después volveremos a concatenar ambos array para eliminar el tercer y cuarto elemento de este último
   */
 
-let personasAprobadas, resultado, pares, impares;
 
-const BURBUJA = (a, b) => a - b; // Método de ordenación de la burbuja para números
-// Para cadenas, usar: BURBUJA = (a, b) => a.localeCompare(b); Ver opciones de localeCompare.
+let personasAprobadas, resultado, pares, impares;
 
 let personas = [
     { nombre: 'David',  edad: 44, aprobado: true,  nota: 7 },
@@ -35,12 +33,11 @@ let personas = [
     { nombre: 'Marcos', edad: 25, aprobado: true,  nota: 6 }
 ];
 
-let numeros = [ 43, 11, 18, 46, 44, 37, 42, 29, 9, 3, 37, 0, 40, 10, 38, 34, 25, 40, 4, 32 ];
 
 personasAprobadas = personas.filter(el => el.aprobado);
 console.log(personasAprobadas);
 
-personasAprobadas = personas.filter(el => el.aprobado && e.edad >30);
+personasAprobadas = personas.filter(el => el.aprobado && el.edad > 30);
 console.log(personasAprobadas);
 
 personas.forEach(el => el.aprobado = true);
@@ -48,6 +45,12 @@ console.log(personas);
 
 resultado = personas.find(el => el.edad < 30);
 console.log(resultado);
+
+
+
+const BURBUJA = (a, b) => a - b; // Método de ordenación de la burbuja para números
+// Para cadenas, usar: BURBUJA = (a, b) => a.localeCompare(b); Ver opciones de localeCompare.
+let numeros = [ 43, 11, 18, 46, 44, 37, 42, 29, 9, 3, 37, 0, 40, 10, 38, 34, 25, 40, 4, 32 ];
 
 resultado = numeros.map(el => el + 10);
 console.log(resultado);
