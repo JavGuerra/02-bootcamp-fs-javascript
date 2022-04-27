@@ -11,6 +11,7 @@ Definiremos un script con los eventos:
   (deberemos cambiar el atributo src) (Solo si sobra tiempo)
 */
 
+
 // function rojo() {this.style.color = 'Crimson'};
 // document.getElementById('p1').addEventListener('click', rojo);
 // document.getElementById('p2').addEventListener('click', rojo);
@@ -22,9 +23,11 @@ for (let i = 0; i < parrafos.length; i++) {
   });
 }
 
+
 document.getElementById('s1').addEventListener('click', function () {
   this.style.background = 'LightGreen';
 });
+
 
 // function azul() {this.style.background = 'PaleTurquoise'};
 // document.getElementById('a1').addEventListener('click', azul);
@@ -37,9 +40,11 @@ for (let i = 0; i < articulos.length; i++) {
   });
 }
 
+
 document.getElementById('b1').addEventListener('click', function () {
   document.getElementById('p1').innerText = 'Nuevo párrafo';
 });
+
 
 // function imagen() {this.setAttribute('src', 'img/foto3.jpg')};
 // document.getElementById('i1').addEventListener('click', imagen);
@@ -56,5 +61,4 @@ document.querySelectorAll('img').forEach(
     el => el.addEventListener('click', e =>
       e.currentTarget.setAttribute('src', 'img/foto3.jpg'))
   );
-
-  // .currentTarget
+// .currentTarget
