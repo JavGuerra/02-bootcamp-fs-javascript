@@ -1,4 +1,4 @@
-fetch("listado.json")
+fetch("js/listado.json")
 .then(response => {
    return response.json();
 })
