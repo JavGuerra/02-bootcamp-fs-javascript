@@ -5,6 +5,9 @@ body {
 
 .imagen {
     width: 250px;
+    float: right;
+    margin-left: 2em;
+    padding-bottom: 2em;
 }
 
 section, article, button, p {
@@ -15,6 +18,22 @@ section, article, button {
     padding: 1em;
 }
 
+section, article {
+    border: 1px dotted gray;
+}
+
+header, .centrado {
+    text-align: center;
+}
+
 #a2, button {
     margin-top: 1em;
+}
+
+#b1 {
+    width: 150px;
+}
+
+br {
+    clear: both;
 }
