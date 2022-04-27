@@ -1,3 +1,15 @@
 [
-    {"titulo": "01 Variables", "enlace": "01-variables.html" }
+    {"titulo": "01. Variables",  "enlace": "01-variables.html" },
+    {"titulo": "02. Swich",      "enlace": "02-swich.html" },
+    {"titulo": "03. Bucles",     "enlace": "03-bucles.html" },
+    {"titulo": "04. Fizzbuzz",   "enlace": "04-fizzbuzz.html" },
+    {"titulo": "05. Funciones",  "enlace": "05-funciones.html" },
+    {"titulo": "05b. Funciones", "enlace": "05b-funciones.html" },
+    {"titulo": "06. Objetos",    "enlace": "06-objetos.html" },
+    {"titulo": "07. Strings",    "enlace": "07-strings.html" },
+    {"titulo": "08. Arrays",     "enlace": "08-arrays.html" },
+    {"titulo": "08b. Arrays",    "enlace": "08b-arrays.html" },
+    {"titulo": "09. Kata",       "enlace": "09-kata.html" },
+    {"titulo": "10. DOM",        "enlace": "10-dom.html" },
+    {"titulo": "11. Eventos",    "enlace": "11-eventos.html" }
 ]
