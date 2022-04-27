@@ -13,10 +13,11 @@ fetch("js/listado.json")
 .then(function(data) {
     let contenidos = data.results;
     return contenidos.map(function(contenido) {
+      let li = createNode('li');
       let span = createNode('span');
-      img.src = contenido.picture.medium;
       span.innerHTML = `${contenido.titulo} - ${contenido.enlace}`;
       append(li, span);
+      append(ul, li);
     })
   })
 .catch(err => console.error(err))
