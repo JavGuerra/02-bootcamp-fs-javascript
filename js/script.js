@@ -13,7 +13,7 @@ fetch("js/listado.json")
 .then(function(data) {
     return data.map(function(contenido) {
         let article = createNode('article');
-        article.innerHTML = `${contenido.titulo} - ${contenido.enlace}`;
+        article.innerHTML = `${contenido.titulo}`;
         append(lista, article);
     })
   })
