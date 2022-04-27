@@ -7,6 +7,10 @@ body {
     width: 250px;
 }
 
+section, article, button, p {
+    cursor: pointer;
+}
+
 section, article, button {
     padding: 1em;
 }
