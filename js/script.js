@@ -12,11 +12,9 @@ fetch("js/listado.json")
 .then(resp => resp.json())
 .then(function(data) {
     return data.map(function(contenido) {
-        let div = createNode('div');
-        let span = createNode('span');
-        span.innerHTML = `${contenido.titulo} - ${contenido.enlace}`;
-        append(div, span);
-        append(lista, div);
+        let article = createNode('article');
+        article.innerHTML = `${contenido.titulo} - ${contenido.enlace}`;
+        append(lista, article);
     })
   })
 .catch(err => console.error(err))

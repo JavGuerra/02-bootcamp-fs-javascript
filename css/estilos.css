@@ -1,6 +1,13 @@
 header {
     text-align: center;
 }
-main {
+section {
     display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+article {
+    min-width: 250px;
+    background-color: aliceblue;
 }
