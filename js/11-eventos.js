@@ -19,7 +19,7 @@ Definiremos un script con los eventos:
 let parrafos = document.getElementsByTagName('p');
 for (let i = 0; i < parrafos.length; i++) {
   parrafos[i].addEventListener('click', function () {
-    this.style.color = 'red';
+    this.style.color = 'Crimson';
   });
 }
 
@@ -50,15 +50,15 @@ document.getElementById('b1').addEventListener('click', function () {
 // document.getElementById('i1').addEventListener('click', imagen);
 // document.getElementById('i2').addEventListener('click', imagen);
 
-let imagenes = document.getElementsByTagName('img');
-for (let i = 0; i < imagenes.length; i++) {
-  imagenes[i].addEventListener('click', function () {
-    this.setAttribute('src', 'img/foto3.jpg');
-  });
-}
+// let imagenes = document.getElementsByTagName('img');
+// for (let i = 0; i < imagenes.length; i++) {
+//   imagenes[i].addEventListener('click', function () {
+//     this.setAttribute('src', 'img/foto3.jpg');
+//   });
+// }
 
 document.querySelectorAll('img').forEach(
     el => el.addEventListener('click', e =>
       e.currentTarget.setAttribute('src', 'img/foto3.jpg'))
   );
-// .currentTarget
+// Ver .currentTarget
