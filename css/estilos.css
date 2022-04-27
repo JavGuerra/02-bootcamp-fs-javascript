@@ -1,13 +1,27 @@
-header {
-    text-align: center;
+body {
+  margin: 2em auto;
+  max-width: 50em;
 }
+
+header {
+  text-align: center;
+}
+
+main {
+    margin: 2em, 0;
+}
+
 section {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 1em;
 }
 
 article {
-    min-width: 250px;
-    background-color: aliceblue;
+  width: 20%;
+  min-width: 250px;
+  background-color: aliceblue;
+  padding: 0.5em;
+  text-align: center;
 }
