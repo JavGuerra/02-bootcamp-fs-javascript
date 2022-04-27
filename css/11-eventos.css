@@ -26,11 +26,12 @@ header, .centrado {
     text-align: center;
 }
 
-#a2, button {
+#a2 {
     margin-top: 1em;
 }
 
 #b1 {
+    margin-top: 2em;
     width: 150px;
 }
 
