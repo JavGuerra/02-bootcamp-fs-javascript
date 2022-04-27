@@ -6,4 +6,4 @@ fetch("js/listado.json")
 })
 .then(jsondata => listado = jsondata);
 
-console.log(listado);
+console.log("Listado:" + listado);
