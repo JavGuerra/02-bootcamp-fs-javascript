@@ -6,8 +6,8 @@ body {
 .imagen {
     width: 250px;
     float: right;
-    margin-left: 2em;
-    padding-bottom: 2em;
+    margin-left: 1.5em;
+    margin-bottom: 0.75em;
 }
 
 section, article, button, p {
@@ -32,9 +32,9 @@ header, .centrado {
 
 #b1 {
     margin-top: 2em;
-    width: 150px;
+    width: 175px;
 }
 
-br {
+.clear, br {
     clear: both;
 }
