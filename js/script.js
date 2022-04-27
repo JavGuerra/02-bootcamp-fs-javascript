@@ -6,13 +6,12 @@ function append(parent, el) {
   return parent.appendChild(el);
 }
 
-const ul = document.getElementById('contenido');
+const ul = document.getElementById('listado');
 
 fetch("js/listado.json")
 .then(resp => resp.json())
 .then(function(data) {
-    let contenidos = data.results;
-    return contenidos.map(function(contenido) {
+    return data.map(function(contenido) {
       let li = createNode('li');
       let span = createNode('span');
       span.innerHTML = `${contenido.titulo} - ${contenido.enlace}`;
