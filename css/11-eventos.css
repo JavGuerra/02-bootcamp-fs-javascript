@@ -20,6 +20,7 @@ section, article, button {
 
 section, article {
     border: 1px dotted gray;
+    background-color: ghostwhite;
 }
 
 header, .centrado {
