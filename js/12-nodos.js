@@ -9,10 +9,10 @@ Creamos un index.js el cual realice 3 funciones (una por botón), es decir:
 - Función que elimine el ultimo article que haya.
 */
 
-// let btnCrear = document.getElementById('bC');
-// let btnReemp = document.getElementById('bR');
-// let btnBorra = document.getElementById('bB');
-// let elPadre  = document.getElementById('ar');
+// let btnCrear = document.getElementById('btnCrea');
+// let btnReemp = document.getElementById('btnReem');
+// let btnBorra = document.getElementById('btnBorr');
+// let elPadre  = document.getElementById('rtcl');
 // btnCrear.addEventListener('click', creaP);
 // btnReemp.addEventListener('click', reemplazaP);
 // btnBorra.addEventListener('click', borraP)
@@ -27,7 +27,7 @@ function conectaNodo(padre, el) {
     return padre.appendChild(el);
 }
 
-elemento('#btnCrea').onclick = creaP; // btnCrear.addEventListener('click', crea);
+elemento('#btnCrea').onclick = creaP; // btnCrear.addEventListener('click', creaP);
 elemento('#btnReem').onclick = reemplazaP;
 elemento('#btnBorr').onclick = borraP;
 
