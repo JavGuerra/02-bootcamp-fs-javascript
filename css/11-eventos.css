@@ -23,7 +23,7 @@ section, article {
     background-color: ghostwhite;
 }
 
-header, .centrado {
+header, footer, .centrado {
     text-align: center;
 }
 

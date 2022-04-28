@@ -11,5 +11,6 @@
     {"titulo": "08b. Arrays",    "enlace": "08b-arrays.html" },
     {"titulo": "09. Kata",       "enlace": "09-kata.html" },
     {"titulo": "10. DOM",        "enlace": "10-dom.html" },
-    {"titulo": "11. Eventos",    "enlace": "11-eventos.html" }
+    {"titulo": "11. Eventos",    "enlace": "11-eventos.html" },
+    {"titulo": "12. Nodos",      "enlace": "12-nodos.html" }
 ]
