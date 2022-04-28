@@ -32,8 +32,8 @@ elemento('#btnReem').onclick = reemplazaP;
 elemento('#btnBorr').onclick = borraP;
 
 let elPadre = elemento('#rtcl');
-let texto1 = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.¶";
-let texto2 = '¡Supercalifragilisticoespialidoso!¶';
+let texto1  = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.¶";
+let texto2  = '¡Supercalifragilisticoespialidoso!¶';
 
 function creaP() {
     let parrafo = creaNodo('p'); // document.createElement('p');
