@@ -82,11 +82,12 @@ const elHijo  = 'ARTICLE';
 const texto1  = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.¶";
 const texto2  = '¡Supercalifragilisticoespialidoso!¶';
 let   pintar  = false;  // Coloreado
-let   reempl  = false;  // ¿Acabo de reemplazar?
+let   reempl  = false;  // ¿Última línea reemplazada?
 let   borrar  = true;   // ¿Queda algo por borrar?
 let   retira  = 0;      // ¿Cuánto hay que limpiar?
 
 function crea() {
+    btnCrea.disabled = true;
     let nuevo = creaNodo(elHijo); // document.createElement(elHijo);
     nuevo.innerText = texto1;
     if (pintar && esPar()) {
@@ -98,9 +99,11 @@ function crea() {
         reempl = false;
         btnReem.disabled = false;
     }
+    btnCrea.disabled = false;
 };
 
 function reemplaza() {
+    btnReem.disabled = true;
     let el = elPadre.lastElementChild;
     if (el.tagName == elHijo) {
         let nuevo = creaNodo(elHijo);
@@ -110,13 +113,13 @@ function reemplaza() {
         }
         elPadre.replaceChild(nuevo, el);
         reempl = true;
-        btnReem.disabled = true;
         retira++;
         btnLimp.disabled = false;
     }
 }
 
 function colorea () {
+    btnColo.disabled = true;
     let pares = elementos(`${elHijo}:nth-child(odd)`);
     pares.forEach(el => {
         if (pintar) {
@@ -127,9 +130,11 @@ function colorea () {
     });
     pintar = !pintar;
     btnColor();
+    btnColo.disabled = false;
 }
 
 function borra() {
+    btnBorr.disabled = true;
     let el  = elPadre.lastElementChild;
     let txt = el.firstChild.textContent;
     if (el.tagName == elHijo) {
@@ -148,7 +153,8 @@ function borra() {
             } else {
                 reempl = false;
                 btnReem.disabled = false;
-            }         
+            }
+            btnBorr.disabled = false;       
         } else {
             botones(false);
         }
@@ -158,19 +164,19 @@ function borra() {
 }
 
 function limpia() {
+    btnLimp.disabled = true;
     let elsReem = elementos(elHijo);
     elsReem.forEach( el => {
         el.classList.remove('pares');
         let txt = el.firstChild.textContent;
         if (txt == texto2) el.remove();
     });
-    if (pintar) {
-        pintar = !pintar;
-        colorea();
-    }
     if (longPadre() > 1) {
         retira = 0;
-        btnLimp.disabled = true;
+        if (pintar) {
+            pintar = !pintar;
+            colorea();
+        }
         if (reempl) {
             reempl = false;
             btnReem.disabled = false;

@@ -9,6 +9,15 @@ button {
     cursor: pointer;
     margin: 0.5em 0.5em;
     width: 135px;
+    background-color: LightCyan;
+}
+
+button:disabled {
+    background-color: WhiteSmoke;
+}
+
+button:hover:disabled {
+    cursor: not-allowed;
 }
 
 section, article, button {
@@ -40,8 +49,4 @@ header, footer p, nav {
 
 .pares, .btnColor {
     background-color: LemonChiffon;
-}
-
-button:hover:disabled {
-    cursor: not-allowed;
 }
