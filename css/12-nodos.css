@@ -5,14 +5,19 @@ body {
     max-width: 50em;
   }
 
+h1, h2, button {
+    color: DarkSlateBlue !important;
+}
+
 button {
     cursor: pointer;
     margin: 0.5em 0.5em;
     width: 135px;
-    background-color: LightCyan;
+    background-color: Lavender;
 }
 
 button:disabled {
+    color: DarkGray !important;
     background-color: WhiteSmoke;
 }
 
