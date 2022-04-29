@@ -34,57 +34,70 @@ function creaNodo(el) {
 function conectaNodo(padre, el) {
     return padre.appendChild(el);
 }
+function longPadre() {
+    return elPadre.children.length;
+}
 function esPar() {
-    return elPadre.children.length % 2;
+    return longPadre() % 2 == 0;
 }
 function btnColor() {
     if (pintar) {
-        elemento('#btnColo').classList.add('btnColor');
+        btnColo.classList.add('btnColor');
     } else {
-        elemento('#btnColo').classList.remove('btnColor');
+        btnColo.classList.remove('btnColor');
     }
 }
 function botones(poner) {
     if (poner) {
-        elemento('#btnReem').disabled = false;
-        elemento('#btnColo').disabled = false;
-        elemento('#btnBorr').disabled = false;
+        btnReem.disabled = false;
+        btnColo.disabled = false;
+        btnBorr.disabled = false;
     } else {
-        elemento('#btnReem').disabled = true;
-        elemento('#btnColo').disabled = true;
-        elemento('#btnBorr').disabled = true;
-        elemento('#btnLimp').disabled = true;
-        reempl = false;
+        btnReem.disabled = true;
+        btnColo.disabled = true;
+        btnBorr.disabled = true;
+        btnLimp.disabled = true;
+        retira = 0;
         pintar = false;
         btnColor();
     }
     borrar = !borrar;
 }
 
-elemento('#btnCrea').onclick  = crea; // btnCrear.addEventListener('click', crea);
-elemento('#btnReem').onclick  = reemplaza;
-elemento('#btnColo').onclick  = colorea;
-elemento('#btnBorr').onclick  = borra;
-elemento('#btnLimp').onclick  = limpia;
+let btnCrea = elemento('#btnCrea');
+let btnReem = elemento('#btnReem');
+let btnColo = elemento('#btnColo');
+let btnBorr = elemento('#btnBorr');
+let btnLimp = elemento('#btnLimp');
 
-elemento('#btnLimp').disabled = true;
+btnCrea.onclick  = crea; // btnCrear.addEventListener('click', crea);
+btnReem.onclick  = reemplaza;
+btnColo.onclick  = colorea;
+btnBorr.onclick  = borra;
+btnLimp.onclick  = limpia;
+btnLimp.disabled = true;
 
 const elPadre = elemento('#sctn');
 const elHijo  = 'ARTICLE';
 const texto1  = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.¶";
 const texto2  = '¡Supercalifragilisticoespialidoso!¶';
-let   pintar  = false; // Coloreado
-let   borrar  = true;  // ¿Queda algo por borrar?
-let   reempl  = false; // ¿Algo reemplazado?
+let   pintar  = false;  // Coloreado
+let   reempl  = false;  // ¿Acabo de reemplazar?
+let   borrar  = true;   // ¿Queda algo por borrar?
+let   retira  = 0;      // ¿Cuánto hay que limpiar?
 
 function crea() {
     let nuevo = creaNodo(elHijo); // document.createElement(elHijo);
     nuevo.innerText = texto1;
-    if (pintar && esPar() == 0) {
+    if (pintar && esPar()) {
         nuevo.classList.add('pares'); 
     }
     conectaNodo(elPadre, nuevo); // elPadre.appendChild(nuevo);
     if (!borrar) botones(true);
+    if (reempl) {
+        reempl = false;
+        btnReem.disabled = false;
+    }
 };
 
 function reemplaza() {
@@ -92,14 +105,14 @@ function reemplaza() {
     if (el.tagName == elHijo) {
         let nuevo = creaNodo(elHijo);
         nuevo.innerText = texto2;
-        if (pintar && esPar() != 0) {
+        if (pintar && esPar()) {
             nuevo.classList.add('pares'); 
         }
         elPadre.replaceChild(nuevo, el);
-        if (!reempl) {
-            reempl = true;
-            elemento('#btnLimp').disabled = false;
-        }
+        reempl = true;
+        btnReem.disabled = true;
+        retira++;
+        btnLimp.disabled = false;
     }
 }
 
@@ -117,11 +130,27 @@ function colorea () {
 }
 
 function borra() {
-    let el = elPadre.lastElementChild;
+    let el  = elPadre.lastElementChild;
+    let txt = el.firstChild.textContent;
     if (el.tagName == elHijo) {
         el.remove(); //elPadre.removeChild(el);
-        if (elPadre.children.length == 1) {
-            botones(false);           
+        if (longPadre() > 1) {
+            if (txt == texto2) retira--;
+            if (retira == 0) {
+                btnLimp.disabled = true;
+            }
+            // ¿Qué tenemos ahora en el último el?
+            el  = elPadre.lastElementChild;
+            txt = el.firstChild.textContent;
+            if (txt == texto2) {
+                reempl = true;
+                btnReem.disabled = true;
+            } else {
+                reempl = false;
+                btnReem.disabled = false;
+            }         
+        } else {
+            botones(false);
         }
     } else {
         botones(false);
@@ -129,8 +158,8 @@ function borra() {
 }
 
 function limpia() {
-    let elsMod = elementos(elHijo);
-    elsMod.forEach( el => {
+    let elsReem = elementos(elHijo);
+    elsReem.forEach( el => {
         el.classList.remove('pares');
         let txt = el.firstChild.textContent;
         if (txt == texto2) el.remove();
@@ -139,11 +168,15 @@ function limpia() {
         pintar = !pintar;
         colorea();
     }
-    if (elPadre.children.length == 1) {
-        botones(false);           
+    if (longPadre() > 1) {
+        retira = 0;
+        btnLimp.disabled = true;
+        if (reempl) {
+            reempl = false;
+            btnReem.disabled = false;
+        }
     } else {
-        reempl = false;
-        elemento('#btnLimp').disabled = true;
+        botones(false); 
     }
 }
 
