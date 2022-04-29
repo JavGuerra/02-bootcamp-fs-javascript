@@ -1,0 +1,3 @@
+EJERCICIO CREAR TABLA- Crearemos una función createTable(numero1, numero2) que reciba por parametros dos números, el primero de ellos determinará el número de filas y el segundo el numero de columnas.- La tabla debe tener borde, El tamaño de cada una de las celdas debe ser fijo. (ej.: width: 20px, heigth: 20px)- La función retornará una tabla que añadiremos a nuestro HTML- Añadiremos 3 botones: Crear tabla, Añadir fila y Borrar fila (añade al final o borra la última) intentaremos que los botones Añadir y Borrar estén deshabilitados hasta que se cree la tabla.
+
+Los botones de añadir y borrar no esen habilitados si no existe la tabla.

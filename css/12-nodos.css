@@ -7,23 +7,25 @@ body {
 
 button {
     cursor: pointer;
-    margin: 2em 0.5em;
-    width: 175px;
+    margin: 0.5em 0.5em;
+    width: 135px;
 }
 
-section, article, button, article p {
+section, article, button {
     padding: 1em;
 }
 
-section, article, article p {
+section, article {
     border: 1px dotted gray;
 }
 
-article {
-    background-color: ghostwhite;
+section {
+    margin-top: 1em;
+    background-color: WhiteSmoke;
 }
 
-article p {
+article {
+    margin-bottom: 1em;
     background-color: white;
 }
 
@@ -34,4 +36,12 @@ header, footer p, nav {
 .bi {
     font-size: 1.2rem;
     vertical-align: sub;
+}
+
+.pares, .btnColor {
+    background-color: LemonChiffon;
+}
+
+button:hover:disabled {
+    cursor: not-allowed;
 }
