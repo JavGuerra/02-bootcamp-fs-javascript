@@ -83,7 +83,7 @@ const texto1  = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.¶";
 const texto2  = '¡Supercalifragilisticoespialidoso!¶';
 let   pintar  = false;  // Coloreado
 let   reempl  = false;  // ¿Última línea reemplazada?
-let   borrar  = true;   // ¿Queda algo por borrar?
+let   borrar  = true;   // ¿Quedan filas por borrar?
 let   retira  = 0;      // ¿Cuánto hay que limpiar?
 
 function crea() {
@@ -108,7 +108,7 @@ function reemplaza() {
     if (el.tagName == elHijo) {
         let nuevo = creaNodo(elHijo);
         nuevo.innerText = texto2;
-        if (pintar && esPar()) {
+        if (pintar && !esPar()) {
             nuevo.classList.add('pares'); 
         }
         elPadre.replaceChild(nuevo, el);
