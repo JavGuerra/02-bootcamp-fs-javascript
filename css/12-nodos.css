@@ -16,6 +16,10 @@ button {
     background-color: Lavender;
 }
 
+button:hover {
+    background-color: #D6D6FA;
+}
+
 button:disabled {
     color: DarkGray !important;
     background-color: WhiteSmoke;
@@ -54,4 +58,8 @@ header, footer p, nav {
 
 .pares, .btnColor {
     background-color: LemonChiffon;
+}
+
+.btnColor:hover {
+    background-color: #FFFAAD !important;
 }

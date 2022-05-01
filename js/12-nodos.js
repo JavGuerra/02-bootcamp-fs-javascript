@@ -122,9 +122,11 @@ function colorea () {
     btnColo.disabled = true;
     let pares = elementos(`${elHijo}:nth-child(odd)`);
     pares.forEach(el => {
-        if (pintar) {
+        if (!pintar) {
             el.classList.remove('pares');
+            el.classList.add('btn');
         } else {
+            el.classList.remove('btn');
             el.classList.add('pares'); // el.className = 'pares';
         }
     });
