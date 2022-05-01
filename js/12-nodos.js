@@ -1,26 +1,20 @@
 /*
+By: Javier Guerra
+
+Enunciado inicial recibido:
 Creamos un index.html que contenga:
 - Section (1), article (1), h2(1)
 - 3 botones (1 para añadir, 1 para borrar, 1 para reemplazar)
-
 Creamos un index.js el cual realice 3 funciones (una por botón), es decir: 
 - Función que cree un article nuevo  
 - Función que reemplace el ÚLTIMO article por otro article con distinto contenido 
 - Función que elimine el ultimo article que haya.
-
-Nuevo ejercicio
+Añadido después al ejercicio:
 - Botón colorear article pares
 - Botón eliminar article reemplazados
-+ Deshabilitar botones que no tengan funcionalidad.
+Realizado por mi cuenta:
+- Deshabilitar botones que no tengan funcionalidad.
 */
-
-// let btnCrear = document.getElementById('btnCrea');
-// let btnReemp = document.getElementById('btnReem');
-// let btnBorra = document.getElementById('btnBorr');
-// let elPadre  = document.getElementById('sctn');
-// btnCrear.addEventListener('click', crea);
-// btnReemp.addEventListener('click', reemplaza);
-// btnBorra.addEventListener('click', borra)
 
 function elemento(sel) {
     return document.querySelector(sel);
@@ -38,6 +32,8 @@ function longPadre() {
     return elPadre.children.length;
 }
 function esPar() {
+    // Recordar que 'pares' es 'impares' porque
+    // aquí el título h2 es el primer elemento.
     return longPadre() % 2 == 0;
 }
 function btnColor() {
@@ -70,7 +66,7 @@ let btnColo = elemento('#btnColo');
 let btnBorr = elemento('#btnBorr');
 let btnLimp = elemento('#btnLimp');
 
-btnCrea.onclick  = crea; // btnCrear.addEventListener('click', crea);
+btnCrea.onclick  = crea; // alt: btnCrear.addEventListener('click', crea);
 btnReem.onclick  = reemplaza;
 btnColo.onclick  = colorea;
 btnBorr.onclick  = borra;
@@ -81,20 +77,20 @@ const elPadre = elemento('#sctn');
 const elHijo  = 'ARTICLE';
 const texto1  = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.¶";
 const texto2  = '¡Supercalifragilisticoespialidoso!¶';
-let   pintar  = false;  // Coloreado
-let   reempl  = false;  // ¿Última línea reemplazada?
+let   pintar  = false;  // ¿Coloreado activado?
+let   reempl  = false;  // ¿Última línea está reemplazada?
 let   borrar  = true;   // ¿Quedan filas por borrar?
-let   retira  = 0;      // ¿Cuánto hay que limpiar?
+let   retira  = 0;      // ¿Cuántas líneas reemplazadas hay que limpiar?
 
 function crea() {
     btnCrea.disabled = true;
-    let nuevo = creaNodo(elHijo); // document.createElement(elHijo);
+    let nuevo = creaNodo(elHijo); // alt: document.createElement(elHijo);
     nuevo.innerText = texto1;
     if (pintar && esPar()) {
         nuevo.classList.add('pares'); 
     }
-    conectaNodo(elPadre, nuevo); // elPadre.appendChild(nuevo);
-    if (!borrar) botones(true);
+    conectaNodo(elPadre, nuevo); // alt: elPadre.appendChild(nuevo);
+    if (!borrar) botones(true);  // Primer artículo
     if (reempl) {
         reempl = false;
         btnReem.disabled = false;
@@ -125,7 +121,7 @@ function colorea () {
         if (pintar) {
             el.classList.remove('pares');
         } else {
-            el.classList.add('pares'); // el.className = 'pares';
+            el.classList.add('pares'); // alt: el.className = 'pares';
         }
     });
     pintar = !pintar;
@@ -138,7 +134,7 @@ function borra() {
     let el  = elPadre.lastElementChild;
     let txt = el.firstChild.textContent;
     if (el.tagName == elHijo) {
-        el.remove(); //elPadre.removeChild(el);
+        el.remove(); // alt: elPadre.removeChild(el);
         if (longPadre() > 1) {
             if (txt == texto2) retira--;
             if (retira == 0) {
@@ -156,10 +152,10 @@ function borra() {
             }
             btnBorr.disabled = false;       
         } else {
-            botones(false);
+            botones(false); // Era el último artículo
         }
     } else {
-        botones(false);
+        botones(false); // Ya no hay artículos
     }
 }
 
@@ -182,7 +178,7 @@ function limpia() {
             btnReem.disabled = false;
         }
     } else {
-        botones(false); 
+        botones(false); // Ya no hay artículos
     }
 }
 
