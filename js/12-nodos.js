@@ -78,9 +78,9 @@ const elHijo  = 'ARTICLE';
 const texto1  = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.¶";
 const texto2  = '¡Supercalifragilisticoespialidoso!¶';
 let   pintar  = false;  // ¿Coloreado activado?
-let   reempl  = false;  // ¿Última línea está reemplazada?
-let   borrar  = true;   // ¿Quedan filas por borrar?
-let   retira  = 0;      // ¿Cuántas líneas reemplazadas hay que limpiar?
+let   reempl  = false;  // ¿Último elemento reemplazado?
+let   borrar  = true;   // ¿Quedan elementos por borrar?
+let   retira  = 0;      // ¿Cuántos elementos reemplazados hay que limpiar?
 
 function crea() {
     btnCrea.disabled = true;
