@@ -6,6 +6,7 @@
 body {
   margin: 2em auto;
   max-width: 50em;
+  background: #b4ecf1 url(../img/pinchitos-bg.png) center/cover no-repeat fixed;
 }
 
 header,
