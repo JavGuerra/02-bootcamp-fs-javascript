@@ -65,11 +65,11 @@ function createTable(numero1, numero2) {
 }
 
 function deleteTable() {
-    btnTabla.disabled = false;
     btnCreaF.disabled = true;
     btnBorrF.disabled = true;
     let table = elemento('table');
     table.remove();
+    btnTabla.disabled = false;
 }
 
 function nuevaFila() {
