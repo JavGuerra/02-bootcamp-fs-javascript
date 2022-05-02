@@ -18,6 +18,7 @@ button {
   height: 35px;
   border-radius: 20px;
   border: 1px solid darkgray;
+  cursor: pointer;
 }
 
 .seleccion {
@@ -45,6 +46,7 @@ td {
   width: var(--anchocel) !important;
   height: var(--anchocel) !important;
   padding: 0 !important;
+  cursor: pointer;
 }
 
 .negro {
