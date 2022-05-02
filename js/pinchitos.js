@@ -1,8 +1,5 @@
 /* Pinchitos, (CC BY) Javier Guerra, mayo 2022 */
 
-let numCols = 16;
-let numFils = 16;
-
 let btnNegro    = elemento('#btnNegro');
 let btnAzul     = elemento('#btnAzul');
 let btnRojo     = elemento('#btnRojo');
@@ -21,18 +18,20 @@ btnCian.onclick     = color;
 btnAmarillo.onclick = color;
 btnBlanco.onclick   = color;
 
-let pincel = 'negro';
-let btnSel = btnNegro;
+let numCols = 16; // Columnas de la tabla
+let numFils = 16; // Filas de la tabla
+let pincel  = 'negro';  // Color del pincel
+let btnSel  = btnNegro; // Botón seleccionado
 
 let padre = elemento('main');
-let tabla = createTabla(numCols, numFils);
+let tabla = creaTabla(numCols, numFils);
 padre.appendChild(tabla);
 
 function elemento(sel) { return document.querySelector(sel); }
 
 function creaNodo(el)  { return document.createElement(el); }
 
-function createTabla(numCols, numFils) {
+function creaTabla(numCols, numFils) {
     let tabla, tbody, tr, td;
     // tbody
     tbody = creaNodo('tbody');
@@ -41,7 +40,7 @@ function createTabla(numCols, numFils) {
         for (let i = 1; i <= numCols; i++) {
             td = creaNodo('td');
             td.classList.add('blanco');
-            td.onclick = pinta;
+            td.onclick = pinta; // Cambia color celda
             tr.appendChild(td);
         }
         tbody.appendChild(tr);
