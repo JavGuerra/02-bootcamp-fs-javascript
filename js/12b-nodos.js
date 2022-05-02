@@ -9,14 +9,13 @@ numero de columnas.
 botones: Crear tabla, Añadir fila y Borrar fila (añade al final o borra la
 última) intentaremos que los botones Añadir y Borrar estén deshabilitados hasta
 que se cree la tabla.
-- Los botones de añadir y borrar no esen habilitados si no existe la tabla.
 */
 
 let numCols = 15;
 let numFils = 5;
 // Anchura de la tabla en función del número de columnas
 let variabl = elemento(':root');
-variabl.style.setProperty('--columnas', numCols);
+variabl.style.setProperty('--columnas', numCols + 1);
 elemento('#numCols').innerText = numCols;
 elemento('#numFils').innerText = numFils;
 
@@ -29,8 +28,8 @@ btnBorrF.onclick  = quitaFila;
 btnCreaF.disabled = true;
 btnBorrF.disabled = true;
 
-function elemento(sel) {return document.querySelector(sel)}
-function creaNodo(el)  {return document.createElement(el)}
+function elemento(sel) { return document.querySelector(sel); }
+function creaNodo(el)  { return document.createElement(el); }
 
 function poneTabla() {
     btnTabla.disabled = true;
