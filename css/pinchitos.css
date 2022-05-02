@@ -46,7 +46,7 @@ td {
   width: var(--anchocel) !important;
   height: var(--anchocel) !important;
   padding: 0 !important;
-  cursor: pointer;
+  cursor: crosshair;
 }
 
 .negro {
