@@ -16,50 +16,6 @@ Realizado por mi cuenta:
 - Deshabilitar botones que no tengan funcionalidad.
 */
 
-function elemento(sel) {
-    return document.querySelector(sel);
-}
-function elementos(sel) {
-    return document.querySelectorAll(sel);
-}
-function creaNodo(el) {
-    return document.createElement(el);
-}
-function conectaNodo(padre, el) {
-    return padre.appendChild(el);
-}
-function longPadre() {
-    return elPadre.children.length;
-}
-function esPar() {
-    // Recordar que 'pares' es 'impares' porque
-    // aquí el título h2 es el primer elemento.
-    return longPadre() % 2 == 0;
-}
-function btnColor() {
-    if (pintar) {
-        btnColo.classList.add('btnColor');
-    } else {
-        btnColo.classList.remove('btnColor');
-    }
-}
-function botones(poner) {
-    if (poner) {
-        btnReem.disabled = false;
-        btnColo.disabled = false;
-        btnBorr.disabled = false;
-    } else {
-        btnReem.disabled = true;
-        btnColo.disabled = true;
-        btnBorr.disabled = true;
-        btnLimp.disabled = true;
-        retira = 0;
-        pintar = false;
-        btnColor();
-    }
-    borrar = !borrar;
-}
-
 let btnCrea = elemento('#btnCrea');
 let btnReem = elemento('#btnReem');
 let btnColo = elemento('#btnColo');
@@ -89,7 +45,7 @@ function crea() {
     if (pintar && esPar()) {
         nuevo.classList.add('pares'); 
     }
-    conectaNodo(elPadre, nuevo); // alt: elPadre.appendChild(nuevo);
+    elPadre.appendChild(nuevo);
     if (!borrar) botones(true);  // Primer artículo
     if (reempl) {
         reempl = false;
@@ -180,5 +136,41 @@ function limpia() {
     } else {
         botones(false); // Ya no hay artículos
     }
+}
+
+function elemento(sel) { return document.querySelector(sel); }
+
+function elementos(sel) { return document.querySelectorAll(sel); }
+
+function creaNodo(el) { return document.createElement(el); }
+
+function longPadre() { return elPadre.children.length; }
+
+// Recordar que 'pares' es 'impares' aquí porque h2 es el primer elemento.
+function esPar() { return longPadre() % 2 == 0; }
+
+function btnColor() {
+    if (pintar) {
+        btnColo.classList.add('btnColor');
+    } else {
+        btnColo.classList.remove('btnColor');
+    }
+}
+
+function botones(poner) {
+    if (poner) {
+        btnReem.disabled = false;
+        btnColo.disabled = false;
+        btnBorr.disabled = false;
+    } else {
+        btnReem.disabled = true;
+        btnColo.disabled = true;
+        btnBorr.disabled = true;
+        btnLimp.disabled = true;
+        retira = 0;
+        pintar = false;
+        btnColor();
+    }
+    borrar = !borrar;
 }
 

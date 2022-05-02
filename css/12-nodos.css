@@ -1,65 +1,73 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css");
 
 body {
-    margin: 2em auto;
-    max-width: 50em;
-  }
+  margin: 2em auto;
+  max-width: 50em;
+}
 
-h1, h2, button {
-    color: DarkSlateBlue !important;
+h1,
+h2,
+button {
+  color: DarkSlateBlue !important;
 }
 
 button {
-    cursor: pointer;
-    margin: 0.5em 0.5em;
-    width: 135px;
-    background-color: Lavender;
+  cursor: pointer;
+  margin: 0.5em 0.5em;
+  width: 135px;
+  background-color: Lavender;
 }
 
 button:hover {
-    background-color: #D6D6FA;
+  background-color: #d6d6fa;
 }
 
 button:disabled {
-    color: DarkGray !important;
-    background-color: WhiteSmoke;
+  color: DarkGray !important;
+  background-color: WhiteSmoke;
 }
 
 button:hover:disabled {
-    cursor: not-allowed;
+  cursor: not-allowed;
 }
 
-section, article, button {
-    padding: 1em;
+section,
+article,
+button {
+  padding: 1em;
 }
 
-section, article {
-    border: 1px dotted gray;
+section,
+article {
+  border: 1px dotted gray;
 }
 
 section {
-    margin-top: 1em;
-    background-color: WhiteSmoke;
+  margin-top: 1em;
+  background-color: WhiteSmoke;
 }
 
 article {
-    margin-bottom: 1em;
-    background-color: white;
+  margin-bottom: 1em;
+  background-color: white;
 }
 
-header, footer p, nav {
-    text-align: center;
+header,
+footer p,
+nav {
+  text-align: center;
 }
 
 .bi {
-    font-size: 1.2rem;
-    vertical-align: sub;
+  font-size: 1.2rem;
+  vertical-align: sub;
 }
 
-.pares, .btnColor {
-    background-color: LemonChiffon;
+.pares,
+.btnColor {
+  background-color: LemonChiffon;
 }
 
 .btnColor:hover {
-    background-color: #FFFAAD;
+  background-color: #fffaad;
 }

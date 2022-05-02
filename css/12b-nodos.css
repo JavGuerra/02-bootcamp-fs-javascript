@@ -1,0 +1,52 @@
+:root {
+  --columnas: 0;
+  --anchocel: 30px;
+  --bordecel: 2;
+  --ancho: calc((var(--columnas) * var(--anchocel)) + var(--bordecel));
+}
+
+body {
+  margin: 2em auto;
+  max-width: 50em;
+}
+
+header,
+footer {
+  text-align: center;
+}
+
+button {
+  padding: 0.75em;
+  margin: 0.5em;
+  width: 100px;
+}
+
+button:hover:disabled {
+  cursor: not-allowed;
+}
+
+table {
+  margin-top: 1.5em !important;
+  border-collapse: collapse;
+  width: var(--ancho) !important;
+  margin: 0 auto;
+  font-size: 0.75em;
+}
+
+table,
+tr,
+th,
+td {
+  border: 2px solid lightseagreen !important;
+}
+
+th,
+td {
+  width: var(--anchocel) !important;
+  height: var(--anchocel) !important;
+  padding: 0 !important;
+}
+
+th {
+  background-color: HoneyDew;
+}
