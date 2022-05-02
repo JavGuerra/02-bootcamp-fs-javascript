@@ -1,0 +1,75 @@
+:root {
+  --anchocel: 20px;
+  --bordecel: 1px;
+}
+
+body {
+  margin: 2em auto;
+  max-width: 50em;
+}
+
+header,
+footer {
+  text-align: center;
+}
+
+button {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+}
+
+.seleccion {
+  box-shadow: inset 2px 2px 5px;
+}
+
+table {
+  width: auto !important;
+  margin: 0 auto;
+  margin-top: 1.5em !important;
+  border-collapse: collapse;
+}
+
+table,
+tr,
+td {
+  border: var(--bordecel) solid darkgray !important;
+}
+
+td {
+  width: var(--anchocel) !important;
+  height: var(--anchocel) !important;
+  padding: 0 !important;
+}
+
+.negro {
+  background-color: #000;
+}
+
+.azul {
+  background-color: #00f;
+}
+
+.rojo {
+  background-color: #f00;
+}
+
+.magenta {
+  background-color: #f0f;
+}
+
+.verde {
+  background-color: #0f0;
+}
+
+.cian {
+  background-color: #0ff;
+}
+
+.amarillo {
+  background-color: #ff0;
+}
+
+.blanco {
+  background-color: #fff;
+}

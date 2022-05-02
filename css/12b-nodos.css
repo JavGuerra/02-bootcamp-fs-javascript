@@ -1,8 +1,6 @@
 :root {
-  --columnas: 0;
   --anchocel: 30px;
   --bordecel: 2;
-  --ancho: calc((var(--columnas) * var(--anchocel)) + var(--bordecel));
 }
 
 body {
@@ -26,10 +24,10 @@ button:hover:disabled {
 }
 
 table {
+  width: auto !important;
+  margin: 0 auto;
   margin-top: 1.5em !important;
   border-collapse: collapse;
-  width: var(--ancho) !important;
-  margin: 0 auto;
   font-size: 0.75em;
 }
 

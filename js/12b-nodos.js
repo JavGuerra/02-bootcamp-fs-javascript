@@ -13,9 +13,6 @@ que se cree la tabla.
 
 let numCols = 15;
 let numFils = 5;
-// Anchura de la tabla en función del número de columnas
-let variabl = elemento(':root');
-variabl.style.setProperty('--columnas', numCols + 1);
 elemento('#numCols').innerText = numCols;
 elemento('#numFils').innerText = numFils;
 
