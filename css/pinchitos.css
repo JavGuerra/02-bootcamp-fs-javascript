@@ -17,10 +17,11 @@ button {
   width: 35px;
   height: 35px;
   border-radius: 20px;
+  border: 1px solid darkgray;
 }
 
 .seleccion {
-  box-shadow: inset 2px 2px 5px;
+  box-shadow: inset 2px 2px 5px darkslategray;
 }
 
 table {
@@ -30,7 +31,11 @@ table {
   border-collapse: collapse;
 }
 
-table,
+table {
+  border: calc(var(--bordecel) * 2) solid darkgray !important;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.15);
+}
+
 tr,
 td {
   border: var(--bordecel) solid darkgray !important;
