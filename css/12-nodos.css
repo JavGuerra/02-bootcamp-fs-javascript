@@ -64,11 +64,10 @@ nav {
   vertical-align: sub;
 }
 
-.pares,
-.btnColor {
+.resaltar {
   background-color: LemonChiffon;
 }
 
-.btnColor:hover {
+.resaltar:hover {
   background-color: #fffaad;
 }

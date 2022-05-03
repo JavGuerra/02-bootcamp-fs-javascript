@@ -43,7 +43,7 @@ function crea() {
     let nuevo = creaNodo(elHijo); // alt: document.createElement(elHijo);
     nuevo.textContent = texto1;
     if (pintar && esPar()) {
-        nuevo.classList.add('pares'); 
+        nuevo.classList.add('resaltar'); 
     }
     elPadre.appendChild(nuevo);
     if (!borrar) botones(true);  // Primer artículo
@@ -61,7 +61,7 @@ function reemplaza() {
         let nuevo = creaNodo(elHijo);
         nuevo.textContent = texto2;
         if (pintar && !esPar()) {
-            nuevo.classList.add('pares'); 
+            nuevo.classList.add('resaltar'); 
         }
         elPadre.replaceChild(nuevo, el);
         reempl = true;
@@ -73,13 +73,7 @@ function reemplaza() {
 function colorea () {
     btnColo.disabled = true;
     let pares = elementos(`${elHijo}:nth-child(odd)`);
-    pares.forEach(el => {
-        if (pintar) {
-            el.classList.remove('pares');
-        } else {
-            el.classList.add('pares'); // alt: el.className = 'pares';
-        }
-    });
+    pares.forEach(el => { el.classList.toggle('resaltar') });
     pintar = !pintar;
     btnColor();
     btnColo.disabled = false;
@@ -119,7 +113,7 @@ function limpia() {
     btnLimp.disabled = true;
     let elsReem = elementos(elHijo);
     elsReem.forEach( el => {
-        el.classList.remove('pares');
+        el.classList.remove('resaltar');
         let txt = el.firstChild.textContent;
         if (txt == texto2) el.remove();
     });
@@ -149,13 +143,7 @@ function longPadre() { return elPadre.children.length; }
 // Recordar que 'pares' es 'impares' aquí porque h2 es el primer elemento.
 function esPar() { return longPadre() % 2 == 0; }
 
-function btnColor() {
-    if (pintar) {
-        btnColo.classList.add('btnColor');
-    } else {
-        btnColo.classList.remove('btnColor');
-    }
-}
+function btnColor() { btnColo.classList.toggle('resaltar') }
 
 function botones(poner) {
     if (poner) {
