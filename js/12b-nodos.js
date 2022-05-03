@@ -13,8 +13,8 @@ que se cree la tabla.
 
 let numCols = 15;
 let numFils = 5;
-elemento('#numCols').innerText = numCols;
-elemento('#numFils').innerText = numFils;
+elemento('#numCols').textContent = numCols;
+elemento('#numFils').textContent = numFils;
 
 let btnTabla = elemento('#btnTabla');
 let btnCreaF = elemento('#btnCreaF');
@@ -43,7 +43,7 @@ function createTable(numero1, numero2) {
     tr = creaNodo('tr');
     for (let i = 0; i <= numero1; i++) {
         th = creaNodo('th');
-        th.innerText = i;
+        th.textContent = i;
         tr.appendChild(th);
     }
     thead = creaNodo('thead');
@@ -83,7 +83,7 @@ function creaTr(cols, i) {
     let tr, th, td;
     tr = creaNodo('tr');
     th = creaNodo('th');
-    th.innerText = i;
+    th.textContent = i;
     tr.appendChild(th);
     for (let i = 1; i <= cols; i++) {
         td = creaNodo('td');

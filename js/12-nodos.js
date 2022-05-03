@@ -41,7 +41,7 @@ let   retira  = 0;      // ¿Cuántos elementos reemplazados hay que limpiar?
 function crea() {
     btnCrea.disabled = true;
     let nuevo = creaNodo(elHijo); // alt: document.createElement(elHijo);
-    nuevo.innerText = texto1;
+    nuevo.textContent = texto1;
     if (pintar && esPar()) {
         nuevo.classList.add('pares'); 
     }
@@ -59,7 +59,7 @@ function reemplaza() {
     let el = elPadre.lastElementChild;
     if (el.tagName == elHijo) {
         let nuevo = creaNodo(elHijo);
-        nuevo.innerText = texto2;
+        nuevo.textContent = texto2;
         if (pintar && !esPar()) {
             nuevo.classList.add('pares'); 
         }
