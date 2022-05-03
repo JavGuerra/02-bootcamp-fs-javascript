@@ -20,8 +20,9 @@ btnBlanco.onclick   = color;
 
 let numCols = 16; // Columnas de la tabla
 let numFils = 16; // Filas de la tabla
-let pincel  = 'negro';  // Color del pincel
 let btnSel  = btnNegro; // Botón seleccionado
+let pincel  = btnSel.className; // Color del pincel
+btnSel.classList.add('seleccion');
 
 let padre = elemento('main');
 let tabla = creaTabla(numCols, numFils);
