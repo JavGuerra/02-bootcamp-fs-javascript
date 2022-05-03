@@ -1,4 +1,4 @@
-/* Pinchitos, (CC BY) Javier Guerra, mayo 2022 */
+/* Mosaico, (CC BY) Javier Guerra, mayo 2022 */
 
 let btnNegro    = elemento('#btnNegro');
 let btnAzul     = elemento('#btnAzul');

@@ -3,10 +3,21 @@
   --bordecel: 1px;
 }
 
+@font-face {
+  font-family: 'ScreenMatrix';
+  src: url('../fonts/ScreenMatrix.ttf') format('truetype');
+}
+
+h1 {
+  font-family: 'ScreenMatrix', sans-serif;
+  font-size: 3.5em !important;
+  color: olive !important;
+}
+
 body {
   margin: 2em auto;
   max-width: 50em;
-  background: #fff url(../img/pinchitos-bg.png) center/cover no-repeat;
+  background: #fff url(../img/mosaico-bg.png) center/cover no-repeat;
 }
 
 header,
