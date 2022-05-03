@@ -1,0 +1,5 @@
+https://github.com/TheBridge-FullStackDeveloper/programacion-avanzada-kata-mayas-y-aztecas
+
+https://github.com/TheBridge-FullStackDeveloper/programacion-avanzada-pp-il-sogno-di-volare
+
+HAY QUE HACER UN git clone
