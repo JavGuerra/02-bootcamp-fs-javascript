@@ -143,7 +143,13 @@ function longPadre() { return elPadre.children.length; }
 // Recordar que 'pares' es 'impares' aquí porque h2 es el primer elemento.
 function esPar() { return longPadre() % 2 == 0; }
 
-function btnColor() { btnColo.classList.toggle('resaltar') }
+function btnColor() {
+    if (pintar) {
+        btnColo.classList.add('resaltar');
+    } else {
+        btnColo.classList.remove('resaltar');
+    }
+}
 
 function botones(poner) {
     if (poner) {
