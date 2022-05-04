@@ -13,5 +13,6 @@
     {"titulo": "10. DOM",        "enlace": "10-dom.html" },
     {"titulo": "11. Eventos",    "enlace": "11-eventos.html" },
     {"titulo": "12. Nodos",      "enlace": "12-nodos.html" },
-    {"titulo": "12b. Nodos",     "enlace": "12b-nodos.html" }
+    {"titulo": "12b. Nodos",     "enlace": "12b-nodos.html" },
+    {"titulo": "13. Clases",     "enlace": "mayas-aztecas.html" }
 ]
