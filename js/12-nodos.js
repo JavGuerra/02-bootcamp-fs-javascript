@@ -22,7 +22,7 @@ let btnColo = elemento('#btnColo');
 let btnBorr = elemento('#btnBorr');
 let btnLimp = elemento('#btnLimp');
 
-btnCrea.onclick  = crea; // alt: btnCrear.addEventListener('click', crea);
+btnCrea.onclick  = crea; // alt: btnCrea.addEventListener('click', crea);
 btnReem.onclick  = reemplaza;
 btnColo.onclick  = colorea;
 btnBorr.onclick  = borra;
@@ -31,7 +31,7 @@ btnLimp.disabled = true;
 
 const elPadre = elemento('#sctn');
 const elHijo  = 'ARTICLE';
-const texto1  = "Lorem ipsum dolor sit amet, consectetur adipisicing elit.¶";
+const texto1  = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.¶';
 const texto2  = '¡Supercalifragilisticoespialidoso!¶';
 let   pintar  = false;  // ¿Coloreado activado?
 let   reempl  = false;  // ¿Último elemento reemplazado?
@@ -40,7 +40,7 @@ let   retira  = 0;      // ¿Cuántos elementos reemplazados hay que limpiar?
 
 function crea() {
     btnCrea.disabled = true;
-    let nuevo = creaNodo(elHijo); // alt: document.createElement(elHijo);
+    let nuevo = creaElem(elHijo); // alt: document.createElement(elHijo);
     nuevo.textContent = texto1;
     if (pintar && esPar()) {
         nuevo.classList.add('resaltar'); 
@@ -58,7 +58,7 @@ function reemplaza() {
     btnReem.disabled = true;
     let el = elPadre.lastElementChild;
     if (el.tagName == elHijo) {
-        let nuevo = creaNodo(elHijo);
+        let nuevo = creaElem(elHijo);
         nuevo.textContent = texto2;
         if (pintar && !esPar()) {
             nuevo.classList.add('resaltar'); 
@@ -136,7 +136,7 @@ function elemento(sel) { return document.querySelector(sel); }
 
 function elementos(sel) { return document.querySelectorAll(sel); }
 
-function creaNodo(el) { return document.createElement(el); }
+function creaElem(el) { return document.createElement(el); }
 
 function longPadre() { return elPadre.children.length; }
 

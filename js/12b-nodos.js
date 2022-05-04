@@ -19,86 +19,106 @@ elemento('#numFils').textContent = numFils;
 let btnTabla = elemento('#btnTabla');
 let btnCreaF = elemento('#btnCreaF');
 let btnBorrF = elemento('#btnBorrF');
+
 btnTabla.onclick  = poneTabla;
 btnCreaF.onclick  = nuevaFila;
 btnBorrF.onclick  = quitaFila;
+
 btnCreaF.disabled = true;
 btnBorrF.disabled = true;
 
 function elemento(sel) { return document.querySelector(sel); }
-function creaNodo(el)  { return document.createElement(el); }
+
+function creaElem(el)  { return document.createElement(el);  }
 
 function poneTabla() {
     btnTabla.disabled = true;
+
     let padre = elemento('main');
     let tabla = createTable(numCols, numFils);
     padre.appendChild(tabla);
+
     btnCreaF.disabled = false;
     btnBorrF.disabled = false;
 }
 
 function createTable(numero1, numero2) {
-    let tabla, thead, tbody, tr, th = null;
+    let tabla, thead, tbody, tr, th;
+
     // thead
-    tr = creaNodo('tr');
+    tr = creaElem('tr');
     for (let i = 0; i <= numero1; i++) {
-        th = creaNodo('th');
+        th = creaElem('th');
         th.textContent = i;
         tr.appendChild(th);
     }
-    thead = creaNodo('thead');
+    thead = creaElem('thead');
     thead.appendChild(tr);
+
     // tbody
-    tbody = creaNodo('tbody');
+    tbody = creaElem('tbody');
     for (let i = 1; i <= numero2; i++) {
         tr = creaTr(numero1, i);
         tbody.appendChild(tr);
     }
+
     // table
-    tabla = creaNodo('table');
+    tabla = creaElem('table');
     tabla.appendChild(thead);
-    tabla.appendChild(tbody);
+    tabla.appendChild(tbody); // alt.: tabla.append(thead, tbody)
+
     return tabla;
 }
 
 function deleteTable() {
     btnCreaF.disabled = true;
     btnBorrF.disabled = true;
+
     let table = elemento('table');
     table.remove();
+
     btnTabla.disabled = false;
 }
 
 function nuevaFila() {
     btnCreaF.disabled = true;
     let tbody, tr, numOrden; 
+
     tbody = elemento('tbody');
-    numOrden = tbody.children.length + 1;
+    numOrden = tbody.children.length + 1; // alt.: tbody.childElementCount
     tr = creaTr(numCols, numOrden);
     tbody.appendChild(tr);
+
     btnCreaF.disabled = false;
 }
 
 function creaTr(cols, i) {
     let tr, th, td;
-    tr = creaNodo('tr');
-    th = creaNodo('th');
+
+    // Primera columna numerada
+    tr = creaElem('tr');
+    th = creaElem('th');
     th.textContent = i;
     tr.appendChild(th);
+
+    // Resto de columnas
     for (let i = 1; i <= cols; i++) {
-        td = creaNodo('td');
+        td = creaElem('td');
         tr.appendChild(td);
     }
+
     return tr;
 }
 
 function quitaFila() {
     btnBorrF.disabled = true;
+
     let tbody = elemento('tbody');
     tbody.lastElementChild.remove();
+
     // ¿Quedan filas?
     if (tbody.children.length >= 1) {
-        btnBorrF.disabled = false;
+        btnBorrF.disabled = false; // Lo desactivé
     } else {
         deleteTable();
     }

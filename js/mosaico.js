@@ -24,22 +24,22 @@ let btnSel  = btnNegro; // Botón seleccionado
 let pincel  = btnSel.className; // Color del pincel
 btnSel.classList.add('seleccion');
 
-let padre = elemento('main');
-let tabla = creaTabla(numCols, numFils);
+let padre   = elemento('main');
+let tabla   = creaTabla(numCols, numFils);
 padre.appendChild(tabla);
 
 function elemento(sel) { return document.querySelector(sel); }
 
-function creaNodo(el)  { return document.createElement(el); }
+function creaElem(el)  { return document.createElement(el);  }
 
 function creaTabla(numCols, numFils) {
     let tabla, tbody, tr, td;
     // tbody
-    tbody = creaNodo('tbody');
+    tbody = creaElem('tbody');
     for (let i = 1; i <= numFils; i++) {
-        tr = creaNodo('tr');
+        tr = creaElem('tr');
         for (let i = 1; i <= numCols; i++) {
-            td = creaNodo('td');
+            td = creaElem('td');
             td.classList.add('blanco');
             td.onclick = pinta; // Cambia color celda
             tr.appendChild(td);
@@ -47,7 +47,7 @@ function creaTabla(numCols, numFils) {
         tbody.appendChild(tr);
     }
     // table
-    tabla = creaNodo('table');
+    tabla = creaElem('table');
     tabla.appendChild(tbody);
     return tabla;
 }
