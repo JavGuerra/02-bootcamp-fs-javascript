@@ -12,9 +12,9 @@ que se cree la tabla.
 */
 
 let numCols = 15;
-let numFils = 5;
-elemento('#numCols').textContent = numCols;
-elemento('#numFils').textContent = numFils;
+let numFilas = 5;
+elemento('#numCols').textContent  = numCols;
+elemento('#numFilas').textContent = numFilas;
 
 let btnTabla = elemento('#btnTabla');
 let btnCreaF = elemento('#btnCreaF');
@@ -35,19 +35,19 @@ function poneTabla() {
     btnTabla.disabled = true;
 
     let padre = elemento('main');
-    let tabla = createTable(numCols, numFils);
+    let tabla = createTable(numCols, numFilas);
     padre.appendChild(tabla);
 
     btnCreaF.disabled = false;
     btnBorrF.disabled = false;
 }
 
-function createTable(numero1, numero2) {
+function createTable(numCols, numFilas) {
     let tabla, thead, tbody, tr, th;
 
     // thead
     tr = creaElem('tr');
-    for (let i = 0; i <= numero1; i++) {
+    for (let i = 0; i <= numCols; i++) {
         th = creaElem('th');
         th.textContent = i;
         tr.appendChild(th);
@@ -57,8 +57,8 @@ function createTable(numero1, numero2) {
 
     // tbody
     tbody = creaElem('tbody');
-    for (let i = 1; i <= numero2; i++) {
-        tr = creaTr(numero1, i);
+    for (let i = 1; i <= numFilas; i++) {
+        tr = creaTr(numCols, i);
         tbody.appendChild(tr);
     }
 
@@ -82,23 +82,23 @@ function deleteTable() {
 
 function nuevaFila() {
     btnCreaF.disabled = true;
-    let tbody, tr, numOrden; 
+    let tbody, tr, filaNum; 
 
     tbody = elemento('tbody');
-    numOrden = tbody.children.length + 1; // alt.: tbody.childElementCount
-    tr = creaTr(numCols, numOrden);
+    filaNum = tbody.children.length + 1; // alt.: tbody.childElementCount
+    tr = creaTr(numCols, filaNum);
     tbody.appendChild(tr);
 
     btnCreaF.disabled = false;
 }
 
-function creaTr(cols, numFila) {
+function creaTr(cols, filaNum) {
     let tr, th, td;
 
     // Primera columna numerada
     tr = creaElem('tr');
     th = creaElem('th');
-    th.textContent = numFila;
+    th.textContent = filaNum;
     tr.appendChild(th);
 
     // Resto de columnas
