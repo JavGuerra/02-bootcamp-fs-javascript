@@ -1,13 +1,13 @@
 /* «Mosaico» (CC BY) Javier Guerra, mayo 2022 */
 
-let btnNegro    = elemento('#btnNegro'   );
-let btnAzul     = elemento('#btnAzul'    );
-let btnRojo     = elemento('#btnRojo'    );
-let btnMagenta  = elemento('#btnMagenta' );
-let btnVerde    = elemento('#btnVerde'   );
-let btnCian     = elemento('#btnCian'    );
-let btnAmarillo = elemento('#btnAmarillo');
-let btnBlanco   = elemento('#btnBlanco'  );
+const btnNegro    = elemento('#btnNegro'   );
+const btnAzul     = elemento('#btnAzul'    );
+const btnRojo     = elemento('#btnRojo'    );
+const btnMagenta  = elemento('#btnMagenta' );
+const btnVerde    = elemento('#btnVerde'   );
+const btnCian     = elemento('#btnCian'    );
+const btnAmarillo = elemento('#btnAmarillo');
+const btnBlanco   = elemento('#btnBlanco'  );
 
 btnNegro.onclick    = color;
 btnAzul.onclick     = color;
@@ -18,15 +18,15 @@ btnCian.onclick     = color;
 btnAmarillo.onclick = color;
 btnBlanco.onclick   = color;
 
-let numCols = 16;
-let numFils = 16;
+const numCols = 16;
+const numFils = 16;
+
 let btnSel  = btnNegro; // Selección Btn
 let pincel  = btnSel.className; // Color
-let padre   = elemento('main');
-let tabla   = creaTabla(numCols, numFils);
+
+elemento('main').appendChild( creaTabla(numCols, numFils) );
 
 btnSel.classList.add('seleccion');
-padre.appendChild(tabla);
 
 
 function elemento(sel) { return document.querySelector(sel); }
@@ -34,7 +34,7 @@ function elemento(sel) { return document.querySelector(sel); }
 function creaElem(el)  { return document.createElement(el);  }
 
 function creaTabla(numCols, numFils) {
-    let tabla, tbody, tr, td;
+    let table, tbody, tr, td;
     tbody = creaElem('tbody');
     for (let i = 1; i <= numFils; i++) {
         tr = creaElem('tr');
@@ -46,9 +46,9 @@ function creaTabla(numCols, numFils) {
         }
         tbody.appendChild(tr);
     }
-    tabla = creaElem('table');
-    tabla.appendChild(tbody);
-    return tabla;
+    table = creaElem('table');
+    table.appendChild(tbody);
+    return table;
 }
 
 // Selecciona botón y color del pincel
