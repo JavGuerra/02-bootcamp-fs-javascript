@@ -92,7 +92,7 @@ function nuevaFila() {
     btnCreaF.disabled = false;
 }
 
-function creaTr(cols, filaNum) {
+function creaTr(numCols, filaNum) {
     let tr, th, td;
 
     // Primera columna numerada
@@ -102,7 +102,7 @@ function creaTr(cols, filaNum) {
     tr.appendChild(th);
 
     // Resto de columnas
-    for (let i = 1; i <= cols; i++) {
+    for (let i = 1; i <= numCols; i++) {
         td = creaElem('td');
         tr.appendChild(td);
     }
