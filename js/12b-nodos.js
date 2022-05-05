@@ -43,7 +43,7 @@ function poneTabla() {
 }
 
 function createTable(numCols, numFilas) {
-    let tabla, thead, tbody, tr, th;
+    let table, thead, tbody, tr, th;
 
     // thead
     tr = creaElem('tr');
@@ -63,11 +63,11 @@ function createTable(numCols, numFilas) {
     }
 
     // table
-    tabla = creaElem('table');
-    tabla.appendChild(thead);
-    tabla.appendChild(tbody); // alt.: tabla.append(thead, tbody)
+    table = creaElem('table');
+    table.appendChild(thead);
+    table.appendChild(tbody); // alt.: tabla.append(thead, tbody)
 
-    return tabla;
+    return table;
 }
 
 function deleteTable() {
