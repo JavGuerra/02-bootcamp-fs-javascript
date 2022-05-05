@@ -92,13 +92,13 @@ function nuevaFila() {
     btnCreaF.disabled = false;
 }
 
-function creaTr(cols, i) {
+function creaTr(cols, numFila) {
     let tr, th, td;
 
     // Primera columna numerada
     tr = creaElem('tr');
     th = creaElem('th');
-    th.textContent = i;
+    th.textContent = numFila;
     tr.appendChild(th);
 
     // Resto de columnas
