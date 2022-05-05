@@ -11,14 +11,14 @@ botones: Crear tabla, Añadir fila y Borrar fila (añade al final o borra la
 que se cree la tabla.
 */
 
-let numCols = 15;
-let numFilas = 5;
+const numCols = 15;
+const numFilas = 5;
 elemento('#numCols').textContent  = numCols;
 elemento('#numFilas').textContent = numFilas;
 
-let btnTabla = elemento('#btnTabla');
-let btnCreaF = elemento('#btnCreaF');
-let btnBorrF = elemento('#btnBorrF');
+const btnTabla = elemento('#btnTabla');
+const btnCreaF = elemento('#btnCreaF');
+const btnBorrF = elemento('#btnBorrF');
 
 btnTabla.onclick  = poneTabla;
 btnCreaF.onclick  = nuevaFila;
@@ -26,6 +26,8 @@ btnBorrF.onclick  = quitaFila;
 
 btnCreaF.disabled = true;
 btnBorrF.disabled = true;
+
+let tbody; // Se define en createTable()
 
 function elemento(sel) { return document.querySelector(sel); }
 
@@ -43,11 +45,11 @@ function poneTabla() {
 }
 
 function createTable(numCols, numFilas) {
-    let table, thead, tbody, tr, th;
+    let table, thead, tr, th;
 
     // thead
     tr = creaElem('tr');
-    for (let i = 0; i <= numCols; i++) {
+    for (let i = 0; i <= numCols; i++) { // Salen numCols + 1
         th = creaElem('th');
         th.textContent = i;
         tr.appendChild(th);
@@ -72,7 +74,6 @@ function createTable(numCols, numFilas) {
 
 function deleteTable() {
     btnCreaF.disabled = true;
-    btnBorrF.disabled = true;
 
     let table = elemento('table');
     table.remove();
@@ -82,9 +83,8 @@ function deleteTable() {
 
 function nuevaFila() {
     btnCreaF.disabled = true;
-    let tbody, tr, filaNum; 
+    let tr, filaNum; 
 
-    tbody = elemento('tbody');
     filaNum = tbody.children.length + 1; // alt.: tbody.childElementCount
     tr = creaTr(numCols, filaNum);
     tbody.appendChild(tr);
@@ -95,8 +95,9 @@ function nuevaFila() {
 function creaTr(numCols, filaNum) {
     let tr, th, td;
 
-    // Primera columna numerada
     tr = creaElem('tr');
+
+    // Primera columna numerada
     th = creaElem('th');
     th.textContent = filaNum;
     tr.appendChild(th);
@@ -113,12 +114,11 @@ function creaTr(numCols, filaNum) {
 function quitaFila() {
     btnBorrF.disabled = true;
 
-    let tbody = elemento('tbody');
     tbody.lastElementChild.remove();
 
     // ¿Quedan filas?
     if (tbody.children.length >= 1) {
-        btnBorrF.disabled = false; // Estaba desactivado
+        btnBorrF.disabled = false;
     } else {
         deleteTable();
     }
