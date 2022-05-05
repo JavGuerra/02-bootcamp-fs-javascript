@@ -118,7 +118,7 @@ function quitaFila() {
 
     // ¿Quedan filas?
     if (tbody.children.length >= 1) {
-        btnBorrF.disabled = false; // Lo desactivé
+        btnBorrF.disabled = false; // Estaba desactivado
     } else {
         deleteTable();
     }
