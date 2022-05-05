@@ -67,7 +67,7 @@ function createTable(numCols, numFilas) {
     // table
     table = creaElem('table');
     table.appendChild(thead);
-    table.appendChild(tbody); // alt.: tabla.append(thead, tbody)
+    table.appendChild(tbody); // alt.: table.append(thead, tbody)
 
     return table;
 }
