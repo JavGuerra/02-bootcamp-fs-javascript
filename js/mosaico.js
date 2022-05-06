@@ -1,4 +1,4 @@
-/* «Mosaico» (CC BY) Javier Guerra, mayo 2022 */
+/* «Mosaico» por Javier Guerra, mayo 2022 */
 
 const btnNegro    = elemento('#btnNegro'   );
 const btnAzul     = elemento('#btnAzul'    );
