@@ -11,9 +11,9 @@ botones: Crear tabla, Añadir fila y Borrar fila (añade al final o borra la
 que se cree la tabla.
 */
 
-const numCols = 15;
-const numFilas = 5;
-elemento('#numCols').textContent  = numCols;
+const numCols = 15; // Mayor que 0
+const numFilas = 5; // Mayor que 0
+elemento('#numCols' ).textContent = numCols;
 elemento('#numFilas').textContent = numFilas;
 
 const btnTabla = elemento('#btnTabla');
@@ -27,7 +27,9 @@ btnBorrF.onclick  = quitaFila;
 btnCreaF.disabled = true;
 btnBorrF.disabled = true;
 
-let tbody; // Se define en createTable()
+let padre = elemento('main');
+let table, tbody; // Se definen en createTable()
+
 
 function elemento(sel) { return document.querySelector(sel); }
 
@@ -36,16 +38,14 @@ function creaElem(el)  { return document.createElement(el);  }
 function poneTabla() {
     btnTabla.disabled = true;
 
-    let padre = elemento('main');
-    let tabla = createTable(numCols, numFilas);
-    padre.appendChild(tabla);
+    padre.appendChild(createTable(numCols, numFilas));
 
     btnCreaF.disabled = false;
     btnBorrF.disabled = false;
 }
 
 function createTable(numCols, numFilas) {
-    let table, thead, tr, th;
+    let thead, tr, th;
 
     // thead
     tr = creaElem('tr');
@@ -72,10 +72,9 @@ function createTable(numCols, numFilas) {
     return table;
 }
 
-function deleteTable() {
+function borraTabla() {
     btnCreaF.disabled = true;
 
-    let table = elemento('table');
     table.remove();
 
     btnTabla.disabled = false;
@@ -120,6 +119,6 @@ function quitaFila() {
     if (tbody.children.length >= 1) {
         btnBorrF.disabled = false;
     } else {
-        deleteTable();
+        borraTabla();
     }
 }
