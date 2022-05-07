@@ -1,5 +1,16 @@
 /* «Mosaico» por Javier Guerra, mayo 2022 */
 
+/* Enunciado:
+Creamos una tabla de 16 x 16 celdas cuadradas de p.ej. 20px x 20px, con fondo
+blanco y borde, y creamos también unos botones de colores (al menos 4 u 8
+colores/botones) para poder seleccionar el color con el que vamos a pintar
+las celdas del mosaico. Se deberá poner el fondo del botón del color que
+representa. Cada vez que hacemos click en una de las celdas de la tabla
+(mosaico), esta se pondrá del color de fondo del botón seleccionado, pudiendo
+de esta forma hacer dibujos de colores en él. El botón seleccionado al inicio
+será el negro, Con el botón de color blanco podemos "borrar" el color de las
+celdas al hacer click en ellas. */
+
 const btnNegro    = elemento('#btnNegro'   );
 const btnAzul     = elemento('#btnAzul'    );
 const btnRojo     = elemento('#btnRojo'    );
