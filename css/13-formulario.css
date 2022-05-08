@@ -1,0 +1,79 @@
+body {
+    margin: 2em auto;
+    max-width: 50em;
+}
+
+h1 {
+    color: darkblue !important;
+}
+
+button {
+    padding: 0.5em;
+    margin-right: 0.5em;
+    width: 7em;
+}
+
+legend {
+    background-color:LightSteelBlue;
+    color: white;
+}
+
+fieldset {
+    background-color: aliceblue;
+    margin-bottom: 1em;
+    border: 1px solid LightSteelBlue;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    justify-content: flex-start;
+}
+
+input, select {
+    width: 200px;
+    padding: 0 10px;
+    border: 1px solid LightSteelBlue;
+}
+
+input {
+    height: 25px;
+}
+select {
+    padding: 0.3em;
+    width: 220px;
+}
+textarea {
+    border: 1px solid LightSteelBlue;
+}
+
+.obligatorio {
+    color: red;
+}
+
+#hombre, #mujer, #color {
+    width: auto;
+    height: auto;
+    margin: auto;
+    margin-left: 0.5em;
+    padding: 1em;
+}
+
+#color {
+    width: 25px;
+    height: 25px;
+    padding: 0;
+
+}
+
+#curiosidad {
+    width: 100%;
+}
+
+.campo {
+    text-align: right;
+    flex: 1 45%;
+}
+
+.izquierda {
+    text-align: left !important;
+}

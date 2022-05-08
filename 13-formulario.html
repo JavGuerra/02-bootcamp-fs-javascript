@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Javier Guerra" />
+    <meta name="keywords" content="Formulario web" />
+    <meta name='date' content='May. 09, 2022'>
+    <title>Formulario</title>
+    <link rel="stylesheet" href="css/wysiwyg-min.css">
+    <link rel="stylesheet" href="css/13-formulario.css">
+    <script defer src="js/13-formulario.js"></script>
+</head>
+
+<body>
+    <div class="wysiwyg">
+        <noscript>
+            <p>
+                La página web que está viendo usa JavaScript, por lo que, para su
+                correcto funcionamiento, debe tenerlo activado en el navegador.
+            </p>
+        </noscript>
+
+        <head>
+            <h1>Formulario</h1>
+        </head>
+
+        <main>
+            <form action="#" method="post">
+                <fieldset>
+                    <legend>&nbsp;Datos&nbsp;personales&nbsp;</legend>
+                    <div class="campo">
+                        <label for="nombre">Nombre<span class="obligatorio">*</span>:</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="David" autofocus="autofocus"
+                            required="required" />
+                    </div>
+                    <div class="campo">
+                        <label for="apellido</li>s">Apellidos<span class="obligatorio">*</span>:</label>
+                        <input type="text" id="apellidos" name="apellidos" placeholder="López Gutierrez"
+                            required="required" />
+                    </div>
+                    <div class="campo">
+                        <label for="edad">Edad:</label>
+                        <!--Valores mínimos y máximos aceptados-->
+                        <input type="number" id="edad" name="edad" placeholder="18" min="0" max="150" />
+                    </div>
+                    <div class="campo">
+                        <label for="fecha">Nacimiento:</label>
+                        <input type="date" id="fecha" name="fecha" />
+                    </div>
+                    <div class="campo">
+                        Sexo:
+                        <input type="radio" id="hombre" name="sexo" value="hombre" />
+                        <label for="hombre">H</label>
+                        <input type="radio" id="mujer" name="sexo" value="mujer" />
+                        <label for="mujer">M</label>
+                    </div>
+                    <div class="campo"></div>
+                    <fieldset>
+                        <legend>&nbsp;Sobre&nbsp;ti&nbsp;</legend>
+                        <span class="campo">
+                            <label for="deporte">Deporte favorito:</label>
+                            <input type="text" id="deporte" name="deporte" placeholder="Input predictivo"
+                                list="lista" />
+                            <datalist id="lista">
+                                <option value="Caminar"></option>
+                                <option value="Cine-maratón"></option>
+                                <option value="Sillón-Ball"></option>
+                                <option value="Computing all day"></option>
+                            </datalist>
+                        </span>
+                        <span class="campo">
+                            <label for="color">Color favorito:</label>
+                            <input type="color" id="color" name="color" value="#fff" />
+                        </span>
+                        <div>
+                            <label for="curiosidad">Cuéntanos alguna curiosidad:</label><br />
+                            <textarea id="curiosidad" name="curiosidad" cols="40" rows="7"></textarea>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>&nbsp;Datos&nbsp;de&nbsp;contacto&nbsp;</legend>
+                        <div class="campo">
+                            <label for="telefono">Teléfono:</label>
+                            <input type="tel" id="telefono" name="telefono" />
+                        </div>
+                        <div class="campo">
+                            <label for="correo">Correo<span class="obligatorio">*</span>:</label>
+                            <input type="email" id="correo" name="correo" required="required" />
+                        </div>
+                        <div class="campo">
+                            <label for="ciudad">Nacimiento:</label>
+                            <select id="ciudad" name="ciudad">
+                                <optgroup label="España">
+                                    <option value="Badajoz">Badajoz</option>
+                                    <!--Opción seleccionada-->
+                                    <option value="Madrid" selected="selected">Madrid</option>
+                                </optgroup>
+                                <optgroup label="Venezuela">
+                                    <option value="Maracaibo">Maracaibo</option>
+                                    <option value="Caracas">Caracas</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="campo"></div>
+                    </fieldset>
+                    <div>
+                        <small>Los campos con (<span class="obligatorio">*</span>) son obligatorios.</small></p>
+                    </div>
+                    <div class="campo">
+                        <button type="reset">Resetear</button>
+                        <button type="submit">Enviar</button>
+                    </div>
+                </fieldset>
+            </form>
+        </main>
+
+    </div>
+</body>
+
+</html>
