@@ -9,41 +9,54 @@ h1 {
 
 button {
     padding: 0.5em;
-    margin-right: 0.5em;
-    width: 7em;
+    margin: 0 0.5em;
+    width: 200px;
+    height: 40px;
+    text-transform: uppercase;
+    cursor: pointer;
 }
 
-legend {
-    background-color:LightSteelBlue;
+legend, #enviar {
+    background-color:SteelBlue;
     color: white;
+    border: 1px solid LightSteelBlue;
+}
+
+#borrar {
+    background-color: aliceblue;
+    color: SteelBlue;
+    border: 1px solid SteelBlue;
 }
 
 fieldset {
     background-color: aliceblue;
     margin-bottom: 1em;
     border: 1px solid LightSteelBlue;
-
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1em;
-    justify-content: flex-start;
 }
 
 input, select {
-    width: 200px;
+    width: 230px;
     padding: 0 10px;
     border: 1px solid LightSteelBlue;
 }
 
 input {
-    height: 25px;
+    height: 30px;
 }
+
+label, .etiqueta {
+    color: SteelBlue;
+}
+
 select {
-    padding: 0.3em;
-    width: 220px;
+    padding: 6px;
+    width: 252px;
+    background-color: white;
 }
+
 textarea {
     border: 1px solid LightSteelBlue;
+    width: 99% !important;
 }
 
 .obligatorio {
@@ -69,11 +82,15 @@ textarea {
     width: 100%;
 }
 
+.campos {
+    margin: 0.5em 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    justify-content: flex-start;
+}
+
 .campo {
     text-align: right;
     flex: 1 45%;
-}
-
-.izquierda {
-    text-align: left !important;
 }
