@@ -1,6 +1,7 @@
 body {
     margin: 2em auto;
     max-width: 50em;
+    font-family: "Helvetica", "Arial", sans-serif;
 }
 
 h1 {
@@ -9,7 +10,7 @@ h1 {
 
 button {
     padding: 0.5em;
-    margin: 0 0.5em;
+    margin: 0.5em;
     width: 200px;
     height: 40px;
     text-transform: uppercase;
@@ -19,7 +20,7 @@ button {
 legend, #enviar {
     background-color:SteelBlue;
     color: white;
-    border: 1px solid LightSteelBlue;
+    border: 1px solid SteelBlue;
 }
 
 #borrar {
@@ -36,6 +37,7 @@ fieldset {
 
 input, select {
     width: 230px;
+    height: 30px;
     padding: 0 10px;
     border: 1px solid LightSteelBlue;
 }
@@ -49,8 +51,8 @@ label, .etiqueta {
 }
 
 select {
-    padding: 6px;
     width: 252px;
+    height: 32px;
     background-color: white;
 }
 
