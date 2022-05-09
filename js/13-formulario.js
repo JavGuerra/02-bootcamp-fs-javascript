@@ -41,7 +41,7 @@ function validaForm(evento) {
 
 /* Devuelve un div con la info del formulario */
 function divInfo() {
-    let campo, divInfo, div;
+    let divInfo, div;
 
     divInfo = creaElem('div');
     divInfo.setAttribute("id", "info");
@@ -50,47 +50,48 @@ function divInfo() {
     div = creaElem('div');
     div.classList.add('valores');
 
+    // Nombre y apellidos
     div.innerHTML += '<div class="valor"><span class="etiqueta">Nombre completo:</span> '
                    + form.nombre.value + ' ' + form.apellidos.value + '</div>';
-
+    // Edad
     if (form.edad.value) {
       div.innerHTML += '<div class="valor"><span class="etiqueta">Edad:</span> '
       + form.edad.value  + '</div>';           
     }
-
+    // Sexo
     if (form.sexo.value) {
       div.innerHTML += '<div class="valor"><span class="etiqueta">Sexo:</span> '
       + form.sexo.value  + '</div>';           
     }
-
+    // Fecha de nacimiento
     if (form.fecha.value) {
       div.innerHTML += '<div class="valor"><span class="etiqueta">Nacimiento:</span> '
       + form.fecha.value  + '</div>';
     }
-
+    // Deporte favorito
     if (form.deporte.value) {
     div.innerHTML += '<div class="valor"><span class="etiqueta">Deporte favorito:</span> '
     + form.deporte.value  + '</div>';
     }
-
+    // Color favorito
     if (form.color.value) {
       div.innerHTML += '<div class="valor"><span class="etiqueta">Color favorito:</span> '
       + form.color.value + '</div>';
     }
-
+    // Teléfono
     if (form.telefono.value) {
       div.innerHTML += '<div class="valor"><span class="etiqueta">Teléfono:</span> '
       + form.telefono.value + '</div>';
     }
-
+    // Correo electrónico
     div.innerHTML += '<div class="valor"><span class="etiqueta">Correo:</span> '
     + form.correo.value + '</div>';
-
+    // Ciudad de nacimiento
     if (form.ciudad.value) {
       div.innerHTML += '<div class="valor"><span class="etiqueta">Ciudad:</span> '
       + form.ciudad.value + '</div>';
     }
-
+    // Alguna curiosidad
     if (form.curiosidad.value) {
       div.innerHTML += '<div class=""><span class="etiqueta">Alguna curiosidad:</span> '
       + form.curiosidad.value + '</div>';
