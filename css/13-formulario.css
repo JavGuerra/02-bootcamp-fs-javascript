@@ -4,7 +4,7 @@ body {
     font-family: "Helvetica", "Arial", sans-serif;
 }
 
-h1 {
+h1, h2 {
     color: darkblue !important;
 }
 
@@ -21,6 +21,7 @@ legend, #enviar {
     background-color:SteelBlue;
     color: white;
     border: 1px solid SteelBlue;
+    padding: 3px;
 }
 
 #borrar {
@@ -45,6 +46,10 @@ input, select {
 input {
     height: 30px;
 }
+
+/* input:invalid {
+    border: 2px solid red;
+} */
 
 label, .etiqueta {
     color: SteelBlue;
@@ -95,4 +100,11 @@ textarea {
 .campo {
     text-align: right;
     flex: 1 45%;
+}
+
+#info {
+    background-color: GhostWhite;
+    border: 1px solid SteelBlue;
+    margin-bottom: 1em;
+    padding: 0 1em;
 }
