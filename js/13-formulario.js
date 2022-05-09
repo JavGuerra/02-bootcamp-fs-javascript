@@ -20,7 +20,7 @@ function validaForm(evento) {
     console.log('Apellidos: ' + form.apellidos.value);
     console.log('Correo   : ' + form.correo.value   );
 
-    resulta.textContent = ''; // Si hay algo en el div #resulta, lo borra
+    resulta.textContent = ''; // Si hay algo en el div #resultado, lo borra
 
     resulta.appendChild(divInfo());
 
