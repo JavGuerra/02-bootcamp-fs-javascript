@@ -41,21 +41,71 @@ function validaForm(evento) {
 
 /* Devuelve un div con la info del formulario */
 function divInfo() {
-    let div = creaElem('div');
-    div.setAttribute("id", "info");
-    div.innerHTML = '<h2>Datos recibidos desde el formulario</h2>';
-    div.innerHTML +=  '<p><span class="etiqueta">Nombre y apellidos:</span> ' + form.nombre.value
-                     + ' ' + form.apellidos.value;
-    div.innerHTML += '<p><span class="etiqueta">Correo:</span> ' + form.correo.value;
-    return div;
+    let campo, divInfo, div;
+
+    divInfo = creaElem('div');
+    divInfo.setAttribute("id", "info");
+    divInfo.innerHTML =  '<h2>Datos recibidos desde el formulario</h2>';
+
+    div = creaElem('div');
+    div.classList.add('valores');
+
+    div.innerHTML += '<div class="valor"><span class="etiqueta">Nombre completo:</span> '
+                   + form.nombre.value + ' ' + form.apellidos.value + '</div>';
+
+    if (form.edad.value) {
+      div.innerHTML += '<div class="valor"><span class="etiqueta">Edad:</span> '
+      + form.edad.value  + '</div>';           
+    }
+
+    if (form.sexo.value) {
+      div.innerHTML += '<div class="valor"><span class="etiqueta">Sexo:</span> '
+      + form.sexo.value  + '</div>';           
+    }
+
+    if (form.fecha.value) {
+      div.innerHTML += '<div class="valor"><span class="etiqueta">Nacimiento:</span> '
+      + form.fecha.value  + '</div>';
+    }
+
+    if (form.deporte.value) {
+    div.innerHTML += '<div class="valor"><span class="etiqueta">Deporte favorito:</span> '
+    + form.deporte.value  + '</div>';
+    }
+
+    if (form.color.value) {
+      div.innerHTML += '<div class="valor"><span class="etiqueta">Color favorito:</span> '
+      + form.color.value + '</div>';
+    }
+
+    if (form.telefono.value) {
+      div.innerHTML += '<div class="valor"><span class="etiqueta">Teléfono:</span> '
+      + form.telefono.value + '</div>';
+    }
+
+    div.innerHTML += '<div class="valor"><span class="etiqueta">Correo:</span> '
+    + form.correo.value + '</div>';
+
+    if (form.ciudad.value) {
+      div.innerHTML += '<div class="valor"><span class="etiqueta">Ciudad:</span> '
+      + form.ciudad.value + '</div>';
+    }
+
+    if (form.curiosidad.value) {
+      div.innerHTML += '<div class=""><span class="etiqueta">Alguna curiosidad:</span> '
+      + form.curiosidad.value + '</div>';
+    }
+
+    divInfo.appendChild(div);
+
+    return divInfo;
 }
 
 function validaApellidos(e) {
-  let value = form.apellidos.value;
-  if (!value.trim().includes(' ')) {
-    alert('Debe incluir todos los apellidos');
-    let el = elemento('#apellidos');
-    el.focus(); // TODO
+  if (!form.apellidos.value.trim().includes(' ')) {
+    e.preventDefault();
+    form.apellidos.focus(); // TODO Aún no pone el foco en apellidos
+    alert('Debes incluir todos los apellidos');
   }
 }
 
@@ -72,8 +122,8 @@ function validaChars(e) {
         !(charCode >= 224  &&  charCode <= 237) &&
         !(charCode == 222) && !(charCode == 32) ) {
       e.preventDefault();
-      alert("Por favor usa sólo vocales y consonantes." + "\n"
-          + "Carácter: '" + String.fromCharCode(charCode) + "', charCode: " + charCode + "\n"
+      alert("Usa sólo vocales y consonantes." + "\n"
+          + "Carácter recibido: '" + String.fromCharCode(charCode) + "', charCode: " + charCode + ".\n"
       );
     }
   }
@@ -86,8 +136,8 @@ function validaCharTel(e) {
         !(charCode >= 40  &&  charCode <= 41 ) &&
         !(charCode == 32) && !(charCode == 43) ) {
       e.preventDefault();
-      alert("Por favor usa sólo números, espacios, paréntesis, '+'." + "\n"
-          + "Carácter: '" + String.fromCharCode(charCode) + "', charCode: " + charCode + "\n"
+      alert("Usa sólo números, espacios, paréntesis y '+'." + "\n"
+          + "Carácter recibido: '" + String.fromCharCode(charCode) + "', charCode: " + charCode + ".\n"
       );
     }
   }

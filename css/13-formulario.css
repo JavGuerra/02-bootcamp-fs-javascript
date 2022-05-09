@@ -8,6 +8,10 @@ h1, h2 {
     color: darkblue !important;
 }
 
+#info h2 {
+    margin-bottom: 0.5em !important;
+}
+
 button {
     padding: 0.5em;
     margin: 0.5em;
@@ -89,17 +93,21 @@ textarea {
     width: 100%;
 }
 
-.campos {
-    margin: 0.5em 0;
+.campos, .valores {
+    margin-top: 0.25em;
+    margin-bottom: 0.75em;
     display: flex;
     flex-wrap: wrap;
     gap: 1em;
     justify-content: flex-start;
 }
 
+.campo, .valor {
+    flex: 1 45%;
+}
+
 .campo {
     text-align: right;
-    flex: 1 45%;
 }
 
 #info {
@@ -107,4 +115,16 @@ textarea {
     border: 1px solid SteelBlue;
     margin-bottom: 1em;
     padding: 0 1em;
+}
+
+footer {
+    text-align: center;
+}
+
+footer a {
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
 }
