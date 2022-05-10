@@ -21,6 +21,12 @@ button {
     cursor: pointer;
 }
 
+button:disabled {
+    cursor: not-allowed;
+    color: LightSteelBlue !important;
+    background-color: aliceblue !important;
+}
+
 legend, #enviar {
     background-color:SteelBlue;
     color: white;
@@ -123,6 +129,7 @@ footer {
 
 footer a {
     text-decoration: none;
+    color: SteelBlue;
 }
 
 footer a:hover {
