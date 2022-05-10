@@ -94,6 +94,7 @@ function validaRequeridos() {
   requerido.apellidos = form.apellidos.value ? true : false; 
   requerido.correo    = form.correo.value    ? true : false; 
 
+  // enviar.disable = !(requerido.nombre && requerido.apellidos && requerido.correo);
   if (requerido.nombre && requerido.apellidos && requerido.correo) {
     enviar.disabled = false;
   } else {
@@ -129,7 +130,7 @@ function validaFecha() {
     let hoy   = new Date();
     let annio = hoy.getFullYear();
     if (form.edad.value && form.fecha.value) {
-      console.log(annio, annFe, annio - annFe);
+      // console.log(annio, annFe, annio - annFe);
       if (form.edad.value != (annio - annFe)) {
 
         form.fecha.focus();
