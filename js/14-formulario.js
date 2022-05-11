@@ -11,11 +11,12 @@ al formulario para dejarlo medio bonito y sin los br tan feos que usamos en su d
 // https://stackoverflow.com/questions/6348494/addeventlistener-vs-onclick
 
 // TODO poner color rojo a campos inválidos
+// TODO revisar los setCustomValidity()
 
 
 const resulta = elemento('#resultado');
 const enviar  = elemento('#enviar');
-const form    = document.formulario; // document.getElementsByName()[0];
+const form    = document.formulario; // alt. document.getElementsByName()[0];
 let requerido = {nombre: false, apellidos: false, correo: false};
 
 form.nombre.onkeypress    = validaChars;
@@ -26,7 +27,7 @@ form.deporte.onkeypress   = validaChars;
 form.telefono.onkeypress  = validaCharTel;
 form.correo.onchange      = validaRequeridos;
 
-form.onsubmit             = validaForm; // form.addEventListener('submit', validar);
+form.onsubmit             = validaForm; // alt. form.addEventListener('submit', validar);
 
 enviar.disabled = true;
 
@@ -36,15 +37,16 @@ function elemento(sel) { return document.querySelector(sel); }
 function creaElem(el)  { return document.createElement(el);  }
 
 function validaForm(evento) {
-  evento.preventDefault(); // Evita que el evento siga su curso
+  evento.preventDefault(); // Evita que el evento submit siga su curso y envíe el form.
 
-  if ( validaApellidos() && validaFecha() ) {
+  if ( validaApellidos() && validaEdad() ) {
 
     resulta.textContent = ''; // Si hay algo en el div #resultado, lo borra
     resulta.appendChild( divInfo() );
-
-    // this.submit(); // Sigue el curso del action del formulario
-    this.reset(); // Está implícito en submit() pero no tenemos dónde enviar
+    
+    // this.submit(); // esto retomaría el curso del 'action' del formulario
+    // submit() hace reset del form. pero no tengo back end donde enviar el form.
+    this.reset(); // así que no uso submit, y borro el formulario manualmente
   }
 }
 
@@ -93,63 +95,53 @@ function validaRequeridos() {
   requerido.nombre    = form.nombre.value    ? true : false; 
   requerido.apellidos = form.apellidos.value ? true : false; 
   requerido.correo    = form.correo.value    ? true : false; 
-
-  // enviar.disable = !(requerido.nombre && requerido.apellidos && requerido.correo);
-  if (requerido.nombre && requerido.apellidos && requerido.correo) {
-    enviar.disabled = false;
-  } else {
-    enviar.disabled = true;
-  }
+  enviar.disabled = !(requerido.nombre && requerido.apellidos && requerido.correo);
 }
 
 function validaApellidos() {
   let valida = true;
   let error = '';
   if (!form.apellidos.value.trim().includes(' ')) {
-    // form.apellidos.focus();
-    // alert('Debes incluir todos los apellidos.');
-    valida = false;
     error  = 'Debes incluir todos los apellidos.';
+    valida = false;
+    form.apellidos.focus(); alert(error);  // TODO quitar esta linea cuando funcione setCustomValidity()
   }
-  form.apellidos.setCustomValidity(error);
+  // form.apellidos.setCustomValidity(error); // TODO activar cuando funcione etCustomValidity()
+
   return valida;
 }
 
-function validaFecha() {
+function validaEdad() {
   let valida = true;
+  let errorE = errorF = '';
 
   if (form.edad.value && form.edad.value < 16) {
-
-    form.edad.focus();
-    alert('No tienes la edad requerida.');
-    // TODO form.edad.setCustomValidity('No tienes la edad requerida.');
-
+    errorE = 'No tienes la edad requerida.';
     valida = false;
+    form.edad.focus(); alert(errorE);      // TODO quitar esta linea cuando funcione setCustomValidity()
   } else if (form.fecha.value) {
-    let annFe = form.fecha.value.substr(0,4);
+    let annFe = form.fecha.value.substr(0,4); // Año de la fecha
     let hoy   = new Date();
-    let annio = hoy.getFullYear();
+    let annio = hoy.getFullYear(); // Año actual
     if (form.edad.value && form.fecha.value) {
-      // console.log(annio, annFe, annio - annFe);
+      // ¿Coinciden edad y fecha de nacimiento?  
       if (form.edad.value != (annio - annFe)) {
-
-        form.fecha.focus();
-        alert('La fecha no coincide con la edad.');
-        // TODO form.fecha.setCustomValidity('La fecha no coincide con la edad.');
-
+        errorF = 'La fecha no coincide con la edad.';
         valida = false;
+        form.fecha.focus(); alert(errorF); // TODO quitar esta linea cuando funcione setCustomValidity()
       }
     } else {
+      // ¿Hace menos de 16 años desde que nació?
       if ((annio - annFe) < 16) { 
-
-        form.fecha.focus();
-        alert('No tienes la edad requerida.');
-        // TODO form.fecha.setCustomValidity('No tienes la edad requerida.');
-
+        errorF = 'No tienes la edad requerida.';
         valida = false;
-      }   
+        form.fecha.focus(); alert(errorF); // TODO quitar esta linea cuando funcione setCustomValidity()
+      }
     }
   }
+  // form.edad.setCustomValidity(errorE);  // TODO activar cuando funcione etCustomValidity()
+  // form.fecha.setCustomValidity(errorF); // TODO activar cuando funcione etCustomValidity()
+
   return valida;
 }
 
