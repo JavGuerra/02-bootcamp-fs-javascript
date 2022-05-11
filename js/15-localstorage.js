@@ -39,7 +39,7 @@ form.onsubmit = guardaLS;
 borrLS.onclick = borraLS;
 borraF.onclick = borraFh;
 
-// Inicio
+// Al inicio
 poneEstado();
 
 
@@ -95,7 +95,7 @@ function recogeLS() {
 
     if (existeClave('datos')) {
         requerido = JSON.parse(localStorage.datos);
-        
+
         datos.innerHTML += '<br /><span class="propiedad">Propiedades del objeto «datos»:</span>';
         for (const propiedad in requerido) {
             datos.innerHTML += `<br /><span class="etiqueta">${propiedad}:</span> `;
@@ -108,6 +108,7 @@ function recogeLS() {
 function borraLS() {
     borrLS.disabled = true;
     if (localStorage.length) localStorage.clear();
+
     poneEstado();
 }
 
