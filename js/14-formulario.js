@@ -145,8 +145,8 @@ function validaEdad() {
   return valida;
 }
 
-function validaChars(e) {
-  let charCode = e.charCode;
+function validaChars(evento) {
+  let charCode = evento.charCode;
   if (charCode != 0) {
     if (!(charCode >= 65   &&  charCode <= 90 ) &&
         !(charCode >= 97   &&  charCode <= 122) &&
@@ -158,19 +158,18 @@ function validaChars(e) {
         !(charCode >= 224  &&  charCode <= 237) &&
         !(charCode == 222) && !(charCode == 45) &&
         !(charCode == 32) ) {
-      e.preventDefault();
+      evento.preventDefault();
     }
   }
 }
 
-function validaCharTel(e) {
-  let charCode = e.charCode;
+function validaCharTel(evento) {
+  let charCode = evento.charCode;
   if (charCode != 0) {
-    // TODO Con RegExp molaría más
     if (!(charCode >= 48  &&  charCode <= 57 ) &&
         !(charCode >= 40  &&  charCode <= 41 ) &&
         !(charCode == 32) && !(charCode == 43) ) {
-      e.preventDefault();
+      evento.preventDefault();
       alert("Usa sólo números, espacios, paréntesis y '+'." + "\n" + "Carácter recibido: '"
             + String.fromCharCode(charCode) + "', charCode: " + charCode + ".\n"
       );
