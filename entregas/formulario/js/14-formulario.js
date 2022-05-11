@@ -104,9 +104,10 @@ function validaApellidos() {
   if (!form.apellidos.value.trim().includes(' ')) {
     error  = 'Debes incluir todos los apellidos.';
     valida = false;
-    form.apellidos.focus(); alert(error);  // TODO quitar esta linea cuando funcione setCustomValidity()
+    //form.apellidos.focus(); alert(error);  // TODO quitar esta linea cuando funcione setCustomValidity()
   }
-  // form.apellidos.setCustomValidity(error); // TODO activar cuando funcione etCustomValidity()
+  form.apellidos.setCustomValidity(error); // TODO activar cuando funcione etCustomValidity()
+  form.apellidos.checkValidity();
 
   return valida;
 }
