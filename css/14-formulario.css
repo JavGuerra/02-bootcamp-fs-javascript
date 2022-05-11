@@ -46,6 +46,10 @@ fieldset {
     border: 1px solid LightSteelBlue;
 }
 
+input, select, textarea, button, #info {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+
 input, select {
     width: 230px;
     height: 30px;
@@ -57,9 +61,12 @@ input {
     height: 30px;
 }
 
-/* input:invalid {
-    border: 2px solid red;
-} */
+input:required:valid {
+    border: 1px solid SteelBlue;
+}
+input:required:invalid {
+    border: 1px solid #ff2450;
+}
 
 label, .etiqueta {
     color: SteelBlue;
@@ -77,7 +84,7 @@ textarea {
 }
 
 .obligatorio {
-    color: red;
+    color: #ff2450;
 }
 
 #hombre, #mujer, #color {
@@ -129,7 +136,7 @@ footer {
 
 footer a {
     text-decoration: none;
-    color: SteelBlue;
+    color: #2478ff;
 }
 
 footer a:hover {
