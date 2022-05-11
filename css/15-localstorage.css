@@ -1,4 +1,48 @@
 body {
     margin: 2em auto;
     max-width: 50em;
+    text-align: center;
+}
+
+label, .etiqueta {
+    display: inline-block;
+    width: 110px;
+    text-align: left;
+}
+
+input {
+    width: 165px;
+    padding: 0.3em;
+}
+
+button {
+    margin: 0 0.5em;
+    padding: 0.5em;
+    width: 135px;
+    font-variant: small-caps;
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}
+
+input, button {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+
+.obligatorio {
+    color: #ff2450;
+}
+
+#fecha, #datos {
+    display: inline-block;
+    width: 300px;
+    text-align: left;
+    vertical-align: text-top;
+}
+
+.etiqueta {
+    vertical-align: text-top;
+    font-weight: bold;
 }
