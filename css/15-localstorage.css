@@ -39,10 +39,12 @@ input, button {
     display: inline-block;
     width: 300px;
     text-align: left;
-    vertical-align: text-top;
 }
 
 .etiqueta {
-    vertical-align: text-top;
     font-weight: bold;
+}
+
+#fecha, #datos, .etiqueta, .propiedad {
+    vertical-align: text-top;
 }

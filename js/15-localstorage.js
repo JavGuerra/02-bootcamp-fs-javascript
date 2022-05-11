@@ -29,13 +29,13 @@ const fecha   = elemento('#fecha' );
 const form    = document.formulario;
 let requerido = {nombre: false, edad: false, correo: false};
 
-// Eventos de crear
+// Eventos de Crear
 form.nombre.onchange = validaRequeridos;
 form.edad.onchange   = validaRequeridos;
 form.correo.onchange = validaRequeridos;
 form.onsubmit = guardaLS;
 
-// Eventos de borrar
+// Eventos de Borrar
 borrLS.onclick = borraLS;
 borraF.onclick = borraFh;
 
@@ -43,8 +43,10 @@ borraF.onclick = borraFh;
 poneEstado();
 
 
+/* Devuelve un elemento */
 function elemento(sel)  { return document.querySelector(sel); }
 
+/* Muestra el listado de claves en L.S. o si no hay claves, muestra el formulario */
 function poneEstado() {
     let hayDatos = (existeClave('datos') || existeClave('fecha')) ? true : false;
 
@@ -63,6 +65,7 @@ function poneEstado() {
     }
 }
 
+/* ¿Se ha rellenado el formulario? */
 function validaRequeridos() {
     requerido.nombre = form.nombre.value ? true : false; 
     requerido.edad   = form.edad.value   ? true : false; 
@@ -71,6 +74,7 @@ function validaRequeridos() {
     enviar.disabled  = !(requerido.nombre && requerido.edad && requerido.correo);
 }
 
+/* Guarda los datos en en L.S. */
 function guardaLS(evento) {
     evento.preventDefault();
 
@@ -84,32 +88,36 @@ function guardaLS(evento) {
     poneEstado();
 }
 
+/* Lee y muestra los datos desde L.S. */
 function recogeLS() {
     datos.textContent = existeClave('datos') ? localStorage.datos : 'no existe';
     fecha.textContent = existeClave('fecha') ? localStorage.fecha : 'no existe';
 
     if (existeClave('datos')) {
-        datos.innerHTML += '<br />Propiedades del objeto «datos»:';
+        datos.innerHTML += '<br /><span class="propiedad">Propiedades del objeto «datos»:</span>';
         requerido = JSON.parse(localStorage.datos);
         for (const propiedad in requerido) {
             datos.innerHTML += `<br /><span class="etiqueta">${propiedad}:</span> `;
-            datos.innerHTML += `${requerido[propiedad]}`;
+            datos.innerHTML += `<span class="propiedad">${requerido[propiedad]}</span>`;
         }
     }
 }
 
+/* Borra todas las claves de L.S. */
 function borraLS() {
     borrLS.disabled = true;
     if (localStorage.length) localStorage.clear();
     poneEstado();
 }
 
+/* Borra la fecha de alta de L.S. */
 function borraFh() {
     borraF.disabled = true;
     if (existeClave('fecha')) localStorage.removeItem('fecha');
     fecha.textContent = 'no existe';
 }
 
+/* ¿Existe la clave en L.S.? Devuelve un booleano */
 function existeClave(clave) {
     return localStorage.getItem(clave) !== undefined && localStorage.getItem(clave);
 }
