@@ -94,8 +94,9 @@ function recogeLS() {
     fecha.textContent = existeClave('fecha') ? localStorage.fecha : 'no existe';
 
     if (existeClave('datos')) {
-        datos.innerHTML += '<br /><span class="propiedad">Propiedades del objeto «datos»:</span>';
         requerido = JSON.parse(localStorage.datos);
+        
+        datos.innerHTML += '<br /><span class="propiedad">Propiedades del objeto «datos»:</span>';
         for (const propiedad in requerido) {
             datos.innerHTML += `<br /><span class="etiqueta">${propiedad}:</span> `;
             datos.innerHTML += `<span class="propiedad">${requerido[propiedad]}</span>`;
