@@ -6,14 +6,13 @@ enviar.onclick = validaForm;
 function validaForm() {
   if (validaEdad() && form.checkValidity()) {
     alert('Ambas validaciones son correctas.');
-    // Cosas que hacer antes de enviar el form.
-    // form.submit();
+    form.submit();
   } else {
     alert( 'El formulario contiene errores.' );
   }
 }
 
-/* El usuario debe tener al menos 16 años. */
+/* Comprueba que el usuario tenga más de 16 años */
 function validaEdad() {
   let valida = true;
   let error  = '';
