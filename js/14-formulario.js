@@ -148,16 +148,9 @@ function validaEdad() {
 function validaChars(evento) {
   let charCode = evento.charCode;
   if (charCode != 0) {
-    if (!(charCode >= 65   &&  charCode <= 90 ) &&
-        !(charCode >= 97   &&  charCode <= 122) &&
-        !(charCode >= 128  &&  charCode <= 154) &&
-        !(charCode >= 160  &&  charCode <= 165) &&
-        !(charCode >= 181  &&  charCode <= 183) &&
-        !(charCode >= 198  &&  charCode <= 199) &&
-        !(charCode >= 208  &&  charCode <= 216) &&
-        !(charCode >= 224  &&  charCode <= 237) &&
-        !(charCode == 222) && !(charCode == 45) &&
-        !(charCode == 32) ) {
+      let caracter = String.fromCharCode(charCode);
+      let exprRegl = /^[a-zA-ZÀ-ÿ\u00f1\u00d1\s-]$/;
+      if (!exprRegl.test(caracter)) {
       evento.preventDefault();
     }
   }
@@ -170,8 +163,8 @@ function validaCharTel(evento) {
     let exprRegl = /^[\+-\s\d]$/;
     if (!exprRegl.test(caracter)) {
       evento.preventDefault();
-      alert("Usa sólo números, espacios, guiones y el '+'.\nCarácter recibido: '"
-            + caracter + "', charCode: " + charCode + ".\n"
+      alert("Usa sólo números, espacios, guiones y el '+'.\n"
+        + `Carácter recibido: '${caracter}', charCode: ${charCode}\n`
       );
     }
   }
