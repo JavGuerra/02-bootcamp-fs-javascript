@@ -4,15 +4,12 @@ const enviar   = document.querySelector('#enviar');
 const nombre   = document.querySelector('#nombre');
 const form     = document.formulario;
 
-//form.onsubmit   = prevenirEvento;
 enviar.onclick = validaForm;
 
-function prevenirEvento(evento) { evento.preventDefault(); }
-
 function validaForm() {
-  if (validaNombre()) {
-    form.submit();
+  if (validaNombre() && form.checkValidity()) {
     alert('Ola ke Ase');
+    // form.submit();
   }
 }
 

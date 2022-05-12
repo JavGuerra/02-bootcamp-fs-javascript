@@ -6,8 +6,12 @@ puso fue una ficha personal, pero dijo que podía hacerse de la forma que se
 quiera. Una vez este la funcionalidad esa hecha, si da tiempo, aplicar Flexbox
 al formulario para dejarlo medio bonito y sin los br tan feos que usamos en su día.
 */
+
 // Nota: onclick vs addEventListener
 // https://stackoverflow.com/questions/6348494/addeventlistener-vs-onclick
+
+
+// TODO revisar los setCustomValidity()
 
 
 const resulta = elemento('#resultado');
@@ -23,8 +27,7 @@ form.deporte.onkeypress   = validaChars;
 form.telefono.onkeypress  = validaCharTel;
 form.correo.onchange      = validaRequeridos;
 
-form.onsubmit   = prevenirEvento;
-enviar.onclick  = validaForm;
+form.onsubmit             = validaForm; // alt. form.addEventListener('submit', validar);
 
 enviar.disabled = true;
 
@@ -33,16 +36,17 @@ function elemento(sel) { return document.querySelector(sel); }
 
 function creaElem(el)  { return document.createElement(el);  }
 
-function prevenirEvento(evento) { evento.preventDefault(); }
+function validaForm(evento) {
+  evento.preventDefault(); // Evita que el evento submit siga su curso y envíe el form.
 
-function validaForm() {
   if ( validaApellidos() && validaEdad() ) {
-
-    // this.submit();
-    this.reset(); // Borra el formulario
 
     resulta.textContent = ''; // Si hay algo en el div #resultado, lo borra
     resulta.appendChild( divInfo() );
+    
+    // this.submit(); // esto retomaría el curso del 'action' del formulario
+    // submit() hace reset del form. pero no tengo back end donde enviar el form.
+    this.reset(); // así que no uso submit, y borro el formulario manualmente
   }
 }
 
@@ -100,8 +104,9 @@ function validaApellidos() {
   if (!form.apellidos.value.trim().includes(' ')) {
     error  = 'Debes incluir todos los apellidos.';
     valida = false;
+    form.apellidos.focus(); alert(error);  // TODO quitar esta linea cuando funcione setCustomValidity()
   }
-  form.apellidos.setCustomValidity(error);
+  // form.apellidos.setCustomValidity(error); // TODO activar cuando funcione etCustomValidity()
 
   return valida;
 }
@@ -113,6 +118,7 @@ function validaEdad() {
   if (form.edad.value && form.edad.value < 16) {
     errorE = 'No tienes la edad requerida.';
     valida = false;
+    form.edad.focus(); alert(errorE);      // TODO quitar esta linea cuando funcione setCustomValidity()
   } else if (form.fecha.value) {
     let annFe = form.fecha.value.substr(0,4); // Año de la fecha
     let hoy   = new Date();
@@ -122,17 +128,19 @@ function validaEdad() {
       if (form.edad.value != (annio - annFe)) {
         errorF = 'La fecha no coincide con la edad.';
         valida = false;
+        form.fecha.focus(); alert(errorF); // TODO quitar esta linea cuando funcione setCustomValidity()
       }
     } else {
       // ¿Hace menos de 16 años desde que nació?
       if ((annio - annFe) < 16) { 
         errorF = 'No tienes la edad requerida.';
         valida = false;
+        form.fecha.focus(); alert(errorF); // TODO quitar esta linea cuando funcione setCustomValidity()
       }
     }
   }
-  form.edad.setCustomValidity(errorE);
-  form.fecha.setCustomValidity(errorF);
+  // form.edad.setCustomValidity(errorE);  // TODO activar cuando funcione etCustomValidity()
+  // form.fecha.setCustomValidity(errorF); // TODO activar cuando funcione etCustomValidity()
 
   return valida;
 }
