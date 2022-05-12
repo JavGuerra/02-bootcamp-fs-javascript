@@ -39,7 +39,7 @@ function validaForm() {
     resulta.appendChild( divInfo() );
 
     form.reset(); // Borra el formulario
-    // this.submit();
+    // form.submit();
   }
 }
 
