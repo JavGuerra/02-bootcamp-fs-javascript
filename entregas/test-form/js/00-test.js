@@ -11,7 +11,7 @@ function prevenirEvento(evento) { evento.preventDefault(); }
 
 function validaForm() {
   if (validaNombre()) {
-    form.submit();
+    form.onsubmit();
     alert('Ola ke Ase');
   }
 }

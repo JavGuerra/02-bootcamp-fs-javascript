@@ -20,3 +20,24 @@ let numeros = [ 231, 85 , 123, 5 , 52 , 64 , 2 , 0 , 78, 86 ]
   resultado de concatenar el array creado más los que esten filtrados del anterior y en ese array ordenarlos de mayor
   a menor (ACORDAOS DE QUE SE PUEDE PASAR UNA FUNCIÓN PARA ORDENAR AL .sort(), COMO HIZO BORJA).
   */
+
+
+  /* -- TESTS -- */
+
+let coches = [
+  { marca: "Fiat", caballos: 75, color: "rojo", puertas: 3 },
+  { marca: "lamborghini", caballos: 300, color: "amarillo", puertas: 3 },
+  { marca: "renault", caballos: 160, color: "verde", puertas: 5 },
+  { marca: "ferrari", caballos: 750, color: "negro", puertas: 3 },
+];
+
+let cochesDeAltaGama = coches.filter(
+  coche => coche.marca == 'ferrari' || coche.marca == 'lamborghini'
+);
+console.log(cochesDeAltaGama);
+
+let tresPuertas = coches.filter(coche => coche.puertas == 3);
+console.log(tresPuertas);
+
+let caballos = coches.filter(coche => coche.caballos >= 300);
+console.log(caballos);
