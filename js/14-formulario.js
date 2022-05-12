@@ -170,7 +170,7 @@ function validaCharTel(evento) {
     let exprRegl = /^[+-\s\(\)\d]$/;
     if (!exprRegl.test(caracter)) {
       evento.preventDefault();
-      alert("Usa sólo números, espacios, paréntesis y '+'.\nCarácter recibido: '"
+      alert("Usa sólo números, espacios, guiones y el '+'.\nCarácter recibido: '"
             + caracter + "', charCode: " + charCode + ".\n"
       );
     }
