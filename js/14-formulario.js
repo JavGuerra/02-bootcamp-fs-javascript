@@ -166,12 +166,12 @@ function validaChars(evento) {
 function validaCharTel(evento) {
   let charCode = evento.charCode;
   if (charCode != 0) {
-    if (!(charCode >= 48  &&  charCode <= 57 ) &&
-        !(charCode >= 40  &&  charCode <= 41 ) &&
-        !(charCode == 32) && !(charCode == 43) ) {
+    let caracter = String.fromCharCode(charCode);
+    let exprRegl = /^[+-\s\(\)\d]$/;
+    if (!exprRegl.test(caracter)) {
       evento.preventDefault();
-      alert("Usa sólo números, espacios, paréntesis y '+'." + "\n" + "Carácter recibido: '"
-            + String.fromCharCode(charCode) + "', charCode: " + charCode + ".\n"
+      alert("Usa sólo números, espacios, paréntesis y '+'.\nCarácter recibido: '"
+            + caracter + "', charCode: " + charCode + ".\n"
       );
     }
   }
