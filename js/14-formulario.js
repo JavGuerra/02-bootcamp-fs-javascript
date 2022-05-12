@@ -167,7 +167,7 @@ function validaCharTel(evento) {
   let charCode = evento.charCode;
   if (charCode != 0) {
     let caracter = String.fromCharCode(charCode);
-    let exprRegl = /^[+-\s\(\)\d]$/;
+    let exprRegl = /^[\+-\s\d]$/;
     if (!exprRegl.test(caracter)) {
       evento.preventDefault();
       alert("Usa sólo números, espacios, guiones y el '+'.\nCarácter recibido: '"
