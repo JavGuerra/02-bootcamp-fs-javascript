@@ -15,12 +15,17 @@ const enviar  = elemento('#enviar');
 const form    = document.formulario; // alt. document.getElementsByName()[0];
 let requerido = {nombre: false, apellidos: false, correo: false};
 
-form.nombre.onkeypress    = validaChars;
+let letras = /^[a-zA-ZÀ-ÿ\u00f1\u00d1\s-]$/;
+let numers = /^\d$/;
+let numtel = /^[\+-\s\d]$/;
+
+form.nombre.onkeypress    = (e) => { validaChar(e, letras) };
+form.apellidos.onkeypress = (e) => { validaChar(e, letras) };
+form.edad.onkeypress      = (e) => { validaChar(e, numers) };
+form.deporte.onkeypress   = (e) => { validaChar(e, letras) };
+form.telefono.onkeypress  = (e) => { validaChar(e, numtel) };
 form.nombre.onchange      = validaRequeridos;
-form.apellidos.onkeypress = validaChars;
 form.apellidos.onchange   = validaRequeridos;
-form.deporte.onkeypress   = validaChars;
-form.telefono.onkeypress  = validaCharTel;
 form.correo.onchange      = validaRequeridos;
 
 enviar.onclick  = validaForm;
@@ -122,27 +127,12 @@ function validaEdad() {
   return valida;
 }
 
-function validaChars(evento) {
+function validaChar(evento, exprRegl) {
   let charCode = evento.charCode;
   if (charCode != 0) {
       let caracter = String.fromCharCode(charCode);
-      let exprRegl = /^[a-zA-ZÀ-ÿ\u00f1\u00d1\s-]$/;
       if (!exprRegl.test(caracter)) {
       evento.preventDefault();
-    }
-  }
-}
-
-function validaCharTel(evento) {
-  let charCode = evento.charCode;
-  if (charCode != 0) {
-    let caracter = String.fromCharCode(charCode);
-    let exprRegl = /^[\+-\s\d]$/;
-    if (!exprRegl.test(caracter)) {
-      evento.preventDefault();
-      alert("Usa sólo números, espacios, guiones y el '+'.\n"
-        + `Carácter recibido: '${caracter}', charCode: ${charCode}\n`
-      );
     }
   }
 }
