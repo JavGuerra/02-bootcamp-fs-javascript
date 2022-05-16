@@ -19,11 +19,11 @@ let letras = /^[a-zA-ZÀ-ÿ\u00f1\u00d1\s-]$/;
 let numers = /^\d$/;
 let numtel = /^[\+-\s\d]$/;
 
-form.nombre.onkeypress    = (e) => { validaChar(e, letras) };
-form.apellidos.onkeypress = (e) => { validaChar(e, letras) };
-form.edad.onkeypress      = (e) => { validaChar(e, numers) };
-form.deporte.onkeypress   = (e) => { validaChar(e, letras) };
-form.telefono.onkeypress  = (e) => { validaChar(e, numtel) };
+form.nombre.onkeypress    = (evento) => { validaChar(evento, letras) };
+form.apellidos.onkeypress = (evento) => { validaChar(evento, letras) };
+form.edad.onkeypress      = (evento) => { validaChar(evento, numers) };
+form.deporte.onkeypress   = (evento) => { validaChar(evento, letras) };
+form.telefono.onkeypress  = (evento) => { validaChar(evento, numtel) };
 
 form.nombre.onchange      = validaRequeridos;
 form.apellidos.onchange   = validaRequeridos;
