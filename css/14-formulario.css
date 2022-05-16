@@ -61,9 +61,6 @@ input {
     height: 30px;
 }
 
-input:required:valid {
-    border: 1px solid SteelBlue;
-}
 input:required:invalid {
     border: 1px solid #ff2450;
 }
