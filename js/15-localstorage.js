@@ -50,10 +50,6 @@ function elemento(sel)  { return document.querySelector(sel); }
 function poneEstado() {
     let hayDatos = (localStorage.length) ? true : false;
 
-    // Schrödinger
-    elemento('#formulario').style.display = !hayDatos ? 'initial' : 'none';
-    elemento('#resultado').style.display  =  hayDatos ? 'initial' : 'none';
-
     if (!hayDatos) {
         enviar.disabled = true;
         completo.nombre = completo.edad = completo.correo = false;
@@ -63,6 +59,10 @@ function poneEstado() {
         borraF.disabled = false;
         recogeLS();
     }
+
+    // Schrödinger
+    elemento('#formulario').style.display = !hayDatos ? 'initial' : 'none';
+    elemento('#resultado').style.display  =  hayDatos ? 'initial' : 'none';
 }
 
 /* ¿Se ha rellenado el formulario? */
