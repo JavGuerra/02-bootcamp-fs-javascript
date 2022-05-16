@@ -38,6 +38,7 @@ function elemento(sel) { return document.querySelector(sel); }
 
 function creaElem(el)  { return document.createElement(el);  }
 
+/* ¿El formulario está correcto? */
 function validaForm() {
   if ( validaApellidos() && validaEdad() && form.checkValidity()) {
 
@@ -78,6 +79,7 @@ function divInfo() {
   return divInfo;
 }
 
+/* Valida que los campos requeridos estén completados */
 function validaRequeridos() {
   completo.nombre    = form.nombre.value    ? true : false; 
   completo.apellidos = form.apellidos.value ? true : false; 
@@ -86,6 +88,7 @@ function validaRequeridos() {
   enviar.disabled = !(completo.nombre && completo.apellidos && completo.correo);
 }
 
+/* Valida que haya al menos dos apellidos separados por espacios en apellidos */
 function validaApellidos() {
   let valida = true;
   let error = '';
@@ -98,6 +101,7 @@ function validaApellidos() {
   return valida;
 }
 
+/* Valida los valores introducidos en los campos edad y fecha */
 function validaEdad() {
   let valida = true;
   let errorE = errorF = '';
@@ -129,6 +133,7 @@ function validaEdad() {
   return valida;
 }
 
+/* Valida caracteres introducidos en un campo */
 function validaChar(evento, exprRegl) {
   let charCode = evento.charCode;
   if (charCode != 0) {
