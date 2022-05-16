@@ -45,19 +45,8 @@ function validaForm() {
 
 /* Devuelve un div con la info del formulario */
 function divInfo() {
-  let divInfo, div;
-  let nombre    = form.nombre.value.trim();
-  let apellidos = form.apellidos.value.trim();
-  let edad      = form.edad.value.trim();
-  let fecha     = form.fecha.value.trim();
-  let sexo      = form.sexo.value.trim();
-  let deporte   = form.deporte.value.trim();
-  let color     = form.color.value.trim();
-  let curiosa   = form.curiosidad.value.trim();
-  let telefono  = form.telefono.value.trim();
-  let correo    = form.correo.value.trim();
-  let ciudad    = form.ciudad.value.trim();
-  let repetido  = '<div class="valor"><span class="etiqueta">';
+  let divInfo, div, nombre, valor;
+  let formData = new FormData(form);
 
   divInfo = creaElem('div');
   divInfo.setAttribute("id", "info");
@@ -66,20 +55,19 @@ function divInfo() {
   div = creaElem('div');
   div.classList.add('valores');
 
-  div.innerHTML = `${repetido}Nombre completo:</span> ${nombre} ${apellidos}</div>`;
-  if (edad)     div.innerHTML += `${repetido}Edad:</span> ${edad}</div>`;           
-  if (fecha)    div.innerHTML += `${repetido}Nacimiento:</span> ${fecha}</div>`;
-  if (sexo)     div.innerHTML += `${repetido}Sexo:</span> ${sexo}</div>`;
-  if (deporte)  div.innerHTML += `${repetido}Deporte favorito:</span> ${deporte}</div>`;
-  if (color)    div.innerHTML += `${repetido}Color favorito:</span> ${color}</div>`;
-  if (telefono) div.innerHTML += `${repetido}Teléfono:</span> ${telefono}</div>`;
-  div.innerHTML += `${repetido}Correo:</span> ${correo}</div>`;
-  if (ciudad)   div.innerHTML += `${repetido}Ciudad:</span> ${ciudad}</div>`;
-  if (curiosa) {div.innerHTML += 
-    `<div><span class="etiqueta">Alguna curiosidad:</span> ${curiosa}</div>`;
+  for ([nombre, valor] of formData.entries()) {
+    if (nombre != 'curiosidad' && valor.trim()) {
+      div.innerHTML += '<div class="valor"><span class="etiqueta">'
+        + `${nombre}:</span> ${valor}</div>`;
+    }
   }
 
   divInfo.appendChild(div);
+
+  if (form.curiosidad.value.trim()) {
+    divInfo.innerHTML += '<div id="areaVal"><span class="etiqueta">curiosidad:'
+      + `</span> ${form.curiosidad.value.trim()}</div>`;
+  }
 
   return divInfo;
 }

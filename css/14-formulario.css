@@ -130,6 +130,10 @@ textarea {
     padding: 0 1em;
 }
 
+#areaVal {
+    margin-bottom: 0.75em;
+}
+
 footer {
     text-align: center;
 }
