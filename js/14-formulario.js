@@ -24,6 +24,7 @@ form.apellidos.onkeypress = (e) => { validaChar(e, letras) };
 form.edad.onkeypress      = (e) => { validaChar(e, numers) };
 form.deporte.onkeypress   = (e) => { validaChar(e, letras) };
 form.telefono.onkeypress  = (e) => { validaChar(e, numtel) };
+
 form.nombre.onchange      = validaRequeridos;
 form.apellidos.onchange   = validaRequeridos;
 form.correo.onchange      = validaRequeridos;
