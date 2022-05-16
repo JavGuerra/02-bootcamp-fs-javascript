@@ -34,8 +34,10 @@ enviar.onclick  = validaForm;
 enviar.disabled = true;
 
 
+/* Devuelve un elemento */
 function elemento(sel) { return document.querySelector(sel); }
 
+/* Crea y un elemento y lo devuelve */
 function creaElem(el)  { return document.createElement(el);  }
 
 /* ¿El formulario está correcto? */
