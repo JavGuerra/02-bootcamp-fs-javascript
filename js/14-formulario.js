@@ -13,7 +13,7 @@ al formulario para dejarlo medio bonito y sin los br tan feos que usamos en su d
 const resulta = elemento('#resultado');
 const enviar  = elemento('#enviar');
 const form    = document.formulario; // alt. document.getElementsByName()[0];
-let requerido = {nombre: false, apellidos: false, correo: false};
+let completo  = {nombre: false, apellidos: false, correo: false};
 
 let letras = /^[a-zA-ZÀ-ÿ\u00f1\u00d1\s-]$/;
 let numers = /^\d$/;
@@ -79,10 +79,11 @@ function divInfo() {
 }
 
 function validaRequeridos() {
-  requerido.nombre    = form.nombre.value    ? true : false; 
-  requerido.apellidos = form.apellidos.value ? true : false; 
-  requerido.correo    = form.correo.value    ? true : false; 
-  enviar.disabled = !(requerido.nombre && requerido.apellidos && requerido.correo);
+  completo.nombre    = form.nombre.value    ? true : false; 
+  completo.apellidos = form.apellidos.value ? true : false; 
+  completo.correo    = form.correo.value    ? true : false;
+
+  enviar.disabled = !(completo.nombre && completo.apellidos && completo.correo);
 }
 
 function validaApellidos() {

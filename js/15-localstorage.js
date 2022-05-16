@@ -21,13 +21,13 @@ Usa JSON.parse() y JSON.stringify() para guardar muchos datos usando la misma cl
 */
 
 
-const enviar  = elemento('#enviar');
-const borrLS  = elemento('#borrLS');
-const borraF  = elemento('#borraF');
-const datos   = elemento('#datos' );
-const fecha   = elemento('#fecha' );
-const form    = document.formulario;
-let requerido = {nombre: false, edad: false, correo: false};
+const enviar = elemento('#enviar');
+const borrLS = elemento('#borrLS');
+const borraF = elemento('#borraF');
+const datos  = elemento('#datos' );
+const fecha  = elemento('#fecha' );
+const form   = document.formulario;
+let completo = {nombre: false, edad: false, correo: false};
 
 // Eventos de Crear
 form.nombre.onchange = validaRequeridos;
@@ -48,41 +48,42 @@ function elemento(sel)  { return document.querySelector(sel); }
 
 /* Muestra el listado de claves en L.S. o si no hay claves, muestra el formulario */
 function poneEstado() {
-    let hayDatos = (existeClave('datos') || existeClave('fecha')) ? true : false;
+    let hayDatos = (localStorage.length) ? true : false;
 
     // Schrödinger
     elemento('#formulario').style.display = !hayDatos ? 'initial' : 'none';
     elemento('#resultado').style.display  =  hayDatos ? 'initial' : 'none';
 
     if (!hayDatos) {
-        enviar.disabled  = true;
-        requerido.nombre = requerido.edad = requerido.correo = false;
+        enviar.disabled = true;
+        completo.nombre = completo.edad = completo.correo = false;
         form.reset();
     } else {
-        borrLS.disabled  = false;
-        borraF.disabled  = false;
+        borrLS.disabled = false;
+        borraF.disabled = false;
         recogeLS();
     }
 }
 
 /* ¿Se ha rellenado el formulario? */
 function validaRequeridos() {
-    requerido.nombre = form.nombre.value ? true : false; 
-    requerido.edad   = form.edad.value   ? true : false; 
-    requerido.correo = form.correo.value ? true : false;
+    completo.nombre = form.nombre.value ? true : false;
+    completo.edad   = form.edad.value   ? true : false; 
+    completo.correo = form.correo.value ? true : false;
 
-    enviar.disabled  = !(requerido.nombre && requerido.edad && requerido.correo);
+    enviar.disabled = !(completo.nombre && completo.edad && completo.correo);
 }
 
 /* Guarda los datos en en L.S. */
 function guardaLS(evento) {
     evento.preventDefault();
 
-    requerido.nombre = form.nombre.value;
-    requerido.edad   = form.edad.value;
-    requerido.correo = form.correo.value;
+    // Reaprovechando el objeto 'completo' para guardar los datos
+    completo.nombre = form.nombre.value;
+    completo.edad   = form.edad.value;
+    completo.correo = form.correo.value;
 
-    localStorage.datos = JSON.stringify(requerido);
+    localStorage.datos = JSON.stringify(completo);
     localStorage.fecha = new Date();
 
     poneEstado();
@@ -94,12 +95,12 @@ function recogeLS() {
     fecha.textContent = existeClave('fecha') ? localStorage.fecha : 'no existe';
 
     if (existeClave('datos')) {
-        requerido = JSON.parse(localStorage.datos);
+        completo = JSON.parse(localStorage.datos);
 
         datos.innerHTML += '<br /><span class="propiedad">Propiedades del objeto «datos»:</span>';
-        for (const propiedad in requerido) {
+        for (const propiedad in completo) {
             datos.innerHTML += `<br /><span class="etiqueta">${propiedad}:</span> `;
-            datos.innerHTML += `<span class="propiedad">${requerido[propiedad]}</span>`;
+            datos.innerHTML += `<span class="propiedad">${completo[propiedad]}</span>`;
         }
     }
 }
