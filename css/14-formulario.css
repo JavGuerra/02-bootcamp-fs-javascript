@@ -78,6 +78,10 @@ select {
     background-color: white;
 }
 
+datalist {
+    display: none;
+}
+
 textarea {
     border: 1px solid LightSteelBlue;
     width: 99% !important;
