@@ -63,14 +63,16 @@ function sumaCrono() {
         minutos  = digitos(Math.trunc(contador / 60));
         segundos = digitos(contador % 60);
     } else {
-        minutos  = '00';
+        minutos  = 0;
         segundos = digitos(contador);
     }
-    formato = `<span class="tiempo">${minutos}</span>`
-            + '<span class="medida"> min</span>'
-            + '<span class="separa"> :</span>';
-    formato += `<span class="tiempo">${segundos}</span>` 
+    formato = `<span class="tiempo">${segundos}</span>` 
             + '<span class="medida"> s</span>';
+    if (minutos) {
+            formato = `<span class="tiempo">${minutos}</span>`
+            + '<span class="medida"> min</span>'
+            + '<span class="separa"> :</span>' + formato;
+    }
     valors.innerHTML = formato;
 }
 
