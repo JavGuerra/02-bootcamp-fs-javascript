@@ -1,0 +1,51 @@
+body {
+    margin: 2em auto;
+    max-width: 50em;
+    text-align: center;
+}
+
+@font-face {
+    font-family: 'Digit';
+    src: url('../fonts/Digit.ttf') format('truetype');
+}
+
+#valors {
+    font-family: 'Digit';
+    text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+    box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.33);
+    background-color: AliceBlue;
+    border: 9px solid lightgray;
+    border-radius: 20px;
+    color: DimGray;
+    width: 67%;
+    margin: 0 auto 1.75em;
+    padding-bottom: 0.5em;
+}
+
+.tiempo {
+    font-size: 6em;
+}
+
+.medida {
+    font-size: 4em;
+}
+
+.separa {
+    font-size: 6em;
+}
+
+button {
+    width: 100px !important;
+    margin: 0 0.5em;
+    padding: 0.5em;
+    font-variant: small-caps;
+    cursor: pointer;
+}
+
+button:enabled {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}

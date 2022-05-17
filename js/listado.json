@@ -16,5 +16,6 @@
     { "titulo": "12b. Nodos",       "enlace": "12b-nodos.html"       },
     { "titulo": "13. Clases",       "enlace": "mayas-aztecas.html"   },
     { "titulo": "14. Formulario",   "enlace": "14-formulario.html"   },
-    { "titulo": "15. LocalStorage", "enlace": "15-localstorage.html" }
+    { "titulo": "15. LocalStorage", "enlace": "15-localstorage.html" },
+    { "titulo": "16. Cronómetro",   "enlace": "16-cronometro.html"   }
 ]
