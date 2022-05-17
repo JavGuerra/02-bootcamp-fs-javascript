@@ -66,11 +66,11 @@ function sumaCrono() {
         minutos  = '00';
         segundos = digitos(contador);
     }
-    formato = `<span class="tiempo">${minutos}</span>` + 
-            '<span class="medida"> min</span>' +
-            '<span class="separa"> :</span>';
-    formato += `<span class="tiempo">${segundos}</span>` + 
-            '<span class="medida"> s</span>';
+    formato = `<span class="tiempo">${minutos}</span>`
+            + '<span class="medida"> min</span>'
+            + '<span class="separa"> :</span>';
+    formato += `<span class="tiempo">${segundos}</span>` 
+            + '<span class="medida"> s</span>';
     valors.innerHTML = formato;
 }
 
