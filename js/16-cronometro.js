@@ -24,12 +24,7 @@ inicia.onclick = iniciaCrono;
 parate.onclick = parateCrono;
 cuenta.onclick = cuentaCrono;
 
-parate.disabled = true;
-
-formato = `<span class="tiempo">${digitos(contador)}</span>`
-+ '<span class="medida"> s</span>';
-
-valors.innerHTML = formato;
+parateCrono();
 
 
 /* Devuelve un elemento */
@@ -50,7 +45,10 @@ function parateCrono() {
     if (cronometro) clearInterval(cronometro);
     if (parada10s ) clearInterval(parada10s );
     inicia.disabled = false;
-    cuenta.disabled = false; 
+    cuenta.disabled = false;
+    formato = `<span class="tiempo">${digitos(contador)}</span>`
+    + '<span class="medida"> s</span>';
+    valors.innerHTML = formato;
 }
 
 /* Inicia la cuenta hasta 10 */
@@ -58,9 +56,9 @@ function cuentaCrono() {
     parateCrono();
     cuenta.disabled = true;
     contador = 11;
-    restCuenta();
-    cronometro = setInterval(restCuenta, 1000);
-    parada10s  = setTimeout(parateCrono, 10000);
+    sumaCuenta(); // Pone inicio cuenta
+    cronometro = setInterval(sumaCuenta, 1000);
+    parada10s  = setTimeout(parateCrono, tiempo());
     parate.disabled = false;
     inicia.disabled = false;
 }
@@ -68,37 +66,36 @@ function cuentaCrono() {
 /* Suma y muestra minutos y segundos */
 function sumaCrono() {
     contador++;
-
     if (contador >= 60) {
         minutos  = digitos(Math.trunc(contador / 60));
         segundos = digitos(contador % 60);
     } else {
         segundos = digitos(contador);
     }
-
     formato = `<span class="tiempo">${segundos}</span>` + 
             '<span class="medida"> s</span>';
-
     if (minutos) {
         formato = `<span class="tiempo">${minutos}</span>` + 
             '<span class="medida"> min</span>' +
             '<span class="separa"> :</span>' + formato;
     }
-    
     valors.innerHTML = formato;
 }
 
 /* Suma y muestra el contador */
-function restCuenta() {
+function sumaCuenta() {
     contador--;
-
     formato = `<span class="tiempo">${digitos(contador)}</span>`
-            + '<span class="medida"> s</span>';
-    
+            + '<span class="medida"> s</span>';   
     valors.innerHTML = formato;
 }
 
 /* Devuelve dos dígitos */
 function digitos(numero) {
     return numero < 10 ? '0' + numero : numero ;
+}
+
+/* Contador según navegador */
+function tiempo() {
+    return navigator.userAgent.indexOf("Firefox") > -1 ? 11000 : 10000;
 }
