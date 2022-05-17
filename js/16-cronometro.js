@@ -24,7 +24,7 @@ inicia.onclick = iniciaCrono;
 parate.onclick = parateCrono;
 cuenta.onclick = cuentaCrono;
 
-parateCrono();
+parate.disabled  = true;
 
 
 /* Devuelve un elemento */
@@ -33,34 +33,25 @@ function elemento(sel)  { return document.querySelector(sel); }
 /* Activa el cronómetro */
 function iniciaCrono() {
     parateCrono();
-    inicia.disabled = true;
+    boton(inicia);
     cronometro = setInterval(sumaCrono, 1000);
-    parate.disabled = false;
-    cuenta.disabled = false;
 }
 
 /* Para el cronómetro / contador */
 function parateCrono() {
-    parate.disabled = true;
+    boton(parate);
     if (cronometro) clearInterval(cronometro);
     if (parada10s ) clearInterval(parada10s );
-    inicia.disabled = false;
-    cuenta.disabled = false;
-    formato = `<span class="tiempo">${digitos(contador)}</span>`
-    + '<span class="medida"> s</span>';
-    valors.innerHTML = formato;
 }
 
 /* Inicia la cuenta hasta 10 */
 function cuentaCrono() {
     parateCrono();
-    cuenta.disabled = true;
+    boton(cuenta);
     contador = 11;
-    sumaCuenta(); // Pone inicio cuenta
-    cronometro = setInterval(sumaCuenta, 1000);
+    restaCuenta(); // Pone y ajusta inicio de cuenta
+    cronometro = setInterval(restaCuenta, 1000);
     parada10s  = setTimeout(parateCrono, tiempo());
-    parate.disabled = false;
-    inicia.disabled = false;
 }
 
 /* Suma y muestra minutos y segundos */
@@ -82,8 +73,8 @@ function sumaCrono() {
     valors.innerHTML = formato;
 }
 
-/* Suma y muestra el contador */
-function sumaCuenta() {
+/* Resta y muestra el contador */
+function restaCuenta() {
     contador--;
     formato = `<span class="tiempo">${digitos(contador)}</span>`
             + '<span class="medida"> s</span>';   
@@ -93,6 +84,14 @@ function sumaCuenta() {
 /* Devuelve dos dígitos */
 function digitos(numero) {
     return numero < 10 ? '0' + numero : numero ;
+}
+
+/* Activa y desactiva botones */
+function boton(boton) {
+    inicia.disabled = false;
+    parate.disabled = false;
+    cuenta.disabled = false;
+    boton.disabled  = true;
 }
 
 /* Contador según navegador */
