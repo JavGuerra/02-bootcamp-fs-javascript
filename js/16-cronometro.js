@@ -34,8 +34,8 @@ function elemento(sel)  { return document.querySelector(sel); }
 function iniciaCrono() {
     parateCrono();
     boton(inicia);
-    //contador = -1; // Resetea a 0
-    //sumaCrono();
+    contador = -1; // Porque sumaCromo() le suma 1.
+    sumaCrono();
     cronometro = setInterval(sumaCrono, 1000);
 }
 
@@ -50,7 +50,7 @@ function parateCrono() {
 function cuentaCrono() {
     parateCrono();
     boton(cuenta);
-    contador = 11;
+    contador = 11; // Porque restaCuenta() le resta 1.
     restaCuenta();
     cronometro = setInterval(restaCuenta, 1000);
     parada10s  = setTimeout(parateCrono, tiempo());
