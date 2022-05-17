@@ -11,9 +11,9 @@ body {
 
 #valors {
     font-family: 'Digit';
-    text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+    text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.20);
     box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.33);
-    background-color: AliceBlue;
+    background-color: MintCream;
     border: 9px solid lightgray;
     border-radius: 20px;
     color: DimGray;
