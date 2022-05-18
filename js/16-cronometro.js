@@ -12,8 +12,7 @@ https://www.w3schools.com/jsref/met_win_setinterval.asp
 // Nota: La aplicación maneja sólo minutos y segundos.
 
 let cronometro, parada10s;
-let minutos, segundos, formato;
-let numero, contador = 0;
+let contador = 0;
 
 const inicia = elemento('#inicia');
 const parate = elemento('#parate');
@@ -42,8 +41,14 @@ function iniciaCrono() {
 /* Para el cronómetro / contador */
 function parateCrono() {
     boton(parate);
-    if (cronometro) clearInterval(cronometro);
-    if (parada10s ) clearInterval(parada10s );
+    if (cronometro) {
+        clearInterval(cronometro);
+        cronometro = null;
+    }
+    if (parada10s ) {
+        clearInterval(parada10s );
+        parada10s  = null;
+    }
 }
 
 /* Inicia la cuenta hasta 10 */
@@ -58,6 +63,7 @@ function cuentaCrono() {
 
 /* Suma y muestra minutos y segundos */
 function sumaCrono() {
+    let minutos, segundos, formato;
     contador++;
     if (contador >= 60) {
         minutos  = digitos(Math.trunc(contador / 60));

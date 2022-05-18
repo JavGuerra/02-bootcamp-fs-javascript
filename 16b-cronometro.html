@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript</title>
+    <link rel="stylesheet" href="css/wysiwyg-min.css">
+    <link rel="stylesheet" href="css/16b-cronometro.css">
+    <script defer src="js/16b-cronometro.js"></script>
+</head>
+
+<body>
+    <div class="wysiwyg">
+        <noscript>
+            <p>
+                La página web que está viendo usa JavaScript, por lo que, para su
+                correcto funcionamiento, debe tenerlo activado en el navegador.
+            </p>
+        </noscript>
+
+        <header>
+            <h1>Cronómetro</h1>
+        </header>
+
+        <main>
+            <section id="resulta">
+                <span class="tiempo">00</span><span class="medida"> s</span>
+            </section>
+            <section id="navegacion">
+                <nav>
+                    <button id="inicia" title="Iniciar">
+                        <i class="bi bi-play-fill"></i>
+                    </button>
+                    <button id="contin" title="Continuar">
+                        <i class="bi bi-arrow-clockwise"></i>
+                    </button>
+                    <button id="parate" title="Parar">
+                        <i class="bi bi-pause-fill"></i>
+                    </button>
+                    <button id="cuenta" title="Contar 10" class="espacio">
+                        <i class="bi bi-alarm"></i>
+                    </button>
+                    <button id="guarda" title="Guardar">
+                        <i class="bi bi-plus-lg"></i>
+                    </button>
+                    <button id="histor" title="Historial">
+                        <i class="bi bi-list-ol"></i>
+                    </button>
+                    <button id="borrar" title="Borrar">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </nav>
+            </section>
+            <section id="listado"></section>
+        </main>
+
+        <footer>
+            <p>
+                <small>
+                    <a target="_blank" href="js/16b-cronometro.js">Ver el código JavaScript</a>
+                </small>
+            </p>
+        </footer>
+    </div>
+</body>
+
+</html>
