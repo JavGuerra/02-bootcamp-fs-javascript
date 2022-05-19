@@ -180,8 +180,6 @@ function guardaLocal() {
     hora = `${digitos(hoy.getHours())}:${digitos(hoy.getMinutes())}:${digitos(hoy.getSeconds())}`;
     fechaHora = fecha + ' ' + hora;
 
-    //TODO si tiempo es igual a último tiempo guardado, actualizar, no sumar, sino...
-
     sesion.push({'segundos': tiempo, 'fechaHora': fechaHora});
     localStorage.setItem(numSesion, JSON.stringify(sesion));
 
@@ -190,7 +188,7 @@ function guardaLocal() {
 
     borrar.disabled = false;
     histor.disabled = false;
-    guarda.disabled = false;
+    if (cronometro || parada10s) guarda.disabled = false;
 }
 
 /* Muestra el contenido de localStorage */
