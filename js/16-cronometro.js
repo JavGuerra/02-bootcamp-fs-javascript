@@ -84,6 +84,7 @@ function sumaCrono() {
 
 /* Resta y muestra el contador */
 function restaCuenta() {
+    let formato;
     contador--;
     formato = `<span class="tiempo">${digitos(contador)}</span>`
             + '<span class="medida"> s</span>';   

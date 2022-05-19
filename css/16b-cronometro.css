@@ -62,12 +62,15 @@ button:disabled {
 
 .ancho {
   width: 50px;
-  min-width: 25px;
 }
 
 .fecha {
-  width: 200px;
-  min-width: 100px;
+  width: 190px;
+}
+
+table {
+  margin: 0 auto;
+  border-collapse: collapse;
 }
 
 th {
@@ -84,6 +87,10 @@ caption h2 {
 
 @media (min-width: 600px) {
   #resulta {
-    width: 512px !important;
+    width: 560px !important;
+  }
+
+  table, hr {
+    width: 590px !important;
   }
 }

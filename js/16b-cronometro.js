@@ -27,7 +27,7 @@ https://www.w3schools.com/jsref/met_win_setinterval.asp
 let cronometro, parada10s;
 let sesion = [];
 let numSesion = numClave();
-let contador = 0;
+let tiempo = 0;
 
 const inicia = elemento('#inicia');
 const contin = elemento('#contin');
@@ -61,14 +61,13 @@ if (localStorage.length) {
 
 /* Inicia el cronómetro */
 function iniciaCrono() {
-    parateCrono();
     botonsCrono(inicia);
-    contador = -1; // Porque sumaCromo() le suma 1.
+    tiempo = -1; // Porque sumaCrono() le suma 1.
     sumaCrono();
     continCrono();
 }
 
-/* Para el cronómetro o el contador */
+/* Para el cronómetro o el tiempo */
 function parateCrono() {
     botonsCrono(parate);
     if (cronometro) {
@@ -80,7 +79,7 @@ function parateCrono() {
         parada10s  = null;
         contin.disabled = true;
     } 
-    if (!contador) guarda.disabled = true;
+    if (!tiempo) guarda.disabled = true;
 }
 
 /* Continua el cronómetro tras la pausa */
@@ -94,7 +93,7 @@ function continCrono() {
 function cuentaCrono() {
     parateCrono();
     botonsCuenta();
-    contador = 11; // Porque restaCuenta() le resta 1.
+    tiempo = 11; // Porque restaCuenta() le resta 1.
     restaCuenta();
     cronometro = setInterval(restaCuenta, 1000);
     parada10s  = setTimeout( parateCrono, limite());
@@ -107,29 +106,24 @@ function limite() {
 
 /* Suma y muestra minutos y segundos */
 function sumaCrono() {
-    let minutos, segundos, formato;
-    contador++;
-    if (contador >= 60) {
-        minutos  = digitos(Math.trunc(contador / 60));
-        segundos = digitos(contador % 60);
-    } else {
-        minutos  = 0;
-        segundos = digitos(contador);
-    }
-    formato = `<span class="tiempo">${segundos}</span>` 
+    let minSeg, formato;
+    tiempo++;
+    minSeg = separa(tiempo);
+    formato = `<span class="tiempo">${minSeg.segundos}</span>` 
             + '<span class="medida"> s</span>';
-    if (minutos) {
-            formato = `<span class="tiempo">${minutos}</span>`
+    if (minSeg.minutos) {
+            formato = `<span class="tiempo">${minSeg.minutos}</span>`
             + '<span class="medida"> min</span>'
             + '<span class="separa"> :</span>' + formato;
     }
     resulta.innerHTML = formato;
 }
 
-/* Resta y muestra el contador */
+/* Resta y muestra el tiempo */
 function restaCuenta() {
-    contador--;
-    formato = `<span class="tiempo">${digitos(contador)}</span>`
+    let formato;
+    tiempo--;
+    formato = `<span class="tiempo">${digitos(tiempo)}</span>`
             + '<span class="medida"> s</span>';   
     resulta.innerHTML = formato;
 }
@@ -139,7 +133,21 @@ function digitos(numero) {
     return numero < 10 ? '0' + numero : numero ;
 }
 
-/* Activa y desactiva botones según Crono */
+/* Devuelve un objeto con los minutos y segundos */
+function separa(tiempo) {
+    let minutos, segundos;
+    if (tiempo >= 60) {
+        minutos  = digitos(Math.trunc(tiempo / 60));
+        segundos = digitos(tiempo % 60);
+    } else {
+        minutos  = 0;
+        segundos = digitos(tiempo);
+    }
+
+    return {'minutos': minutos, 'segundos': segundos};
+}
+
+/* Activa y desactiva botones según iniciaCrono */
 function botonsCrono(boton) {
     inicia.disabled = false;
     contin.disabled = false;
@@ -149,7 +157,7 @@ function botonsCrono(boton) {
     boton.disabled  = true;
 }
 
-/* Activa y desactiva botones según Cuenta */
+/* Activa y desactiva botones según cuentaCrono */
 function botonsCuenta() {
     parate.disabled = false;
     guarda.disabled = false;
@@ -157,12 +165,12 @@ function botonsCuenta() {
     cuenta.disabled = true;
 }
 
-/* Obtiene la última clave */
+/* Obtiene la última clave en localStorage */
 function numClave() {
     return localStorage.length ? parseInt(localStorage.key(0)) + 1 : 1;
 }
 
-/* Guarda en LocalStorage las sesiones */
+/* Guarda en localStorage las sesiones */
 function guardaLocal() {
     let hoy, fecha, hora, fechaHora;
     guarda.disabled = true;
@@ -172,18 +180,20 @@ function guardaLocal() {
     hora = `${digitos(hoy.getHours())}:${digitos(hoy.getMinutes())}:${digitos(hoy.getSeconds())}`;
     fechaHora = fecha + ' ' + hora;
 
-    sesion.push({'segundos': contador, 'fechaHora': fechaHora});
+    //TODO si tiempo es igual a último tiempo guardado, actualizar, no sumar, sino...
+
+    sesion.push({'segundos': tiempo, 'fechaHora': fechaHora});
     localStorage.setItem(numSesion, JSON.stringify(sesion));
 
     creaTabla('<i class="bi bi-stopwatch"></i>&nbsp; Sesión actual');
-    creaFilas(numSesion, JSON.stringify(sesion));
+    creaFilas(numSesion, sesion);
 
     borrar.disabled = false;
     histor.disabled = false;
     guarda.disabled = false;
 }
 
-/* Muestra el contenido de LocalStorage */
+/* Muestra el contenido de localStorage */
 function historLocal() {
     let clave, valor;
     histor.disabled = true;
@@ -193,17 +203,25 @@ function historLocal() {
     // alt: for (i in localStorage) console.log(localStorage[i]);
     for (i = 0; i < localStorage.length; i++)  {  
         clave = localStorage.key(i);
-        valor = localStorage.getItem(clave);
+        valor = JSON.parse(localStorage.getItem(clave));
         creaFilas(clave, valor);
     }
 }
 
-/* Borra el contenido de LocalStorage */
+/* Borra el contenido de localStorage */
 function borrarLocal() {
     borrar.disabled = true;
     localStorage.clear();
+    sesion = [];
+    numSesion = 1;
     listado.textContent = '';
     histor.disabled = true;
+}
+
+/* Borra la clave de localStorage */
+function borraClave(clave) {
+    localStorage.removeItem(clave);
+    historLocal();
 }
 
 function creaTabla(titulo) {
@@ -248,8 +266,7 @@ function creaTabla(titulo) {
 }
 
 function creaFilas(clave, valor) {
-    let tr, th, td;
-    valor = JSON.parse(valor);
+    let tr, th, td, minSeg;
 
     valor.forEach((obj, i) => {
         tr = creaElem('tr');
@@ -265,8 +282,11 @@ function creaFilas(clave, valor) {
         td.textContent = i + 1;
         tr.appendChild(td);
 
+        minSeg = separa(obj.segundos);
+        formato = minSeg.segundos + 's';
+        if (minSeg.minutos) formato = minSeg.minutos + 'min, ' + formato;
         td = creaElem('td');
-        td.textContent = tiempo(obj.segundos);
+        td.textContent = formato;
         tr.appendChild(td);
 
         td = creaElem('td');
@@ -276,26 +296,16 @@ function creaFilas(clave, valor) {
         if (!i) {
             td = creaElem('td');
             td.setAttribute('rowspan', valor.length);
-            if (!i) td.innerHTML = '<i class="bi bi-trash3"></i>';
+            if (!i) td.innerHTML = `<i id="c${clave}" class="bi bi-trash3"></i>`;
             tr.appendChild(td);
         }
+
         elemento('#cuerpo').appendChild(tr);
     });
-}
 
-function tiempo(numero) {
-    let minutos, segundos, formato;
-    if (numero >= 60) {
-        minutos  = digitos(Math.trunc(numero / 60));
-        segundos = digitos(numero % 60);
-    } else {
-        minutos  = 0;
-        segundos = digitos(numero);
-    }
-    formato = segundos + 's';
-    if (minutos) formato = minutos + 'min:' + formato;
-
-    return formato;
+    papelera = elemento(`#c${clave}`);
+    // TODO evento
+    //papelera.onclick = borraClave(clave);
 }
 
 /* Devuelve un elemento */
