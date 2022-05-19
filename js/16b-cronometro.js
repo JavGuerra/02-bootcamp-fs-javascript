@@ -224,7 +224,7 @@ function borraClave(clave) {
         sesion = [];
     }
     if (localStorage.length) {
-        historLocal();
+        historLocal(); // TODO borrar directamente de la tabla
     } else {
         numSesion = 1;
         listado.textContent = '';
