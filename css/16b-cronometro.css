@@ -33,14 +33,15 @@ body {
 }
 
 .espacio {
-  margin: 0;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
 }
 
 button {
   width: 34px !important;
   border-radius: 17px;
   border: 1px solid Gray;
-  margin: 0;
+  margin: 0 0.25em;
   padding: 0.5em;
   cursor: pointer;
 }
@@ -70,15 +71,22 @@ th {
 
 th, td {
   vertical-align: top;
+  padding-left: 0.25em !important;
+  padding-right: 0.25em !important;
 }
 
 caption h2 {
-  margin-bottom: 0.5em !important;
+  margin-bottom: 0.75em !important;
 }
 
 @media (min-width: 600px) {
   table, hr {
     width: 590px !important;
+  }
+
+  th, td {
+    padding-left: 1em !important;
+    padding-right: 1em !important;
   }
 
   button {

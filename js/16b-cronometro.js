@@ -229,22 +229,22 @@ function creaTabla(titulo) {
 
     th = creaElem('th');
     th.classList.add('ancho');
-    th.textContent = 'Clave';
+    th.innerHTML = '<small>Clave</small>';
     tr.appendChild(th);
     th = creaElem('th');
     th.classList.add('ancho');
-    th.textContent = 'Núm.';
+    th.innerHTML = '<small>Núm.</small>';
     tr.appendChild(th);
     th = creaElem('th');
-    th.textContent = 'Crono';
+    th.innerHTML = '<small>Crono</small>';
     tr.appendChild(th);
     th = creaElem('th');
     th.classList.add('fecha');
-    th.textContent = 'Fecha/Hora';
+    th.innerHTML = '<small>Fecha/Hora</small>';
     tr.appendChild(th);
     th = creaElem('th');
     th.classList.add('ancho');
-    th.textContent = 'Borra';
+    th.innerHTML = '<small>Borra</small>';
     tr.appendChild(th);
 
     thead = creaElem('thead');
