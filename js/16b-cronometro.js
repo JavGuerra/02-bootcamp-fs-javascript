@@ -219,7 +219,18 @@ function borrarLocal() {
 /* Borra la clave de localStorage */
 function borraClave(clave) {
     localStorage.removeItem(clave);
-    historLocal();
+    console.log(clave, numSesion);
+    if (clave == numSesion) {
+        sesion = [];
+    }
+    if (localStorage.length) {
+        historLocal();
+    } else {
+        numSesion = 1;
+        listado.textContent = '';
+        histor.disabled = true;
+        borrar.disabled = true;
+    }
 }
 
 function creaTabla(titulo) {
@@ -302,9 +313,8 @@ function creaFilas(clave, valor) {
         elemento('#cuerpo').appendChild(tr);
     });
 
-    papelera = elemento(`#c${clave}`);
-    // TODO evento
-    //papelera.onclick = borraClave(clave);
+    // Ojo. borrarClave(), al llevar parámetro, debe asignarse como una función flecha.
+    elemento(`#c${clave}`).onclick = () => borraClave(clave);
 }
 
 /* Devuelve un elemento */

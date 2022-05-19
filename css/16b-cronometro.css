@@ -95,6 +95,16 @@ caption h2 {
   margin-bottom: 0.75em !important;
 }
 
+.bi-trash3 {
+  cursor: pointer;
+  color: DimGray;
+}
+
+.bi-trash3:hover {
+  color: Black;
+}
+
+
 @media (min-width: 600px) {
   table, hr {
     width: 590px !important;
