@@ -147,7 +147,7 @@ function separa(tiempo) {
     return {'minutos': minutos, 'segundos': segundos};
 }
 
-/* Activa y desactiva botones según iniciaCrono */
+/* Activa y desactiva botones según cronómetro */
 function botonsCrono(boton) {
     inicia.disabled = false;
     contin.disabled = false;
@@ -157,7 +157,7 @@ function botonsCrono(boton) {
     boton.disabled  = true;
 }
 
-/* Activa y desactiva botones según cuentaCrono */
+/* Activa y desactiva botones según contador */
 function botonsCuenta() {
     parate.disabled = false;
     guarda.disabled = false;
