@@ -37,11 +37,32 @@ body {
   margin-right: 0.5em;
 }
 
+.ancho {
+  width: auto;
+}
+
+.crono {
+  width: 75px;
+}
+
+.fecha {
+  width: auto;
+}
+
+#listado {
+  margin: 1.75em 0 1em;
+  padding: 0 0.5em;
+}
+
+.grBotones {
+  display: inline-block;
+}
+
 button {
   width: 34px !important;
   border-radius: 17px;
   border: 1px solid Gray;
-  margin: 0 0.25em;
+  margin: 0.5em 0.25em;
   padding: 0.5em;
   cursor: pointer;
 }
@@ -53,11 +74,6 @@ button:enabled {
 button:disabled {
   cursor: not-allowed;
   border: 1px solid lightgray;
-}
-
-#listado {
-  margin: 1.75em 0 1em;
-  padding: 0 0.5em;
 }
 
 table {
@@ -94,19 +110,23 @@ caption h2 {
   }
 
   #resulta {
-    width: 562px !important;
-  }
-
-  .ancho {
-    width: 50px;
-  }
-  
-  .fecha {
-    width: 190px;
+    width: 562px;
   }
 
   .espacio {
     margin-left: 1.5em;
     margin-right: 1.5em;
+  }
+
+  .ancho {
+    width: 50px;
+  }
+
+  .crono {
+    width: auto;
+  }  
+  
+  .fecha {
+    width: 190px;
   }
 }

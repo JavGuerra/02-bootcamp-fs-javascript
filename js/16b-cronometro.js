@@ -236,6 +236,7 @@ function creaTabla(titulo) {
     th.innerHTML = '<small>Núm.</small>';
     tr.appendChild(th);
     th = creaElem('th');
+    th.classList.add('crono');
     th.innerHTML = '<small>Crono</small>';
     tr.appendChild(th);
     th = creaElem('th');
