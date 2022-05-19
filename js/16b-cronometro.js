@@ -194,7 +194,7 @@ function guardaLocal() {
 
 /* Muestra el contenido de localStorage */
 function historLocal() {
-    let clave, valor;
+    let clave, valor, i;
     histor.disabled = true;
 
     creaTabla('<i class="bi bi-list-ol"></i>&nbsp; Sesiones guardadas');
