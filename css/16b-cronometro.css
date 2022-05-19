@@ -33,15 +33,14 @@ body {
 }
 
 .espacio {
-  margin-left: 1.5em;
-  margin-right: 1.5em;
+  margin: 0;
 }
 
 button {
   width: 34px !important;
   border-radius: 17px;
   border: 1px solid Gray;
-  margin: 0 0.5em;
+  margin: 0;
   padding: 0.5em;
   cursor: pointer;
 }
@@ -58,14 +57,6 @@ button:disabled {
 #listado {
   margin: 1.75em 0 1em;
   padding: 0 0.5em;
-}
-
-.ancho {
-  width: 50px;
-}
-
-.fecha {
-  width: 190px;
 }
 
 table {
@@ -86,11 +77,28 @@ caption h2 {
 }
 
 @media (min-width: 600px) {
+  table, hr {
+    width: 590px !important;
+  }
+
+  button {
+    margin: 0 0.5em;
+  }
+
   #resulta {
     width: 562px !important;
   }
 
-  table, hr {
-    width: 590px !important;
+  .ancho {
+    width: 50px;
+  }
+  
+  .fecha {
+    width: 190px;
+  }
+
+  .espacio {
+    margin-left: 1.5em;
+    margin-right: 1.5em;
   }
 }
