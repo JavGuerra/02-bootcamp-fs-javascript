@@ -67,6 +67,14 @@ function iniciaCrono() {
     continCrono();
 }
 
+
+/* Continua el cronómetro tras la pausa */
+function continCrono() {
+    parateCrono();
+    botonsCrono(contin);
+    cronometro = setInterval(sumaCrono, 1000);
+}
+
 /* Para el cronómetro o el tiempo */
 function parateCrono() {
     botonsCrono(parate);
@@ -80,13 +88,6 @@ function parateCrono() {
         contin.disabled = true;
     } 
     if (!tiempo) guarda.disabled = true;
-}
-
-/* Continua el cronómetro tras la pausa */
-function continCrono() {
-    parateCrono();
-    botonsCrono(contin);
-    cronometro = setInterval(sumaCrono, 1000);
 }
 
 /* Inicia la cuenta hasta 10 */
@@ -219,12 +220,11 @@ function borrarLocal() {
 /* Borra la clave de localStorage */
 function borraClave(clave) {
     localStorage.removeItem(clave);
-    console.log(clave, numSesion);
     if (clave == numSesion) {
         sesion = [];
     }
     if (localStorage.length) {
-        historLocal(); // TODO borrar directamente de la tabla
+        historLocal();
     } else {
         numSesion = 1;
         listado.textContent = '';
