@@ -20,6 +20,7 @@ de una sesión en concreto. (si sobra tiempo) (editado)
 
 https://www.w3schools.com/jsref/met_win_settimeout.asp
 https://www.w3schools.com/jsref/met_win_setinterval.asp
+https://lineadecodigo.com/html5/listar-el-contenido-de-local-storage-en-html5/
 */
 
 // Nota: La aplicación maneja sólo minutos y segundos.
@@ -118,6 +119,11 @@ function sumaCrono() {
             + '<span class="separa"> :</span>' + formato;
     }
     resulta.innerHTML = formato;
+
+    if (minSeg.minutos == 59 && minSeg.segundos == 59) {
+        parateCrono();
+        contin.disabled = true;
+    }
 }
 
 /* Resta y muestra el tiempo */
@@ -209,6 +215,7 @@ function historLocal() {
 
 /* Borra el contenido de localStorage */
 function borrarLocal() {
+    // Procede usar 'if(confirm('pregunta')) {}' pero para el crono hasta confirmar. 
     borrar.disabled = true;
     localStorage.clear();
     sesion = [];
@@ -306,7 +313,7 @@ function creaFilas(clave, valor) {
         if (!i) {
             td = creaElem('td');
             td.setAttribute('rowspan', valor.length);
-            if (!i) td.innerHTML = `<i id="c${clave}" class="bi bi-trash3"></i>`;
+            td.innerHTML = `<i id="c${clave}" class="bi bi-trash3"></i>`;
             tr.appendChild(td);
         }
 
