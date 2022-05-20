@@ -66,6 +66,7 @@ if (localStorage.length) {
 /* Inicia el cronómetro */
 function iniciaCrono() {
     botonsCrono(btnInicia);
+    parateCrono();
     tiempo = -1; // Porque sumaCrono() le suma 1.
     sumaCrono();
     continCrono();
@@ -74,7 +75,6 @@ function iniciaCrono() {
 
 /* Continua el cronómetro tras la pausa */
 function continCrono() {
-    parateCrono();
     botonsCrono(btnContin);
     cronometro = setInterval(sumaCrono, 1000);
 }
