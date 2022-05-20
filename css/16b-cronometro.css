@@ -85,6 +85,14 @@ th {
   font-variant: small-caps;
 }
 
+td button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none !important;
+}
+
 th, td {
   vertical-align: top;
   padding-left: 0.25em !important;
@@ -139,4 +147,12 @@ caption h2 {
   .fecha {
     width: 190px;
   }
+}
+
+/* Hace que los mensajes sean sólo visibles para lectores de pantalla.   */
+/* alternativas: top:-9999px; o left:-9999px; o text-indent:-9999px; ... */
+.sr {
+  position: absolute;
+  overflow: hidden;
+  text-indent: -9999px;
 }
