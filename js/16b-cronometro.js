@@ -33,39 +33,39 @@ let sesion = [];
 let numSesion = numClave();
 let tiempo = 0;
 
-const inicia = elemento('#inicia');
-const contin = elemento('#contin');
-const parate = elemento('#parate');
-const cuenta = elemento('#cuenta');
-const guarda = elemento('#guarda');
-const histor = elemento('#histor');
-const borrar = elemento('#borrar');
-const resulta = elemento('#resulta');
-const listado = elemento('#listado');
+const btnInicia = elemento('#inicia');
+const btnContin = elemento('#contin');
+const btnParate = elemento('#parate');
+const btnCuenta = elemento('#cuenta');
+const btnGuarda = elemento('#guarda');
+const btnHistor = elemento('#histor');
+const btnBorrar = elemento('#borrar');
+const elResulta = elemento('#resulta');
+const elListado = elemento('#listado');
 
-inicia.onclick = iniciaCrono;
-contin.onclick = continCrono;
-parate.onclick = parateCrono;
-cuenta.onclick = cuentaCrono;
-guarda.onclick = guardaLocal;
-histor.onclick = historLocal;
-borrar.onclick = borrarLocal;
+btnInicia.onclick = iniciaCrono;
+btnContin.onclick = continCrono;
+btnParate.onclick = parateCrono;
+btnCuenta.onclick = cuentaCrono;
+btnGuarda.onclick = guardaLocal;
+btnHistor.onclick = historLocal;
+btnBorrar.onclick = borrarLocal;
 
 /* Botones al inicio */
-parate.disabled = true;
-contin.disabled = true;
-guarda.disabled = true;
+btnParate.disabled = true;
+btnContin.disabled = true;
+btnGuarda.disabled = true;
 if (localStorage.length) {
     historLocal();
 } else {
-    histor.disabled = true;
-    borrar.disabled = true;
+    btnHistor.disabled = true;
+    btnBorrar.disabled = true;
 }
 
 
 /* Inicia el cronómetro */
 function iniciaCrono() {
-    botonsCrono(inicia);
+    botonsCrono(btnInicia);
     tiempo = -1; // Porque sumaCrono() le suma 1.
     sumaCrono();
     continCrono();
@@ -75,14 +75,14 @@ function iniciaCrono() {
 /* Continua el cronómetro tras la pausa */
 function continCrono() {
     parateCrono();
-    botonsCrono(contin);
+    botonsCrono(btnContin);
     cronometro = setInterval(sumaCrono, 1000);
 }
 
 
 /* Para el cronómetro o el tiempo */
 function parateCrono() {
-    botonsCrono(parate);
+    botonsCrono(btnParate);
     if (cronometro) {
         clearInterval(cronometro);
         cronometro = null;
@@ -90,9 +90,9 @@ function parateCrono() {
     if (parada10s ) {
         clearInterval(parada10s );
         parada10s  = null;
-        contin.disabled = true;
+        btnContin.disabled = true;
     } 
-    if (!tiempo) guarda.disabled = true;
+    if (!tiempo) btnGuarda.disabled = true;
 }
 
 
@@ -125,11 +125,11 @@ function sumaCrono() {
             + '<span class="medida"> min</span>'
             + '<span class="separa"> :</span>' + formato;
     }
-    resulta.innerHTML = formato;
+    elResulta.innerHTML = formato;
 
     if (minSeg.minutos == 59 && minSeg.segundos == 59) {
         parateCrono();
-        contin.disabled = true;
+        btnContin.disabled = true;
     }
 }
 
@@ -140,7 +140,7 @@ function restaCuenta() {
     tiempo--;
     formato = `<span class="tiempo">${digitos(tiempo)}</span>`
             + '<span class="medida"> s</span>';   
-    resulta.innerHTML = formato;
+    elResulta.innerHTML = formato;
 }
 
 
@@ -167,21 +167,21 @@ function separa(tiempo) {
 
 /* Activa y desactiva botones según cronómetro */
 function botonsCrono(boton) {
-    inicia.disabled = false;
-    contin.disabled = false;
-    parate.disabled = false;
-    cuenta.disabled = false;
-    guarda.disabled = false;
+    btnInicia.disabled = false;
+    btnContin.disabled = false;
+    btnParate.disabled = false;
+    btnCuenta.disabled = false;
+    btnGuarda.disabled = false;
     boton.disabled  = true;
 }
 
 
 /* Activa y desactiva botones según contador */
 function botonsCuenta() {
-    parate.disabled = false;
-    guarda.disabled = false;
-    contin.disabled = true;
-    cuenta.disabled = true;
+    btnParate.disabled = false;
+    btnGuarda.disabled = false;
+    btnContin.disabled = true;
+    btnCuenta.disabled = true;
 }
 
 
@@ -194,7 +194,7 @@ function numClave() {
 /* Guarda en localStorage las sesiones */
 function guardaLocal() {
     let hoy, fecha, hora, fechaHora;
-    guarda.disabled = true;
+    btnGuarda.disabled = true;
 
     hoy = new Date();
     fecha = `${digitos(hoy.getDate())}-${digitos(hoy.getMonth() + 1)}-${hoy.getFullYear()}`;
@@ -207,16 +207,16 @@ function guardaLocal() {
     creaTabla('<i class="bi bi-stopwatch"></i>&nbsp; Sesión actual');
     creaFilas(numSesion, sesion);
 
-    borrar.disabled = false;
-    histor.disabled = false;
-    if (cronometro || parada10s) guarda.disabled = false;
+    btnBorrar.disabled = false;
+    btnHistor.disabled = false;
+    if (cronometro || parada10s) btnGuarda.disabled = false;
 }
 
 
 /* Muestra el contenido de localStorage */
 function historLocal() {
     let clave, valor, i;
-    histor.disabled = true;
+    btnHistor.disabled = true;
 
     creaTabla('<i class="bi bi-list-ol"></i>&nbsp; Sesiones guardadas');
 
@@ -232,12 +232,12 @@ function historLocal() {
 /* Borra el contenido de localStorage */
 function borrarLocal() {
     // Procede usar 'if(confirm('pregunta')) {}' pero para el crono hasta confirmar. 
-    borrar.disabled = true;
+    btnBorrar.disabled = true;
     localStorage.clear();
     sesion = [];
     numSesion = 1;
-    listado.textContent = '';
-    histor.disabled = true;
+    elListado.textContent = '';
+    btnHistor.disabled = true;
 }
 
 
@@ -251,9 +251,9 @@ function borraClave(clave) {
         historLocal();
     } else {
         numSesion = 1;
-        listado.textContent = '';
-        histor.disabled = true;
-        borrar.disabled = true;
+        elListado.textContent = '';
+        btnHistor.disabled = true;
+        btnBorrar.disabled = true;
     }
 }
 
@@ -264,22 +264,27 @@ function creaTabla(titulo) {
     tr = creaElem('tr');
 
     th = creaElem('th');
+    th.setAttribute('scope', 'col');
     th.classList.add('ancho');
     th.innerHTML = '<small>Clave</small>';
     tr.appendChild(th);
     th = creaElem('th');
+    th.setAttribute('scope', 'col');
     th.classList.add('ancho');
     th.innerHTML = '<small>Núm.</small>';
     tr.appendChild(th);
     th = creaElem('th');
+    th.setAttribute('scope', 'col');
     th.classList.add('crono');
     th.innerHTML = '<small>Crono</small>';
     tr.appendChild(th);
     th = creaElem('th');
+    th.setAttribute('scope', 'col');
     th.classList.add('fecha');
     th.innerHTML = '<small>Fecha/Hora</small>';
     tr.appendChild(th);
     th = creaElem('th');
+    th.setAttribute('scope', 'col');
     th.classList.add('ancho');
     th.innerHTML = '<small>Borra</small>';
     tr.appendChild(th);
@@ -296,8 +301,8 @@ function creaTabla(titulo) {
     table.append(caption, thead, tbody);
 
     hr = creaElem('hr');
-    listado.textContent = '';
-    listado.append(hr, table);
+    elListado.textContent = '';
+    elListado.append(hr, table);
 }
 
 /* Crea filas en tbody por cada valor del cronómetro guardado en la sesión */
@@ -308,10 +313,10 @@ function creaFilas(clave, valor) {
         tr = creaElem('tr');
 
         if (!i) {
-            tr.setAttribute('id', `clave${clave}`);
+            tr.setAttribute('id', `clave${clave}`); 
             th = creaElem('th');
             th.setAttribute('rowspan', valor.length);
-            th.setAttribute('scope', 'rowgroup')
+            th.setAttribute('scope', 'rowgroup');
             th.textContent = clave;
             tr.appendChild(th);
         }
@@ -333,7 +338,8 @@ function creaFilas(clave, valor) {
 
         if (!i) {
             boton = creaElem('button');
-            boton.innerHTML = `<i id="borra${clave}" class="bi bi-trash3"></i>`;
+            boton.setAttribute('id', `borra${clave}`);
+            boton.innerHTML = '<i class="bi bi-trash3"></i>';
             boton.innerHTML += `<span class="sr">Borrar sesión ${clave}</span>`;
             td = creaElem('td');
             td.setAttribute('rowspan', valor.length);
