@@ -303,7 +303,9 @@ function creaFilas(clave, valor) {
 
     valor.forEach((obj, i) => {
         tr = creaElem('tr');
+
         if (!i) {
+            tr.setAttribute('id', `clave${clave}`);
             th = creaElem('th');
             th.setAttribute('rowspan', valor.length);
             th.setAttribute('scope', 'rowgroup')
@@ -329,7 +331,7 @@ function creaFilas(clave, valor) {
         if (!i) {
             td = creaElem('td');
             td.setAttribute('rowspan', valor.length);
-            td.innerHTML = `<i id="c${clave}" class="bi bi-trash3"></i>`;
+            td.innerHTML = `<i id="borra${clave}" class="bi bi-trash3"></i>`;
             tr.appendChild(td);
         }
 
@@ -337,7 +339,7 @@ function creaFilas(clave, valor) {
     });
 
     // Ojo. borrarClave(), al llevar parámetro, debe asignarse como una función flecha.
-    elemento(`#c${clave}`).onclick = () => borraClave(clave);
+    elemento(`#borra${clave}`).onclick = () => borraClave(clave);
 }
 
 
