@@ -86,8 +86,9 @@ th {
 }
 
 td button {
+  width: auto !important;
   margin: 0;
-  padding: 0;
+  padding: 0 !important;
   border: 0;
   background: none;
   box-shadow: none !important;
