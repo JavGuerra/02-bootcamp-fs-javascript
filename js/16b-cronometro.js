@@ -256,7 +256,7 @@ function borraClave(clave) {
     }
 }
 
-
+/* Crea una tabla con caption que sustituye a la que hubiera */
 function creaTabla(titulo) {
     let thead, tbody, tr, th, hr;
 
@@ -299,7 +299,7 @@ function creaTabla(titulo) {
     listado.append(hr, table);
 }
 
-
+/* Crea filas en tbody por cada valor del cronómetro guardado en la sesión */
 function creaFilas(clave, valor) {
     let tr, th, td, minSeg;
 
