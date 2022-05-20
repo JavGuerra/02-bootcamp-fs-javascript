@@ -76,6 +76,7 @@ function continCrono() {
     cronometro = setInterval(sumaCrono, 1000);
 }
 
+
 /* Para el cronómetro o el tiempo */
 function parateCrono() {
     botonsCrono(parate);
@@ -91,6 +92,7 @@ function parateCrono() {
     if (!tiempo) guarda.disabled = true;
 }
 
+
 /* Inicia la cuenta hasta 10 */
 function cuentaCrono() {
     parateCrono();
@@ -101,10 +103,12 @@ function cuentaCrono() {
     parada10s  = setTimeout( parateCrono, limite());
 }
 
+
 /* Contador según navegador */
 function limite() {
     return navigator.userAgent.indexOf("Firefox") > -1 ? 11000 : 10000;
 }
+
 
 /* Suma y muestra minutos y segundos */
 function sumaCrono() {
@@ -126,6 +130,7 @@ function sumaCrono() {
     }
 }
 
+
 /* Resta y muestra el tiempo */
 function restaCuenta() {
     let formato;
@@ -135,10 +140,12 @@ function restaCuenta() {
     resulta.innerHTML = formato;
 }
 
+
 /* Devuelve dos dígitos */
 function digitos(numero) {
     return numero < 10 ? '0' + numero : numero ;
 }
+
 
 /* Devuelve un objeto con los minutos y segundos */
 function separa(tiempo) {
@@ -154,6 +161,7 @@ function separa(tiempo) {
     return {'minutos': minutos, 'segundos': segundos};
 }
 
+
 /* Activa y desactiva botones según cronómetro */
 function botonsCrono(boton) {
     inicia.disabled = false;
@@ -164,6 +172,7 @@ function botonsCrono(boton) {
     boton.disabled  = true;
 }
 
+
 /* Activa y desactiva botones según contador */
 function botonsCuenta() {
     parate.disabled = false;
@@ -172,10 +181,12 @@ function botonsCuenta() {
     cuenta.disabled = true;
 }
 
+
 /* Obtiene la última clave en localStorage */
 function numClave() {
     return localStorage.length ? parseInt(localStorage.key(0)) + 1 : 1;
 }
+
 
 /* Guarda en localStorage las sesiones */
 function guardaLocal() {
@@ -198,6 +209,7 @@ function guardaLocal() {
     if (cronometro || parada10s) guarda.disabled = false;
 }
 
+
 /* Muestra el contenido de localStorage */
 function historLocal() {
     let clave, valor, i;
@@ -213,6 +225,7 @@ function historLocal() {
     }
 }
 
+
 /* Borra el contenido de localStorage */
 function borrarLocal() {
     // Procede usar 'if(confirm('pregunta')) {}' pero para el crono hasta confirmar. 
@@ -223,6 +236,7 @@ function borrarLocal() {
     listado.textContent = '';
     histor.disabled = true;
 }
+
 
 /* Borra la clave de localStorage */
 function borraClave(clave) {
@@ -239,6 +253,7 @@ function borraClave(clave) {
         borrar.disabled = true;
     }
 }
+
 
 function creaTabla(titulo) {
     let thead, tbody, tr, th, hr;
@@ -282,6 +297,7 @@ function creaTabla(titulo) {
     listado.append(hr, table);
 }
 
+
 function creaFilas(clave, valor) {
     let tr, th, td, minSeg;
 
@@ -324,8 +340,10 @@ function creaFilas(clave, valor) {
     elemento(`#c${clave}`).onclick = () => borraClave(clave);
 }
 
+
 /* Devuelve un elemento */
 function elemento(sel) { return document.querySelector(sel); }
+
 
 /* Crea y un elemento y lo devuelve */
 function creaElem(el)  { return document.createElement(el);  }
