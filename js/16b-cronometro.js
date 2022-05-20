@@ -3,6 +3,7 @@ Enunciado:
 
 Diseñaremos un HTML que represente un cronómetro con el formato que queramos,
 por ejemplo: 00:00.
+
 Añadiremos los botones:
 - Iniciar: Activará el cronómetro, incrementando el contador cada 1 segundo.
 - Parar: Detiene el cronómetro.
@@ -15,15 +16,16 @@ Queremos guardar en el Local Storage un conjunto de listado de tiempos divididos
 si es la primera vez que accede el usuario a la página web, la sesión será la número 1
 y así sucesivamente.
 
-Añadiremos los botones pertinentes para borrar todos los datos del Local Storage o solo los datos
-de una sesión en concreto. (si sobra tiempo) (editado)
+Añadiremos los botones pertinentes para borrar todos los datos del Local Storage
+o solo los datos de una sesión en concreto. (si sobra tiempo) (editado)
 
+Referencias:
 https://www.w3schools.com/jsref/met_win_settimeout.asp
 https://www.w3schools.com/jsref/met_win_setinterval.asp
 https://lineadecodigo.com/html5/listar-el-contenido-de-local-storage-en-html5/
 */
 
-// Nota: La aplicación maneja sólo minutos y segundos.
+// Nota: La aplicación maneja sólo minutos y segundos. Máximo 3.599 segundos.
 
 let cronometro, parada10s;
 let sesion = [];
