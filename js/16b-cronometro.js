@@ -292,8 +292,8 @@ function creaTabla(titulo) {
     table = creaElem('table');
     table.append(caption, thead, tbody);
 
-    listado.textContent = '';
     hr = creaElem('hr');
+    listado.textContent = '';
     listado.append(hr, table);
 }
 
