@@ -307,7 +307,7 @@ function creaTabla(titulo) {
 
 /* Crea filas en tbody por cada valor del cronómetro guardado en la sesión */
 function creaFilas(clave, valor) {
-    let tr, th, td, minSeg, boton;
+    let tr, th, td, minSeg, button;
 
     valor.forEach((obj, i) => {
         tr = creaElem('tr');
@@ -337,13 +337,13 @@ function creaFilas(clave, valor) {
         tr.appendChild(td);
 
         if (!i) {
-            boton = creaElem('button');
-            boton.setAttribute('id', `borra${clave}`);
-            boton.innerHTML = '<i class="bi bi-trash3"></i>';
-            boton.innerHTML += `<span class="sr">Borrar sesión ${clave}</span>`;
+            button = creaElem('button');
+            button.setAttribute('id', `borra${clave}`);
+            button.innerHTML = '<i class="bi bi-trash3"></i>';
+            button.innerHTML += `<span class="sr">Borrar sesión ${clave}</span>`;
             td = creaElem('td');
             td.setAttribute('rowspan', valor.length);
-            td.appendChild(boton);
+            td.appendChild(button);
             tr.appendChild(td);
         }
 
