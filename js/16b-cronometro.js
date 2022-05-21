@@ -23,6 +23,7 @@ Referencias:
 https://www.w3schools.com/jsref/met_win_settimeout.asp
 https://www.w3schools.com/jsref/met_win_setinterval.asp
 https://lineadecodigo.com/html5/listar-el-contenido-de-local-storage-en-html5/
+https://es.javascript.info/localstorage
 */
 
 // Nota: La aplicación maneja sólo minutos y segundos. Máximo 3.599 segundos.
@@ -187,6 +188,9 @@ function botonsCuenta() {
 
 /* Obtiene la última clave en localStorage */
 function numClave() {
+    // TODO Ojo. Esto parte de la premisa de que la última clave siempre sera:
+    // localStorage.key(0), pero no siempre funciona, ya que en ocasiones, la
+    // última clave se guarda en el último key(n) en vez de en el primero (0).
     return localStorage.length ? parseInt(localStorage.key(0)) + 1 : 1;
 }
 
@@ -221,7 +225,7 @@ function historLocal() {
     creaTabla('<i class="bi bi-list-ol"></i>&nbsp; Sesiones guardadas');
 
     // alt: for (i in localStorage) console.log(localStorage[i]);
-    for (i = 0; i < localStorage.length; i++)  {  
+    for (i = 0; i < localStorage.length; i++) {  
         clave = localStorage.key(i);
         valor = JSON.parse(localStorage.getItem(clave));
         creaFilas(clave, valor);
@@ -243,11 +247,14 @@ function borrarLocal() {
 
 /* Borra la clave de localStorage */
 function borraClave(clave) {
+    let estaSesion = false;
     localStorage.removeItem(clave);
     if (clave == numSesion) {
         sesion = [];
+        estaSesion = true;
     }
     if (localStorage.length) {
+        if (numSesion > localStorage.length && !estaSesion) ordenaClaves();
         historLocal();
     } else {
         numSesion = 1;
@@ -256,6 +263,24 @@ function borraClave(clave) {
         btnBorrar.disabled = true;
     }
 }
+
+
+/* Ordena las sesiones en localStorage para evitar huecos */
+function ordenaClaves() {
+    let i, clave, nueClave, valClave, nClaves = localStorage.length;
+    // Ver comentario en numClave()
+    for (i = nClaves; i > 0; i--) {
+		clave = localStorage.key(i-1);
+		if (clave != i - 1) {
+            nueClave = nClaves - i + 1;
+            valClave = localStorage.getItem(clave);
+            localStorage.removeItem(clave);
+            localStorage.setItem(nueClave, valClave);
+		}
+    }
+    numSesion = sesion.length ? nueClave : nueClave + 1;
+}
+
 
 /* Crea una tabla con caption que sustituye a la que hubiera */
 function creaTabla(titulo) {
@@ -350,7 +375,6 @@ function creaFilas(clave, valor) {
         elemento('#cuerpo').appendChild(tr);
     });
 
-    // Ojo. borrarClave(), al llevar parámetro, debe asignarse como una función flecha.
     elemento(`#borra${clave}`).onclick = () => borraClave(clave);
 }
 
