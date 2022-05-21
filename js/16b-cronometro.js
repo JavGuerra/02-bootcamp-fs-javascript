@@ -275,14 +275,10 @@ function borraClave(clave) {
             ordenaClaves(clave, sesiones + 1);
             --numSesion;
         }
-    
-    historLocal();
+
+        historLocal();
     } else {
-        numSesion = 1;
-        elListado.textContent = '';
-        btnHistor.disabled = true;
-        btnBorrar.disabled = true;
-        localStorage.removeItem('ultSesion'); 
+        borrarLocal();
     }
 }
 
@@ -291,7 +287,7 @@ function borraClave(clave) {
 function ordenaClaves(clave, numSesion) {
     let i, valClave;
 
-    for (i = clave; i < (numSesion); i++) {
+    for (i = clave; i < numSesion; i++) {
         valClave = localStorage.getItem(i + 1);
         localStorage.removeItem(i + 1);
         localStorage.setItem(i, valClave);
