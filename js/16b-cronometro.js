@@ -146,6 +146,7 @@ function restaCuenta() {
     let formato;
 
     tiempo--;
+
     formato = `<span class="tiempo">${digitos(tiempo)}</span>`
             + '<span class="medida"> s</span>';  
      
@@ -183,7 +184,7 @@ function botonsCrono(boton) {
     btnCuenta.disabled = false;
     btnGuarda.disabled = false;
 
-    boton.disabled  = true;
+    boton.disabled = true;
 }
 
 
@@ -202,7 +203,7 @@ function numClave() {
 }
 
 
-/* ¿Existe la clave en L.S.? Devuelve un booleano */
+/* ¿Existe la clave en localStorage? Devuelve un booleano */
 function existeClave(clave) {
     return localStorage.getItem(clave) !== undefined && localStorage.getItem(clave);
 }
@@ -263,24 +264,25 @@ function borrarLocal() {
 /* Borra la clave de localStorage */
 function borraClave(clave) {
     localStorage.removeItem(clave);
+    let sesiones = localStorage.length - 1;
 
-    if (numSesion == clave) sesion = [];
+    if (sesiones) {
+        localStorage.ultSesion = sesiones;
 
-    if (localStorage.length - 1) {
-        localStorage.ultSesion = numSesion - 1;
-
-        if (numSesion > localStorage.length - 1 &&  numSesion != clave) {
-                ordenaClaves(clave, numSesion);
-                --numSesion;
+        if (numSesion == clave) {
+            sesion = [];
+        } else {
+            ordenaClaves(clave, sesiones + 1);
+            --numSesion;
         }
-
-        historLocal();
+    
+    historLocal();
     } else {
         numSesion = 1;
         elListado.textContent = '';
         btnHistor.disabled = true;
         btnBorrar.disabled = true;
-        localStorage.removeItem('ultSesion');
+        localStorage.removeItem('ultSesion'); 
     }
 }
 
@@ -289,7 +291,7 @@ function borraClave(clave) {
 function ordenaClaves(clave, numSesion) {
     let i, valClave;
 
-    for (i = clave; i < numSesion; i++) {
+    for (i = clave; i < (numSesion); i++) {
         valClave = localStorage.getItem(i + 1);
         localStorage.removeItem(i + 1);
         localStorage.setItem(i, valClave);
@@ -343,11 +345,10 @@ function creaTabla(titulo) {
     caption.innerHTML = '<h2>' + titulo + '</h2>';
 
     table = creaElem('table');
-
     table.append(caption, thead, tbody);
 
     hr = creaElem('hr');
-    
+
     elListado.textContent = '';
     elListado.append(hr, table);
 }
