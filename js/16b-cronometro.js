@@ -164,7 +164,7 @@ function digitos(numero) {
 function separa(tiempo) {
     let minutos, segundos;
 
-    if (tiempo >= 60) {
+    if (tiempo  >= 60) {
         minutos  = digitos(Math.trunc(tiempo / 60));
         segundos = digitos(tiempo % 60);
     } else {
@@ -264,30 +264,32 @@ function borrarLocal() {
 /* Borra la clave de localStorage */
 function borraClave(clave) {
     localStorage.removeItem(clave);
-    let sesiones = localStorage.length - 1;
+    let numSesiones = localStorage.length - 1;  // Menos la clave 'ultSesion'.
 
-    if (sesiones) {
-        localStorage.ultSesion = sesiones;
+    if (numSesiones) {
+        localStorage.ultSesion = numSesiones;
 
         if (numSesion == clave) {
             sesion = [];
         } else {
-            ordenaClaves(clave, sesiones + 1);
+            // Para evitar huecos...
+            ordenaClaves(clave, numSesiones + 1); // +1 sesión que quitamos.
             --numSesion;
         }
 
         historLocal();
+        
     } else {
         borrarLocal();
     }
 }
 
 
-/* Ordena las sesiones en localStorage para evitar huecos */
-function ordenaClaves(clave, numSesion) {
+/* Ordena los números de las sesiones por encima de la clave eliminada */
+function ordenaClaves(clave, numSesiones) {
     let i, valClave;
 
-    for (i = clave; i < numSesion; i++) {
+    for (i = clave; i < numSesiones; i++) {
         valClave = localStorage.getItem(i + 1);
         localStorage.removeItem(i + 1);
         localStorage.setItem(i, valClave);
