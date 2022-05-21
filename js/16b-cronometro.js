@@ -56,7 +56,7 @@ btnBorrar.onclick = borrarLocal;
 btnParate.disabled = true;
 btnContin.disabled = true;
 btnGuarda.disabled = true;
-if (localStorage.length) {
+if (existeClave('ultSesion')) {
     historLocal();
 } else {
     btnHistor.disabled = true;
@@ -67,6 +67,7 @@ if (localStorage.length) {
 /* Inicia el cronómetro */
 function iniciaCrono() {
     botonsCrono(btnInicia);
+
     parateCrono();
     tiempo = -1; // Porque sumaCrono() le suma 1.
     sumaCrono();
@@ -84,6 +85,7 @@ function continCrono() {
 /* Para el cronómetro o el tiempo */
 function parateCrono() {
     botonsCrono(btnParate);
+
     if (cronometro) {
         clearInterval(cronometro);
         cronometro = null;
@@ -101,6 +103,7 @@ function parateCrono() {
 function cuentaCrono() {
     parateCrono();
     botonsCuenta();
+
     tiempo = 11; // Porque restaCuenta() le resta 1.
     restaCuenta();
     cronometro = setInterval(restaCuenta, 1000);
@@ -117,8 +120,10 @@ function limite() {
 /* Suma y muestra minutos y segundos */
 function sumaCrono() {
     let minSeg, formato;
+
     tiempo++;
     minSeg = separa(tiempo);
+
     formato = `<span class="tiempo">${minSeg.segundos}</span>` 
             + '<span class="medida"> s</span>';
     if (minSeg.minutos) {
@@ -126,6 +131,7 @@ function sumaCrono() {
             + '<span class="medida"> min</span>'
             + '<span class="separa"> :</span>' + formato;
     }
+
     elResulta.innerHTML = formato;
 
     if (minSeg.minutos == 59 && minSeg.segundos == 59) {
@@ -138,9 +144,11 @@ function sumaCrono() {
 /* Resta y muestra el tiempo */
 function restaCuenta() {
     let formato;
+
     tiempo--;
     formato = `<span class="tiempo">${digitos(tiempo)}</span>`
-            + '<span class="medida"> s</span>';   
+            + '<span class="medida"> s</span>';  
+     
     elResulta.innerHTML = formato;
 }
 
@@ -154,6 +162,7 @@ function digitos(numero) {
 /* Devuelve un objeto con los minutos y segundos */
 function separa(tiempo) {
     let minutos, segundos;
+
     if (tiempo >= 60) {
         minutos  = digitos(Math.trunc(tiempo / 60));
         segundos = digitos(tiempo % 60);
@@ -173,6 +182,7 @@ function botonsCrono(boton) {
     btnParate.disabled = false;
     btnCuenta.disabled = false;
     btnGuarda.disabled = false;
+
     boton.disabled  = true;
 }
 
@@ -188,10 +198,13 @@ function botonsCuenta() {
 
 /* Obtiene la última clave en localStorage */
 function numClave() {
-    // TODO Ojo. Esto parte de la premisa de que la última clave siempre sera:
-    // localStorage.key(0), pero no siempre funciona, ya que en ocasiones, la
-    // última clave se guarda en el último key(n) en vez de en el primero (0).
-    return localStorage.length ? parseInt(localStorage.key(0)) + 1 : 1;
+    return existeClave('ultSesion') ? parseInt(localStorage.ultSesion) + 1 : 1;
+}
+
+
+/* ¿Existe la clave en L.S.? Devuelve un booleano */
+function existeClave(clave) {
+    return localStorage.getItem(clave) !== undefined && localStorage.getItem(clave);
 }
 
 
@@ -206,7 +219,9 @@ function guardaLocal() {
     fechaHora = fecha + ' ' + hora;
 
     sesion.push({'segundos': tiempo, 'fechaHora': fechaHora});
+
     localStorage.setItem(numSesion, JSON.stringify(sesion));
+    localStorage.ultSesion = numSesion;
 
     creaTabla('<i class="bi bi-stopwatch"></i>&nbsp; Sesión actual');
     creaFilas(numSesion, sesion);
@@ -219,66 +234,66 @@ function guardaLocal() {
 
 /* Muestra el contenido de localStorage */
 function historLocal() {
-    let clave, valor, i;
+    let i, valor;
     btnHistor.disabled = true;
 
     creaTabla('<i class="bi bi-list-ol"></i>&nbsp; Sesiones guardadas');
 
-    // alt: for (i in localStorage) console.log(localStorage[i]);
-    for (i = 0; i < localStorage.length; i++) {  
-        clave = localStorage.key(i);
-        valor = JSON.parse(localStorage.getItem(clave));
-        creaFilas(clave, valor);
+    for (i = parseInt(localStorage.ultSesion); i > 0; i--) { 
+        valor = JSON.parse(localStorage.getItem(i));
+        creaFilas(i, valor);
     }
 }
 
 
 /* Borra el contenido de localStorage */
 function borrarLocal() {
-    // Procede usar 'if(confirm('pregunta')) {}' pero para el crono hasta confirmar. 
     btnBorrar.disabled = true;
+    // Procede usar if(confirm('pregunta')), pero para el crono hasta confirmar 
+
     localStorage.clear();
     sesion = [];
     numSesion = 1;
     elListado.textContent = '';
+
     btnHistor.disabled = true;
 }
 
 
 /* Borra la clave de localStorage */
 function borraClave(clave) {
-    let estaSesion = false;
     localStorage.removeItem(clave);
-    if (clave == numSesion) {
-        sesion = [];
-        estaSesion = true;
-    }
-    if (localStorage.length) {
-        if (numSesion > localStorage.length && !estaSesion) ordenaClaves();
+
+    if (numSesion == clave) sesion = [];
+
+    if (localStorage.length - 1) {
+        localStorage.ultSesion = numSesion - 1;
+
+        if (numSesion > localStorage.length - 1 &&  numSesion != clave) {
+                ordenaClaves(clave, numSesion);
+                --numSesion;
+        }
+
         historLocal();
     } else {
         numSesion = 1;
         elListado.textContent = '';
         btnHistor.disabled = true;
         btnBorrar.disabled = true;
+        localStorage.removeItem('ultSesion');
     }
 }
 
 
 /* Ordena las sesiones en localStorage para evitar huecos */
-function ordenaClaves() {
-    let i, clave, nueClave, valClave, nClaves = localStorage.length;
-    // Ver comentario en numClave()
-    for (i = nClaves; i > 0; i--) {
-		clave = localStorage.key(i-1);
-		if (clave != i - 1) {
-            nueClave = nClaves - i + 1;
-            valClave = localStorage.getItem(clave);
-            localStorage.removeItem(clave);
-            localStorage.setItem(nueClave, valClave);
-		}
+function ordenaClaves(clave, numSesion) {
+    let i, valClave;
+
+    for (i = clave; i < numSesion; i++) {
+        valClave = localStorage.getItem(i + 1);
+        localStorage.removeItem(i + 1);
+        localStorage.setItem(i, valClave);
     }
-    numSesion = sesion.length ? nueClave : nueClave + 1;
 }
 
 
@@ -293,21 +308,25 @@ function creaTabla(titulo) {
     th.classList.add('ancho');
     th.innerHTML = '<small>Clave</small>';
     tr.appendChild(th);
+
     th = creaElem('th');
     th.setAttribute('scope', 'col');
     th.classList.add('ancho');
     th.innerHTML = '<small>Núm.</small>';
     tr.appendChild(th);
+
     th = creaElem('th');
     th.setAttribute('scope', 'col');
     th.classList.add('crono');
     th.innerHTML = '<small>Crono</small>';
     tr.appendChild(th);
+
     th = creaElem('th');
     th.setAttribute('scope', 'col');
     th.classList.add('fecha');
     th.innerHTML = '<small>Fecha/Hora</small>';
     tr.appendChild(th);
+
     th = creaElem('th');
     th.setAttribute('scope', 'col');
     th.classList.add('ancho');
@@ -322,10 +341,13 @@ function creaTabla(titulo) {
 
     caption = creaElem('caption');
     caption.innerHTML = '<h2>' + titulo + '</h2>';
+
     table = creaElem('table');
+
     table.append(caption, thead, tbody);
 
     hr = creaElem('hr');
+    
     elListado.textContent = '';
     elListado.append(hr, table);
 }
