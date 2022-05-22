@@ -27,7 +27,6 @@ https://es.javascript.info/localstorage
 */
 
 // Nota: La aplicación maneja sólo minutos y segundos. Máximo 3.599 segundos.
-// TODO: WAI-ARIA
 
 let cronometro, parada10s;
 let sesion = [];
