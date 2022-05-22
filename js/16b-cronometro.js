@@ -341,7 +341,7 @@ function creaTabla(titulo) {
     th = creaElem('th');
     th.setAttribute('scope', 'col');
     th.classList.add('fecha');
-    th.innerHTML = '<small>Fecha/Hora</small>';
+    th.innerHTML = '<small>Fecha / Hora</small>';
     tr.appendChild(th);
 
     th = creaElem('th');
