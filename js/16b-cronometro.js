@@ -375,7 +375,7 @@ function creaFilas(clave, valor) {
         formato = minSeg.segundos + 's';
         if (minSeg.minutos) formato = minSeg.minutos + 'min, ' + formato;
         td = creaElem('td');
-        td.textContent = formato;
+        td.innerHTML = '<strong>' + formato + '</strong>';
         tr.appendChild(td);
 
         td = creaElem('td');
