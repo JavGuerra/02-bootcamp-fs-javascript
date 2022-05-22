@@ -24,17 +24,17 @@
             </p>
         </noscript>
 
-        <header>
+        <header role="banner">
             <h1>Cronómetro</h1>
         </header>
 
         <main>
-            <section id="resulta">
+            <section id="resulta" role="timer" aria-live="polite" aria-atomic="true">
                 <span class="tiempo">00</span><span class="medida"> s</span>
             </section>
 
             <section id="navegacion">
-                <nav>
+                <nav aria-label="Botonera">
                     <button id="inicia" title="Iniciar">
                         <i class="bi bi-play-fill"></i>
                         <span class="sr">Iniciar</span>
@@ -68,10 +68,10 @@
                 </nav>
             </section>
             
-            <section id="listado"></section>
+            <section id="listado" role="region" aria-live="polite"></section>
         </main>
 
-        <footer>
+        <footer role="contentinfo">
             <p>
                 <small>
                     <a target="_blank" href="js/16b-cronometro.js">Ver el código JavaScript</a>

@@ -53,14 +53,18 @@ btnHistor.onclick = historLocal;
 btnBorrar.onclick = borrarLocal;
 
 /* Botones al inicio */
-btnParate.disabled = true;
-btnContin.disabled = true;
-btnGuarda.disabled = true;
+btnInactivo(btnInicia, false);
+btnInactivo(btnContin, true);
+btnInactivo(btnParate, true);
+btnInactivo(btnCuenta, false);
+btnInactivo(btnGuarda, true);
 if (existeClave('ultSesion')) {
     historLocal();
+    btnInactivo(btnHistor, false);
+    btnInactivo(btnBorrar, false);
 } else {
-    btnHistor.disabled = true;
-    btnBorrar.disabled = true;
+    btnInactivo(btnHistor, true);
+    btnInactivo(btnBorrar, true);
 }
 
 
@@ -78,6 +82,7 @@ function iniciaCrono() {
 /* Continua el cronómetro tras la pausa */
 function continCrono() {
     botonsCrono(btnContin);
+
     cronometro = setInterval(sumaCrono, 1000);
 }
 
@@ -93,9 +98,9 @@ function parateCrono() {
     if (parada10s ) {
         clearInterval(parada10s );
         parada10s  = null;
-        btnContin.disabled = true;
+        btnInactivo(btnContin, true);
     } 
-    if (!tiempo) btnGuarda.disabled = true;
+    if (!tiempo) btnInactivo(btnGuarda, true);
 }
 
 
@@ -136,7 +141,7 @@ function sumaCrono() {
 
     if (minSeg.minutos == 59 && minSeg.segundos == 59) {
         parateCrono();
-        btnContin.disabled = true;
+        btnInactivo(btnContin, true);
     }
 }
 
@@ -178,22 +183,33 @@ function separa(tiempo) {
 
 /* Activa y desactiva botones según cronómetro */
 function botonsCrono(boton) {
-    btnInicia.disabled = false;
-    btnContin.disabled = false;
-    btnParate.disabled = false;
-    btnCuenta.disabled = false;
-    btnGuarda.disabled = false;
-
-    boton.disabled = true;
+    btnInactivo(btnInicia, false);
+    btnInactivo(btnContin, false);
+    btnInactivo(btnParate, false);
+    btnInactivo(btnCuenta, false);
+    btnInactivo(btnGuarda, false);
+    btnInactivo(boton, true);
 }
 
 
 /* Activa y desactiva botones según contador */
 function botonsCuenta() {
-    btnParate.disabled = false;
-    btnGuarda.disabled = false;
-    btnContin.disabled = true;
-    btnCuenta.disabled = true;
+    btnInactivo(btnParate, false);
+    btnInactivo(btnGuarda, false);
+    btnInactivo(btnContin, true);
+    btnInactivo(btnCuenta, true);
+}
+
+
+/* Cambia el estado de un botón dado */
+function btnInactivo(boton, estado) {
+    if (estado) {
+      boton.disabled = true;
+      boton.setAttribute('aria-disabled', 'true');
+    } else {
+      boton.disabled = false;
+      boton.setAttribute('aria-disabled', 'false');
+    }
 }
 
 
@@ -212,8 +228,8 @@ function existeClave(clave) {
 /* Guarda en localStorage las sesiones */
 function guardaLocal() {
     let hoy, fecha, hora, fechaHora;
-    btnGuarda.disabled = true;
-
+    btnInactivo(btnGuarda, true);
+    
     hoy = new Date();
     fecha = `${digitos(hoy.getDate())}-${digitos(hoy.getMonth() + 1)}-${hoy.getFullYear()}`;
     hora = `${digitos(hoy.getHours())}:${digitos(hoy.getMinutes())}:${digitos(hoy.getSeconds())}`;
@@ -227,16 +243,16 @@ function guardaLocal() {
     creaTabla('<i class="bi bi-stopwatch"></i>&nbsp; Sesión actual');
     creaFilas(numSesion, sesion);
 
-    btnBorrar.disabled = false;
-    btnHistor.disabled = false;
-    if (cronometro || parada10s) btnGuarda.disabled = false;
+    btnInactivo(btnBorrar, false);
+    btnInactivo(btnHistor, false);
+    if (cronometro || parada10s) btnInactivo(btnGuarda, false);
 }
 
 
 /* Muestra el contenido de localStorage */
 function historLocal() {
     let i, valor;
-    btnHistor.disabled = true;
+    btnInactivo(btnHistor, true);
 
     creaTabla('<i class="bi bi-list-ol"></i>&nbsp; Sesiones guardadas');
 
@@ -249,7 +265,7 @@ function historLocal() {
 
 /* Borra el contenido de localStorage */
 function borrarLocal() {
-    btnBorrar.disabled = true;
+    btnInactivo(btnBorrar, true);
     // Procede usar if(confirm('pregunta')), pero para el crono hasta confirmar 
 
     localStorage.clear();
@@ -257,7 +273,8 @@ function borrarLocal() {
     numSesion = 1;
     elListado.textContent = '';
 
-    btnHistor.disabled = true;
+    btnInactivo(btnHistor, true);
+    
 }
 
 
@@ -274,7 +291,7 @@ function borraClave(clave) {
         } else {
             // Para evitar huecos...
             ordenaClaves(clave, numSesiones + 1); // +1 sesión que quitamos.
-            --numSesion;
+            numSesion--;
         }
 
         historLocal();
