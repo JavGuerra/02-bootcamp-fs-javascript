@@ -1,7 +1,8 @@
-let article;
+let   article;
 const lista = document.getElementById('listado');
+const url   = 'js/listado.json';
 
-fetch('js/listado.json')
+fetch(url)
 .then(resp => resp.json())
 .then(data => {
     return data.forEach(tarea => {
