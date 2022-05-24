@@ -287,8 +287,7 @@ function borrarLocal() {
     numSesion = 1;
     elListado.textContent = '';
 
-    btnInactivo(btnHistor, true);
-    
+    btnInactivo(btnHistor, true); 
 }
 
 
