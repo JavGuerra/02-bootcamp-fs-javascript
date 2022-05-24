@@ -1,12 +1,13 @@
+let article;
 const lista = document.getElementById('listado');
 
-fetch("js/listado.json")
+fetch('js/listado.json')
 .then(resp => resp.json())
-.then(function(data) {
-    return data.map(function(contenido) {
-        let article = document.createElement('article');
+.then(data => {
+    return data.forEach(tarea => {
+        article = document.createElement('article');
         article.innerHTML =
-         `<a target="_blank" href="${contenido.enlace}">${contenido.titulo}</a>`;
+         `<a target="_blank" href="${tarea.enlace}">${tarea.titulo}</a>`;
         lista.appendChild(article);
     })
   })
