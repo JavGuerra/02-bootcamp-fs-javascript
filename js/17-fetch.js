@@ -89,9 +89,9 @@ function muestraGaleria(evento) {
             data.message.forEach(foto => {galeria.push(foto)})
 
             galeria.slice(0, galeria.length > 25 ? 25 : galeria.length).forEach(
-                foto => {elGaleria.innerHTML += `<a href="${foto}" target="_blank">` + 
-                `<img class="foto" src="${foto}" alt="Foto de perrito" title="${foto}" />`
-                + '</a>'}
+                (foto, i) => {elGaleria.innerHTML += `<div><a href="${foto}" target="_blank">` 
+                + `<img class="foto" src="${foto}" alt="Foto de perrito ${i+1}" title="${foto}" />`
+                + '</a></div>'}
             );
         };
         let gal = 'breed/' + form.lista.value + '/images';
