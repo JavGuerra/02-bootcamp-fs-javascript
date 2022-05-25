@@ -89,7 +89,8 @@ function muestraGaleria(evento) {
 
             galeria.slice(0, galeria.length > 25 ? 25 : galeria.length)
             .forEach(foto => {elGaleria.innerHTML +=
-                    `<img class="foto" src="${foto}" alt="Foto de perrito" />`});
+                `<img class="foto" src="${foto}" alt="Foto de perrito" title="${foto}" />`}
+            );
         };
 
         let nueGal = 'breed/' + form.lista.value + '/images';

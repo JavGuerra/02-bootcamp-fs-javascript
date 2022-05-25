@@ -79,7 +79,7 @@ footer p .letras {
 }
 
 #galeria {
-  margin-top: 3.5em;
+  margin-top: 3em;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -108,7 +108,7 @@ footer p .letras {
 
 footer {
   margin-top: 3em;
-  margin-bottom: 2em;
+  margin-bottom: 3em;
 }
 
 footer p {
