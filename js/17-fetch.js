@@ -52,7 +52,7 @@ async function consultaAPI(ruta, hacer) {
 }
 
 
-/* Lista de razas */
+/* Obtiene la lista de razas de la API */
 hacer = data => {
     for(raza in data.message) {
         console.log(raza);
@@ -62,7 +62,7 @@ hacer = data => {
 consultaAPI(url + all, hacer);
 
 
-/* Imagen al azar */
+/* Obtiene una imagen al azar de la API */
 hacer = data => {
     let foto;
     foto = data.message;
@@ -72,12 +72,13 @@ hacer = data => {
 consultaAPI(url + rnd, hacer);
 
 
-/* Imágenes de raza concreta */
+/* Obtiene las imágenes de una raza concreta de la API */
 hacer = data => {data.message.forEach(foto => {console.log(foto);})};
 consultaAPI(url + gal, hacer);
 
 
-/* Lista la galería de imágenes */
+/* Muestra la galería de las imágenes de una raza concreta
+ obtenidas de la API que hemos seleccionado en el campo 'lista' */
 function muestraGaleria(evento) {
     evento.preventDefault();
     elGaleria.textContent = '';
@@ -92,9 +93,8 @@ function muestraGaleria(evento) {
                 `<img class="foto" src="${foto}" alt="Foto de perrito" title="${foto}" />`}
             );
         };
-
-        let nueGal = 'breed/' + form.lista.value + '/images';
-        consultaAPI(url + nueGal, hacer);
+        let gal = 'breed/' + form.lista.value + '/images';
+        consultaAPI(url + gal, hacer);
     } else {
         console.log('Nada que mostrar');
     }
