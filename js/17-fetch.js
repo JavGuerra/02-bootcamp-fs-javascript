@@ -27,21 +27,25 @@ https://www.neoguias.com/javascript-asincrono/
 https://lenguajejs.com/javascript/asincronia/que-es/
 */
 
-let hacer;
-let  raza = 'dachshund';
+
+// Nota: el número de fotos por listado está limitado a 25.
+
 const url = 'https://dog.ceo/api/';
 const all = 'breeds/list/all';
 const rnd = 'breeds/image/random';
-const gal = 'breed/' + raza + '/images';
+const gal = 'breed/dachshund/images';
 const form = document.formulario;
+let hacer;
 
-elPerrio  = elemento('#perrito');
+elZona    = elemento('#zona');
+elPerrito = elemento('#perrito');
 elLista   = elemento('#lista');
 elRazas   = elemento('#razas');
 btnEnviar = elemento('#enviar');
 elGaleria = elemento('#galeria');
 
 btnEnviar.onclick = evento => muestraGaleria(evento);
+
 
 /* Consulta la API en la ruta dada y ejecuta la función hacer() */
 async function consultaAPI(ruta, hacer) {
@@ -54,26 +58,39 @@ async function consultaAPI(ruta, hacer) {
 
 /* Obtiene la lista de razas de la API */
 hacer = data => {
+    ponSpin(true);
+
     for(raza in data.message) {
         console.log(raza);
         elRazas.innerHTML += `<option value="${raza}" />`;
     }
+
+    ponSpin(false);
 };
 consultaAPI(url + all, hacer);
 
 
 /* Obtiene una imagen al azar de la API */
 hacer = data => {
-    let foto;
-    foto = data.message;
+    ponSpin(true);
+
+    let foto = data.message;
     console.log(foto);
-    elPerrio.setAttribute('src', foto);
+    elPerrito.setAttribute('src', foto);
+
+    ponSpin(false);
 };
 consultaAPI(url + rnd, hacer);
 
 
 /* Obtiene las imágenes de una raza concreta de la API */
-hacer = data => {data.message.forEach(foto => {console.log(foto);})};
+hacer = data => {
+    ponSpin(true);
+
+    data.message.forEach(foto => {console.log(foto)});
+
+    ponSpin(false);
+};
 consultaAPI(url + gal, hacer);
 
 
@@ -81,6 +98,9 @@ consultaAPI(url + gal, hacer);
  obtenidas de la API que hemos seleccionado en el campo 'lista' */
 function muestraGaleria(evento) {
     evento.preventDefault();
+    btnInactivo(btnEnviar, true);
+    ponSpin(true);
+
     elGaleria.textContent = '';
 
     if(form.lista.value.trim()) {
@@ -94,11 +114,14 @@ function muestraGaleria(evento) {
                 + '</a></div>'}
             );
         };
-        let gal = 'breed/' + form.lista.value + '/images';
+        let gal = 'breed/' + form.lista.value.trim() + '/images';
         consultaAPI(url + gal, hacer);
     } else {
         console.log('Nada que mostrar');
     }
+    
+    ponSpin(false);
+    btnInactivo(btnEnviar, false);
 }
 
 
@@ -108,3 +131,15 @@ function elemento(sel) { return document.querySelector(sel); }
 
 /* Crea y un elemento y lo devuelve */
 function creaElem(el)  { return document.createElement(el);  }
+
+
+/* Cambia el estado de un botón dado */
+function btnInactivo(boton, estado) {
+    boton.disabled = estado;
+    boton.setAttribute('aria-disabled', estado);
+}
+
+/* Activa o desactiva el spin */
+function ponSpin(estado) {
+    elZona.style.display = estado ? 'initial' : 'none';
+}
