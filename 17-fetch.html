@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript</title>
+    <link rel="stylesheet" href="css/17-fetch.css">
+    <script defer src="js/17-fetch.js"></script>
+</head>
+
+<body>
+    <noscript>
+        <p>
+            La página web que está viendo usa JavaScript, por lo que, para su
+            correcto funcionamiento, debe tenerlo activado en el navegador.
+        </p>
+    </noscript>
+    <header>
+        <h1>} Perritos</h1>
+        <img id="perrito" src="img/pipirula.jpg" alt="Foto de perrito" />
+    </header>
+
+    <main>
+        <section>
+            <form name="formulario" action="#" method="post">
+
+                <input list="razas" type="text" id="lista" name="lista"
+                       aria-label="Lista de razas" placeholder="¿Raza?">
+
+                <datalist id="razas">
+                    <option value="" />
+                </datalist> 
+
+                <button id="enviar" class="letras" aria-label="Enviar">+</button>
+
+            </form>
+        </section>
+
+        <section id="galeria" role="region" aria-live="polite"></section>
+    </main>
+
+    <footer>
+        <p><span class="letras">{</span></p>
+        <p>
+            <small>
+                <a target="_blank" href="js/17-fetch.js">Ver el código JavaScript</a>
+            </small>
+        </p>
+    </footer>
+</body>
+
+</html>

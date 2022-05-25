@@ -1,0 +1,117 @@
+body {
+  margin: 2em auto;
+  max-width: 80%;
+  text-align: center;
+  background-image: url("../img/dogs.png");
+}
+
+@font-face {
+  font-family: "Perritos";
+  src: url("../fonts/puppybellies.medium.ttf") format("truetype");
+  /* by: bythebutterfly - http://bythebutterfly.com
+    font: https://www.1001fonts.com/puppybellies-font.html */
+}
+
+h1,
+a,
+.letras {
+  font-family: "Perritos";
+  color: darkcyan;
+}
+
+h1 {
+  font-size: 5em;
+  margin-top: 0.5em;
+  margin-bottom: 0.25em;
+  text-shadow: 2px 2px 0px #ffffff, -2px -2px 0px #ffffff, -2px 2px 0px #ffffff,
+    2px -2px 0px #ffffff, 4px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+form .letras {
+  padding: 4px 6px 0;
+  margin-left: 0.25em;
+  font-size: 1.5em;
+  height: 42px;
+  vertical-align: bottom;
+  color: white;
+  background-color: darkcyan;
+  border: 2.5px solid white;
+  border-radius: 22px;
+  cursor: pointer;
+}
+
+form .letras:hover {
+  box-shadow: rgba(0, 0, 0, 0.25) 3px 3px 3px;
+}
+
+footer p .letras {
+  font-size: 4em;
+}
+
+#perrito {
+  width: 250px;
+  padding: 20px;
+  margin-bottom: 2em;
+  background-color: Snow;
+  transform: rotate(-3deg);
+}
+
+#lista {
+  padding: 0 1em;
+  height: 40px;
+  width: 300px;
+  font-size: 1em;
+  border: none;
+  border-radius: 10px;
+  box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+#lista:focus {
+    outline: 2px solid yellowgreen;
+}
+
+#galeria {
+  margin-top: 3.5em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-content: center;
+  gap: 3em 2em;
+}
+
+.foto {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  padding: 20px;
+  background-color: Snow;
+  align-self: center;
+}
+
+.foto:hover {
+    transform: rotate(3deg);
+}
+
+#perrito,
+.foto {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+}
+
+footer {
+  margin-top: 3em;
+  margin-bottom: 2em;
+}
+
+footer p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
