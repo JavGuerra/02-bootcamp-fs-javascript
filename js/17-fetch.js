@@ -200,7 +200,7 @@ function paginacion(vector, numEl) {
     /* Instrucciones para mostrar la página */
     vector.slice(inicio, elemens).forEach(
         (foto, i) => {elGaleria.innerHTML += `<div><a href="${foto}" target="_blank">` 
-        + `<img class="foto" src="${foto}" alt="Foto de perrito ${i+1}" title="${foto}" />`
+        + `<img class="foto" src="${foto}" alt="Foto ${inicio + i + 1}" title="Foto ${inicio + i + 1}" />`
         + '</a></div>'}
     );
 }
