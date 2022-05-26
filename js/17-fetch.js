@@ -112,6 +112,7 @@ function muestraGaleria(evento) {
 
     if(raza) {
         if (razas.indexOf(raza) != -1) {
+
             hacer = data => {
                 let galeria = [];
                 data.message.forEach(foto => {galeria.push(foto)})
@@ -124,6 +125,7 @@ function muestraGaleria(evento) {
             };
             let gal = 'breed/' + raza + '/images';
             consultaAPI(url + gal, hacer);
+            
         } else {
             console.log(`No hay información de la raza: "${raza}"`);
             alert(`No hay información de la raza: "${raza}"`);
