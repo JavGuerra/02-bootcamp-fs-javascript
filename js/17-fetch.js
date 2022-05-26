@@ -195,7 +195,7 @@ function paginacion(vector, numEl) {
     }
 
     inicio = (pagina - 1) * elemens;
-    elNavegac.innerHTML = `<span class="cuenta">Fotos: ${inicio + 1}  a ${elemens} de ${totElem}</span>`;
+    elNavegac.innerHTML = `<span class="cuenta">Fotos: ${inicio + 1} a ${elemens} de ${totElem}</span>`;
 
     /* Instrucciones para mostrar la página */
     vector.slice(inicio, elemens).forEach(
