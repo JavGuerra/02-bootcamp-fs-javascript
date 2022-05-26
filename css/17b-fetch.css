@@ -1,0 +1,44 @@
+body {
+  margin: 2em auto;
+  max-width: 50em;
+  text-align: center;
+}
+
+#resulta {
+  margin-top: 2em;
+}
+
+h2 {
+  margin-top: 1em !important;
+}
+
+#zona {
+  display: none;
+  z-index: 1;
+  min-width: 100vw;
+  position: absolute;
+  position: fixed;
+  bottom: 4em;
+  left: 0;
+}
+
+.spinner {
+  margin: 0 auto;
+  border: 5px solid rgba(0, 0, 0, 0.15);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border-left-color: #2478ff;
+
+  animation: spin 1s ease infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

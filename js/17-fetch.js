@@ -41,20 +41,20 @@ let pagina = 1;
 let razas = [];
 let hacer;
 
-elZona    = elemento('#zona');
 elPerrito = elemento('#perrito');
 elLista   = elemento('#lista');
 elRazas   = elemento('#razas');
 btnEnviar = elemento('#enviar');
 elGaleria = elemento('#galeria');
 elNavegac = elemento('#navegacion');
+elZona    = elemento('#zona');
 
 btnEnviar.onclick = evento => muestraGaleria(evento);
 btnInactivo(btnEnviar, true);
 
 
 /* Consulta la API en la ruta dada y ejecuta la función hacer() */
-async function consultaAPI(ruta, hacer) {
+function consultaAPI(ruta, hacer) {
     fetch(ruta)
     .then(resp => resp.json())
     .then(data => hacer(data))
