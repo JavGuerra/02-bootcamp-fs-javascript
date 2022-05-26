@@ -61,6 +61,7 @@ async function consultaAPI(ruta, hacer) {
     .catch(err => console.error(err))
 }
 
+
 /* Obtiene la lista de razas de la API */
 hacer = data => {
     ponSpin(true);
@@ -177,8 +178,9 @@ function compruebaSpin() {
 }
 
 
-/* */
+/* Pagina los elementos de un vector  en función del número de elementos dado */
 function paginacion(vector, numEl) {
+    let elemens, inicio;
     let totElem = vector.length;
 
     // TODO Controlar la última página, que puede tener menos numEl
@@ -186,15 +188,17 @@ function paginacion(vector, numEl) {
     if (totElem > numEl) {
         elemens = numEl;
 
-        //TODO
-        elNavegac.innerHTML = '<p>Botones de navegación</p>'
+        //TODO botones anterior - siguiente
 
     } else {
         elemens = totElem;
     }
 
+    inicio = (pagina - 1) * elemens;
+    elNavegac.innerHTML = `<span class="cuenta">Fotos: ${inicio + 1}  a ${elemens} de ${totElem}</span>`;
+
     /* Instrucciones para mostrar la página */
-    vector.slice((pagina - 1) * elemens, elemens).forEach(
+    vector.slice(inicio, elemens).forEach(
         (foto, i) => {elGaleria.innerHTML += `<div><a href="${foto}" target="_blank">` 
         + `<img class="foto" src="${foto}" alt="Foto de perrito ${i+1}" title="${foto}" />`
         + '</a></div>'}

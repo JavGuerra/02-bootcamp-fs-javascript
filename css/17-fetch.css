@@ -40,7 +40,7 @@ a:hover {
 }
 
 #enviar {
-  padding: 4px 6px 0;
+  padding: 3px 6px 0;
   font-size: 1.5em;
   height: 42px;
   vertical-align: bottom;
@@ -95,7 +95,7 @@ footer p .letras::before {
 
 #galeria {
   margin-top: 3.5em;
-  margin-bottom: 2em;
+  margin-bottom: 3em;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -124,8 +124,13 @@ footer p .letras::before {
     rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
 }
 
+.cuenta {
+  font-size: 1.2em;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 footer {
-  margin-top: 2em;
+  margin-top: 3em;
   margin-bottom: 3em;
 }
 
