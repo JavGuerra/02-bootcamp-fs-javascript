@@ -28,6 +28,7 @@ const api = 'https://api.github.com/users/';
 const form = document.formulario;
 let spin  = intervalo = 0;
 
+elUsuario = elemento('#user');
 btnEnviar = elemento('#enviar');
 elResulta = elemento('#resulta');
 elZona    = elemento('#zona');
@@ -42,6 +43,7 @@ function muestraInfo(evento) {
     ponSpin(true);
 
     let user = form.user.value.trim().toLowerCase();
+    elUsuario.value = user;
     elResulta.innerHTML = '';
 
     if (user) {
@@ -56,8 +58,14 @@ function muestraInfo(evento) {
             console.log(nombre);
             console.log(numRep);
 
-            elResulta.innerHTML = `<img src="${avatar}" alt="Avatar de ${nombre}" />`;
-            elResulta.innerHTML += `<h2>${nombre} | Repos: ${numRep}</h2>`; 
+            if (nombre == null) nombre = '(!) Nombre no definido';
+
+            if (avatar != null && numRep != null) {
+                elResulta.innerHTML = `<img class="avatar" src="${avatar}" alt="Avatar de ${user}" />`;
+                elResulta.innerHTML += `<h2>${nombre} | Repos:&nbsp;${numRep}</h2>`;
+            } else {
+                elResulta.innerHTML = `<h2>(!) El usuario ${user} no existe</h2>`;
+            } 
         })
         .catch(err => alert(err));
     } else {

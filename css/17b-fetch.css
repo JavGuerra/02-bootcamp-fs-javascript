@@ -4,12 +4,20 @@ body {
   text-align: center;
 }
 
+h2 {
+  margin-top: 1em !important;
+}
+
 #resulta {
   margin-top: 2em;
 }
 
-h2 {
-  margin-top: 1em !important;
+.avatar {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 50%;
+  border: 5px solid rgba(0, 0, 0, 0.15);
 }
 
 #zona {
