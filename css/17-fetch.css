@@ -39,7 +39,7 @@ a:hover {
   text-decoration: underline;
 }
 
-form .letras {
+#enviar {
   padding: 4px 6px 0;
   font-size: 1.5em;
   height: 42px;
@@ -51,12 +51,16 @@ form .letras {
   cursor: pointer;
 }
 
-form .letras::before {
+#enviar::before {
   content: '+';
 }
 
-form .letras:hover {
+#enviar:hover {
   box-shadow: rgba(0, 0, 0, 0.25) 3px 3px 3px;
+}
+
+#enviar:disabled {
+  background-color: darkgray;
 }
 
 footer p .letras {
@@ -131,7 +135,7 @@ footer p {
 
 #zona {
   display: none;
-  z-index: 1000;
+  z-index: 1;
   min-width: 100vw;
   position: absolute;
   position: fixed;

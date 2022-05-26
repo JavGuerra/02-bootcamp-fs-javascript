@@ -35,6 +35,7 @@ const all = 'breeds/list/all';
 const rnd = 'breeds/image/random';
 const gal = 'breed/dachshund/images';
 const form = document.formulario;
+let razas = [];
 let hacer;
 
 elZona    = elemento('#zona');
@@ -45,6 +46,7 @@ btnEnviar = elemento('#enviar');
 elGaleria = elemento('#galeria');
 
 btnEnviar.onclick = evento => muestraGaleria(evento);
+btnInactivo(btnEnviar, true);
 
 
 /* Consulta la API en la ruta dada y ejecuta la función hacer() */
@@ -61,9 +63,13 @@ hacer = data => {
     ponSpin(true);
 
     for(raza in data.message) {
+        razas.push(raza);
         console.log(raza);
         elRazas.innerHTML += `<option value="${raza}" />`;
     }
+    // El botón sólo se activa cuando razas está completa
+    // impidiendo realizar búsquedas hasta entonces.
+    btnInactivo(btnEnviar, false);
 
     ponSpin(false);
 };
@@ -102,20 +108,26 @@ function muestraGaleria(evento) {
     ponSpin(true);
 
     elGaleria.textContent = '';
+    let raza = form.lista.value.trim();
 
-    if(form.lista.value.trim()) {
-        hacer = data => {
-            let galeria = [];
-            data.message.forEach(foto => {galeria.push(foto)})
+    if(raza) {
+        if (razas.indexOf(raza) != -1) {
+            hacer = data => {
+                let galeria = [];
+                data.message.forEach(foto => {galeria.push(foto)})
 
-            galeria.slice(0, galeria.length > 25 ? 25 : galeria.length).forEach(
-                (foto, i) => {elGaleria.innerHTML += `<div><a href="${foto}" target="_blank">` 
-                + `<img class="foto" src="${foto}" alt="Foto de perrito ${i+1}" title="${foto}" />`
-                + '</a></div>'}
-            );
-        };
-        let gal = 'breed/' + form.lista.value.trim() + '/images';
-        consultaAPI(url + gal, hacer);
+                galeria.slice(0, galeria.length > 25 ? 25 : galeria.length).forEach(
+                    (foto, i) => {elGaleria.innerHTML += `<div><a href="${foto}" target="_blank">` 
+                    + `<img class="foto" src="${foto}" alt="Foto de perrito ${i+1}" title="${foto}" />`
+                    + '</a></div>'}
+                );
+            };
+            let gal = 'breed/' + raza + '/images';
+            consultaAPI(url + gal, hacer);
+        } else {
+            console.log(`No hay información de la raza: "${raza}"`);
+            alert(`No hay información de la raza: "${raza}"`);
+        }
     } else {
         console.log('Nada que mostrar');
     }
@@ -127,10 +139,6 @@ function muestraGaleria(evento) {
 
 /* Devuelve un elemento */
 function elemento(sel) { return document.querySelector(sel); }
-
-
-/* Crea y un elemento y lo devuelve */
-function creaElem(el)  { return document.createElement(el);  }
 
 
 /* Cambia el estado de un botón dado */
