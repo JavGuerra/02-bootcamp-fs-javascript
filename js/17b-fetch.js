@@ -20,7 +20,7 @@ Lo que queremos que se imprima por consola será:
     número de repositorios
     avatar (imagen)
 
-Si ya has obtenido toda la información, utiliza las herramientas del arbol DOM para
+Si ya has obtenido toda la información, utiliza las herramientas del árbol DOM para
 que esta información aparezca en la pantalla.
 */
 
