@@ -28,7 +28,6 @@ const api = 'https://api.github.com/users/';
 const form = document.formulario;
 let spin  = intervalo = 0;
 
-btnUser   = elemento('#usuario');
 btnEnviar = elemento('#enviar');
 elResulta = elemento('#resulta');
 elZona    = elemento('#zona');
@@ -36,27 +35,19 @@ elZona    = elemento('#zona');
 btnEnviar.onclick = evento => muestraInfo(evento);
 
 
-/* Consulta la API en la ruta dada y ejecuta la función hacer() */
-function consultaAPI(ruta, hacer, error) {
-    fetch(ruta)
-    .then(resp => resp.json())
-    .then(data => hacer(data))
-    .catch(err => error(err))
-}
-
-
 /* Muestra información del usuario */
 function muestraInfo(evento) {
     evento.preventDefault();
     btnInactivo(btnEnviar, true);
+    ponSpin(true);
 
     let user = form.user.value.trim().toLowerCase();
     elResulta.innerHTML = '';
 
     if (user) {
-        let hacer = data => {
-            ponSpin(true);
-        
+        fetch(api + user)
+        .then(resp => resp.json())
+        .then(data => {
             let avatar = data.avatar_url;
             let nombre = data.name;
             let numRep = data.public_repos;
@@ -65,19 +56,15 @@ function muestraInfo(evento) {
             console.log(nombre);
             console.log(numRep);
 
-            elResulta.innerHTML = `<img src="${avatar}" alt="${nombre}" />`;
-            elResulta.innerHTML += `<h2>${nombre} | Repos: ${numRep}`; 
-        
-            ponSpin(false);  
-        }
-
-        let error = err => {
-            alert(err);
-        }
-
-        consultaAPI(api + user, hacer, error);
+            elResulta.innerHTML = `<img src="${avatar}" alt="Avatar de ${nombre}" />`;
+            elResulta.innerHTML += `<h2>${nombre} | Repos: ${numRep}</h2>`; 
+        })
+        .catch(err => alert(err));
+    } else {
+        console.log('¿usuario?');
     }
 
+    ponSpin(false);
     btnInactivo(btnEnviar, false);
 }
 
