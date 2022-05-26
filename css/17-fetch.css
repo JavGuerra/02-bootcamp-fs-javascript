@@ -125,8 +125,9 @@ footer p .letras::before {
 }
 
 .cuenta {
-  font-size: 1.2em;
+  font-size: 1.25em;
   font-family: Arial, Helvetica, sans-serif;
+  color: DimGray;
 }
 
 footer {
