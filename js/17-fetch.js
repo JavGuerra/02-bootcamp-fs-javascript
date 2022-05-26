@@ -35,6 +35,8 @@ const all = 'breeds/list/all';
 const rnd = 'breeds/image/random';
 const gal = 'breed/dachshund/images';
 const form = document.formulario;
+let nFotos = 25;
+let indice;
 let razas = [];
 let hacer;
 
@@ -73,6 +75,7 @@ hacer = data => {
 
     ponSpin(false);
 };
+
 consultaAPI(url + all, hacer);
 
 
@@ -86,6 +89,7 @@ hacer = data => {
 
     ponSpin(false);
 };
+
 consultaAPI(url + rnd, hacer);
 
 
@@ -97,6 +101,7 @@ hacer = data => {
 
     ponSpin(false);
 };
+
 consultaAPI(url + gal, hacer);
 
 
@@ -108,7 +113,8 @@ function muestraGaleria(evento) {
     ponSpin(true);
 
     elGaleria.textContent = '';
-    let raza = form.lista.value.trim();
+    let raza = form.lista.value.trim().toLowerCase();
+    elLista.value = raza;
 
     if(raza) {
         if (razas.indexOf(raza) != -1) {
@@ -117,18 +123,20 @@ function muestraGaleria(evento) {
                 let galeria = [];
                 data.message.forEach(foto => {galeria.push(foto)})
 
-                galeria.slice(0, galeria.length > 25 ? 25 : galeria.length).forEach(
+                indice = galeria.length > nFotos ? nFotos : galeria.length;
+                galeria.slice(0, indice).forEach(
                     (foto, i) => {elGaleria.innerHTML += `<div><a href="${foto}" target="_blank">` 
                     + `<img class="foto" src="${foto}" alt="Foto de perrito ${i+1}" title="${foto}" />`
                     + '</a></div>'}
                 );
             };
             let gal = 'breed/' + raza + '/images';
+
             consultaAPI(url + gal, hacer);
             
         } else {
-            console.log(`No hay información de la raza: "${raza}"`);
-            alert(`No hay información de la raza: "${raza}"`);
+            console.log(`No hay información de la raza: "${form.lista.value.trim()}"`);
+            alert(`No hay información de la raza: "${form.lista.value.trim()}"`);
         }
     } else {
         console.log('Nada que mostrar');
