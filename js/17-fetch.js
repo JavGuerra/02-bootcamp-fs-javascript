@@ -35,8 +35,9 @@ const all = 'breeds/list/all';
 const rnd = 'breeds/image/random';
 const gal = 'breed/dachshund/images';
 const form = document.formulario;
+let spin  = intervalo = 0;
 let nFotos = 25;
-let indice;
+let pagina = 1;
 let razas = [];
 let hacer;
 
@@ -46,6 +47,7 @@ elLista   = elemento('#lista');
 elRazas   = elemento('#razas');
 btnEnviar = elemento('#enviar');
 elGaleria = elemento('#galeria');
+elNavegac = elemento('#navegacion');
 
 btnEnviar.onclick = evento => muestraGaleria(evento);
 btnInactivo(btnEnviar, true);
@@ -59,7 +61,6 @@ async function consultaAPI(ruta, hacer) {
     .catch(err => console.error(err))
 }
 
-
 /* Obtiene la lista de razas de la API */
 hacer = data => {
     ponSpin(true);
@@ -69,8 +70,8 @@ hacer = data => {
         console.log(raza);
         elRazas.innerHTML += `<option value="${raza}" />`;
     }
-    // El botón sólo se activa cuando razas está completa
-    // impidiendo realizar búsquedas hasta entonces.
+    // El botón sólo se activa cuando 'razas' está completa
+    // impidiendo así realizar búsquedas hasta entonces.
     btnInactivo(btnEnviar, false);
 
     ponSpin(false);
@@ -109,10 +110,13 @@ consultaAPI(url + gal, hacer);
  obtenidas de la API que hemos seleccionado en el campo 'lista' */
 function muestraGaleria(evento) {
     evento.preventDefault();
-    btnInactivo(btnEnviar, true);
     ponSpin(true);
+    btnInactivo(btnEnviar, true);
 
     elGaleria.textContent = '';
+    elNavegac.textContent = '';
+    pagina = 1;
+
     let raza = form.lista.value.trim().toLowerCase();
     elLista.value = raza;
 
@@ -122,13 +126,7 @@ function muestraGaleria(evento) {
             hacer = data => {
                 let galeria = [];
                 data.message.forEach(foto => {galeria.push(foto)})
-
-                indice = galeria.length > nFotos ? nFotos : galeria.length;
-                galeria.slice(0, indice).forEach(
-                    (foto, i) => {elGaleria.innerHTML += `<div><a href="${foto}" target="_blank">` 
-                    + `<img class="foto" src="${foto}" alt="Foto de perrito ${i+1}" title="${foto}" />`
-                    + '</a></div>'}
-                );
+                paginacion(galeria, nFotos);
             };
             let gal = 'breed/' + raza + '/images';
 
@@ -142,8 +140,8 @@ function muestraGaleria(evento) {
         console.log('Nada que mostrar');
     }
     
-    ponSpin(false);
     btnInactivo(btnEnviar, false);
+    ponSpin(false);
 }
 
 
@@ -157,7 +155,48 @@ function btnInactivo(boton, estado) {
     boton.setAttribute('aria-disabled', estado);
 }
 
+
 /* Activa o desactiva el spin */
 function ponSpin(estado) {
-    elZona.style.display = estado ? 'initial' : 'none';
+    estado ? spin++ : spin--;
+
+    if (estado && !intervalo) {
+        intervalo = setInterval(compruebaSpin, 300);
+        elZona.style.display = 'initial';
+    }
+}
+
+
+/* Comprueba si el spin ha llegado a cero y desactiva comprobación */
+function compruebaSpin() {
+    if (!spin) {
+        clearInterval(intervalo);
+        intervalo = 0;
+        elZona.style.display = 'none'; 
+    }
+}
+
+
+/* */
+function paginacion(vector, numEl) {
+    let totElem = vector.length;
+
+    // TODO Controlar la última página, que puede tener menos numEl
+
+    if (totElem > numEl) {
+        elemens = numEl;
+
+        //TODO
+        elNavegac.innerHTML = '<p>Botones de navegación</p>'
+
+    } else {
+        elemens = totElem;
+    }
+
+    /* Instrucciones para mostrar la página */
+    vector.slice((pagina - 1) * elemens, elemens).forEach(
+        (foto, i) => {elGaleria.innerHTML += `<div><a href="${foto}" target="_blank">` 
+        + `<img class="foto" src="${foto}" alt="Foto de perrito ${i+1}" title="${foto}" />`
+        + '</a></div>'}
+    );
 }
