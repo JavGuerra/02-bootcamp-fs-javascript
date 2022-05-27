@@ -38,19 +38,24 @@ const rnd = 'breeds/image/random';
 const gal = 'breed/dachshund/images';
 const form = document.formulario;
 let spin  = intervalo = 0;
+let mensaje = '';
 let nFotos = 25;
 let pagina = 1;
-let razas = [];
+let razas  = [];
 let hacer;
 
 elPerrito = elemento('#perrito');
 elLista   = elemento('#lista');
 elRazas   = elemento('#razas');
 btnEnviar = elemento('#enviar');
+btnAcepta = elemento('#aceptar');
 elGaleria = elemento('#galeria');
 elNavegac = elemento('#navegacion');
+elDialogo = elemento('#error');
+elMsgErr  = elemento('#msgErr');
 elZona    = elemento('#zona');
 
+btnAcepta.onclick = cierraModal;
 btnEnviar.onclick = evento => muestraGaleria(evento);
 btnInactivo(btnEnviar, true);
 
@@ -66,7 +71,7 @@ function consultaAPI(ruta, hacer) {
     .then(data => hacer(data))
     .catch(err => {
         console.error(err);
-        alert(err);
+        abreModal(err);
     })
 }
 
@@ -133,18 +138,20 @@ function muestraGaleria(evento) {
     if(raza) {
         if (razas.indexOf(raza) != -1) {
 
-            hacer = data => {
+            let hacer = data => {
                 let galeria = [];
                 data.message.forEach(foto => {galeria.push(foto)})
                 paginacion(galeria, nFotos);
             };
+
             let gal = 'breed/' + raza + '/images';
 
             consultaAPI(url + gal, hacer);
             
         } else {
-            console.log(`No hay información de la raza: "${form.lista.value.trim()}"`);
-            alert(`No hay información de la raza: "${form.lista.value.trim()}"`);
+            mensaje = `No hay información de la raza: «${form.lista.value.trim()}».`;
+            console.log(mensaje);
+            abreModal(mensaje);
         }
     } else {
         console.log('Nada que mostrar');
@@ -166,13 +173,24 @@ function btnInactivo(boton, estado) {
 }
 
 
+/* Abre la ventana modal con un mensaje */
+function abreModal(mensaje) {
+    elMsgErr.textContent = mensaje;
+    elDialogo.showModal();
+}
+
+
+/* Cierra ventana de mensaje modal */
+function cierraModal() { elDialogo.close() };
+
+
 /* Activa o desactiva el spin */
 function ponSpin(estado) {
     estado ? spin++ : spin--;
 
     if (estado && !intervalo) {
         intervalo = setInterval(compruebaSpin, 300);
-        elZona.style.display = 'initial';
+        elZona.showModal();
     }
 }
 
@@ -182,7 +200,7 @@ function compruebaSpin() {
     if (!spin) {
         clearInterval(intervalo);
         intervalo = 0;
-        elZona.style.display = 'none'; 
+        elZona.close(); 
     }
 }
 
@@ -201,12 +219,16 @@ function paginacion(vector, numEl) {
     }
 
     inicio = (pagina - 1) * elemens;
-    elNavegac.innerHTML = `<span class="cuenta">Fotos: ${inicio + 1} a ${elemens} de ${totElem}</span>`;
 
     /* Instrucciones para mostrar la página */
+    elGaleria.style.display = 'none';
     vector.slice(inicio, elemens).forEach(
         (foto, i) => {elGaleria.innerHTML += `<div><a href="${foto}" target="_blank">` 
         + `<img class="foto" src="${foto}" alt="Foto ${inicio + i + 1}" title="Foto ${inicio + i + 1}" />`
         + '</a></div>'}
     );
+    setTimeout(() => { // Hasta que no esté pintada la galería...
+        elGaleria.style.display = 'flex';
+        elNavegac.innerHTML = `<span class="cuenta">Fotos: ${inicio + 1} a ${elemens} de ${totElem}</span>`;
+    }, 300);
 }
