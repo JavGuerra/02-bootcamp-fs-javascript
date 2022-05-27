@@ -48,31 +48,31 @@ function muestraInfo(evento) {
 
     if (user) {
         fetch(api + user)
-        .then(resp => {
-            // fetch() no maneja errores de conexión, luego...
-            if (!resp.ok) throw Error(resp.status);
-            return resp.json();
-        })
-        .then(data => {
-            let avatar = data.avatar_url;
-            let nombre = data.name;
-            let numRep = data.public_repos;
-            let enlace = data.html_url;
+            .then(resp => {
+                // fetch() no maneja errores de conexión, luego...
+                if (!resp.ok) throw Error(resp.status);
+                return resp.json();
+            })
+            .then(data => {
+                let avatar = data.avatar_url;
+                let nombre = data.name;
+                let numRep = data.public_repos;
+                let enlace = data.html_url;
 
-            console.log(avatar);
-            console.log(nombre);
-            console.log(numRep);
+                console.log(avatar);
+                console.log(nombre);
+                console.log(numRep);
 
-            if (nombre == null) nombre = '--Nombre no definido--';
+                if (nombre == null) nombre = '--Nombre no definido--';
 
-            elResulta.innerHTML = `<img class="avatar" src="${avatar}" alt="${user}" />`;
-            elResulta.innerHTML += `<h2><a href="${enlace}" target="_blank">${nombre}</a>`
-                                + `<br />«${user}» | Repos:&nbsp;${numRep}</h2>`;
-        })
-        .catch(err => {
-            elResulta.innerHTML = `<h2><span class="destaca">( ! )&nbsp; ${err}</span><br />`
-                                + `Usuario «${user}» no encontrado.</h2>`;
-        })
+                elResulta.innerHTML = `<img class="avatar" src="${avatar}" alt="${user}" />`;
+                elResulta.innerHTML += `<h2><a href="${enlace}" target="_blank">${nombre}</a>`
+                                    + `<br />«${user}» | Repos:&nbsp;${numRep}</h2>`;
+            })
+            .catch(err => {
+                elResulta.innerHTML = `<h2><span class="destaca">( ! )&nbsp; ${err}</span><br />`
+                                    + `Usuario «${user}» no encontrado.</h2>`;
+            })
     } else {
         console.log('¿usuario?');
     }

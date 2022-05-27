@@ -189,7 +189,7 @@ footer p .letras::before {
 
 .spinner {
   margin: 0 auto;
-  border: 5px solid rgba(0, 0, 0, 0.15);
+  border: 5px solid LightGray;
   width: 36px;
   height: 36px;
   border-radius: 50%;

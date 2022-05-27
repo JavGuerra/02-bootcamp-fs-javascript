@@ -55,25 +55,25 @@ elDialogo = elemento('#error');
 elMsgErr  = elemento('#msgErr');
 elZona    = elemento('#zona');
 
-btnAcepta.onclick = cierraModal;
+btnAcepta.onclick = cierraVentanaModal;
 btnEnviar.onclick = evento => muestraGaleria(evento);
 btnInactivo(btnEnviar, true);
 elLista.value = '';
 
 
-/* Consulta la API en la ruta dada y ejecuta la función hacer() */
-function consultaAPI(ruta, hacer) {
+/* Consulta la API en la ruta dada y ejecuta la función callback() */
+function consultaAPI(ruta, callback) {
     fetch(ruta)
-    .then(resp => {
-        // fetch() no maneja errores de conexión, luego...
-        if (!resp.ok) throw Error(resp.status);
-        return resp.json();
-    })
-    .then(data => hacer(data))
-    .catch(err => {
-        console.error(err);
-        abreModal(err);
-    })
+        .then(respuesta => {
+            // fetch() no maneja errores de conexión, luego...
+            if (!respuesta.ok) throw Error(respuesta.status);
+            return respuesta.json();
+        })
+        .then(data => callback(data))
+        .catch(err => {
+            console.error(err);
+            abreVentanaModal(err);
+        })
 }
 
 
@@ -152,7 +152,7 @@ function muestraGaleria(evento) {
         } else {
             mensaje = `No hay información de la raza: «${form.lista.value.trim()}».`;
             console.log(mensaje);
-            abreModal(mensaje);
+            abreVentanaModal(mensaje);
         }
     } else {
         console.log('Nada que mostrar');
@@ -175,14 +175,14 @@ function btnInactivo(boton, estado) {
 
 
 /* Abre la ventana modal con un mensaje */
-function abreModal(mensaje) {
+function abreVentanaModal(mensaje) {
     elMsgErr.textContent = mensaje;
     elDialogo.showModal();
 }
 
 
 /* Cierra ventana de mensaje modal */
-function cierraModal() { elDialogo.close() };
+function cierraVentanaModal() { elDialogo.close() };
 
 
 /* Activa o desactiva el spin */
