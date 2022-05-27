@@ -1,53 +1,21 @@
-clave = 4;
-numSesion = 5;
-sesion = [{'clave': 'clave'}];
+const url = 'https://dog.ceo/api/';
+const gal = 'breed/dachshund/images';
 
-localStorage.clear();
-for (i = 1; i <= numSesion; i++) {
-    localStorage.setItem(i, JSON.stringify(sesion));
-}
-localStorage.ultSesion = numSesion;
-
-borraClave(clave);
-borraClave(4);
-
-function borraClave(clave) {
-    // numSesion sesión actual;
-    // sesiones num. sesiones;
-    localStorage.removeItem(clave);
-    let sesiones = localStorage.length - 1;
-
-    if (sesiones) {
-        localStorage.ultSesion = sesiones;
-
-        if (numSesion == clave) {
-            sesion = [];
-        } else {
-            ordenaClaves(clave, sesiones + 1);
-            --numSesion;
-        }
-
-    console.log(numSesion, sesion);
-    // historLocal();
-    } else {
-        numSesion = 1;
-        elListado.textContent = '';
-        btnHistor.disabled = true;
-        btnBorrar.disabled = true;
-        localStorage.removeItem('ultSesion');       
-    }
+function consultaAPI(ruta, hacer) {
+    fetch(ruta)
+    .then(resp => {
+        if (!resp.ok) throw Error(resp.status);
+        return resp;
+    })
+    .then(resp => resp.json())
+    .then(data => hacer(data))
+    .catch(err => alert(err))
 }
 
+let hacer = data => {
+    data.message.forEach(foto => {console.log(foto)});
 
-function ordenaClaves(clave, numSesion) {
-    let i, valClave;
+    console.log('otra cosa');
+};
 
-    for (i = clave; i < (numSesion); i++) { // TODO
-
-console.log('clave: ' + i, ' - clave+1: ' + (i+1));
-
-        valClave = localStorage.getItem(i + 1);
-        localStorage.removeItem(i + 1);
-        localStorage.setItem(i, valClave);
-    }
-}
+consultaAPI(url + gal, hacer);

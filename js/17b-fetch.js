@@ -43,11 +43,16 @@ function muestraInfo(evento) {
     ponSpin(true);
 
     let user = form.user.value.trim().toLowerCase();
-    elUsuario.value = user;
+    elUsuario.value = '';
     elResulta.innerHTML = '';
 
     if (user) {
         fetch(api + user)
+        .then(resp => {
+            // fetch no maneja errores de conexión, luego...
+            if (!resp.ok) throw Error(resp.status);
+            return resp;
+        })
         .then(resp => resp.json())
         .then(data => {
             let avatar = data.avatar_url;
@@ -58,16 +63,15 @@ function muestraInfo(evento) {
             console.log(nombre);
             console.log(numRep);
 
-            if (nombre == null) nombre = '(!) Nombre no definido';
+            if (nombre == null) nombre = '[Nombre no definido]';
 
-            if (avatar != null && numRep != null) {
-                elResulta.innerHTML = `<img class="avatar" src="${avatar}" alt="Avatar de ${user}" />`;
-                elResulta.innerHTML += `<h2>${nombre} | Repos:&nbsp;${numRep}</h2>`;
-            } else {
-                elResulta.innerHTML = `<h2>(!) El usuario ${user} no existe</h2>`;
-            } 
+            elResulta.innerHTML = `<img class="avatar" src="${avatar}" alt="${user}" />`;
+            elResulta.innerHTML += `<h2>${nombre}<br />«${user}» | Repos:&nbsp;${numRep}</h2>`;
         })
-        .catch(err => alert(err));
+        .catch(err => {
+            elResulta.innerHTML = `<h2><span class="destaca">(!) ${err}</span><br />`
+                + `Usuario «${user}» no encontrado.</h2>`;
+        })
     } else {
         console.log('¿usuario?');
     }

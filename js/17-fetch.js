@@ -56,9 +56,17 @@ btnInactivo(btnEnviar, true);
 /* Consulta la API en la ruta dada y ejecuta la función hacer() */
 function consultaAPI(ruta, hacer) {
     fetch(ruta)
+    .then(resp => {
+        // fetch no maneja errores de conexión, luego...
+        if (!resp.ok) throw Error(resp.status);
+        return resp;
+    })
     .then(resp => resp.json())
     .then(data => hacer(data))
-    .catch(err => console.error(err))
+    .catch(err => {
+        console.error(err);
+        alert(err);
+    })
 }
 
 
