@@ -63,14 +63,14 @@ function muestraInfo(evento) {
             console.log(nombre);
             console.log(numRep);
 
-            if (nombre == null) nombre = '[Nombre no definido]';
+            if (nombre == null) nombre = '--Nombre no definido--';
 
             elResulta.innerHTML = `<img class="avatar" src="${avatar}" alt="${user}" />`;
             elResulta.innerHTML += `<h2><a href="${enlace}" target="_blank">${nombre}</a>`
                                 + `<br />«${user}» | Repos:&nbsp;${numRep}</h2>`;
         })
         .catch(err => {
-            elResulta.innerHTML = `<h2><span class="destaca">(!) ${err}</span><br />`
+            elResulta.innerHTML = `<h2><span class="destaca">( ! )&nbsp; ${err}</span><br />`
                                 + `Usuario «${user}» no encontrado.</h2>`;
         })
     } else {
