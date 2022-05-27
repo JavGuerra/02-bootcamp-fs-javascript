@@ -49,11 +49,10 @@ function muestraInfo(evento) {
     if (user) {
         fetch(api + user)
         .then(resp => {
-            // fetch no maneja errores de conexión, luego...
+            // fetch() no maneja errores de conexión, luego...
             if (!resp.ok) throw Error(resp.status);
-            return resp;
+            return resp.json();
         })
-        .then(resp => resp.json())
         .then(data => {
             let avatar = data.avatar_url;
             let nombre = data.name;
