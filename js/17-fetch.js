@@ -58,6 +58,7 @@ elZona    = elemento('#zona');
 btnAcepta.onclick = cierraModal;
 btnEnviar.onclick = evento => muestraGaleria(evento);
 btnInactivo(btnEnviar, true);
+elLista.value = '';
 
 
 /* Consulta la API en la ruta dada y ejecuta la función hacer() */
