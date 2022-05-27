@@ -192,16 +192,13 @@ function compruebaSpin() {
 function paginacion(vector, numEl) {
     let elemens, inicio;
     let totElem = vector.length;
-
-    // TODO Controlar la última página, que puede tener menos numEl
-
+ 
     if (totElem > numEl) {
         elemens = numEl;
-
-        //TODO botones anterior - siguiente
-
+        // TODO botones anterior - siguiente
     } else {
         elemens = totElem;
+        // TODO Controlar la última página, que puede tener menos numEl
     }
 
     inicio = (pagina - 1) * elemens;

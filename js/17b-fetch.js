@@ -58,6 +58,7 @@ function muestraInfo(evento) {
             let avatar = data.avatar_url;
             let nombre = data.name;
             let numRep = data.public_repos;
+            let enlace = data.html_url;
 
             console.log(avatar);
             console.log(nombre);
@@ -66,11 +67,12 @@ function muestraInfo(evento) {
             if (nombre == null) nombre = '[Nombre no definido]';
 
             elResulta.innerHTML = `<img class="avatar" src="${avatar}" alt="${user}" />`;
-            elResulta.innerHTML += `<h2>${nombre}<br />«${user}» | Repos:&nbsp;${numRep}</h2>`;
+            elResulta.innerHTML += `<h2><a href="${enlace}" target="_blank">${nombre}</a>`
+                                + `<br />«${user}» | Repos:&nbsp;${numRep}</h2>`;
         })
         .catch(err => {
             elResulta.innerHTML = `<h2><span class="destaca">(!) ${err}</span><br />`
-                + `Usuario «${user}» no encontrado.</h2>`;
+                                + `Usuario «${user}» no encontrado.</h2>`;
         })
     } else {
         console.log('¿usuario?');
