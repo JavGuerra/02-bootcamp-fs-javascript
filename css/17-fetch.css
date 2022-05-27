@@ -136,6 +136,10 @@ footer p .letras::before {
   border-radius: 1em;
 }
 
+#error div {
+  outline: none;
+}
+
 #error::backdrop {
   position: fixed;
   inset: 0;

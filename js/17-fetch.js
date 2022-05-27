@@ -227,7 +227,7 @@ function paginacion(vector, numEl) {
         + `<img class="foto" src="${foto}" alt="Foto ${inicio + i + 1}" title="Foto ${inicio + i + 1}" />`
         + '</a></div>'}
     );
-    setTimeout(() => { // Hasta que no esté pintada la galería...
+    setTimeout(() => { // TODO Hasta que no esté pintada la galería...
         elGaleria.style.display = 'flex';
         elNavegac.innerHTML = `<span class="cuenta">Fotos: ${inicio + 1} a ${elemens} de ${totElem}</span>`;
     }, 300);

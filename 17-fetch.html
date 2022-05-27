@@ -43,10 +43,12 @@
 
         <section id="navegacion" role="region" aria-live="polite"></section>
 
-        <dialog id="error">
-            <h2>Error</h2>
-            <p id="msgErr"></p>
-            <button id="aceptar">Aceptar</button>
+        <dialog id="error" role="alertdialog" aria-labelledby="cabecera" aria-describedby="msgErr">
+            <div role="document" tabindex="0">
+                <h2 id="cabecera">Error</h2>
+                <p id="msgErr"></p>
+                <button id="aceptar">Aceptar</button>
+            </div>
         </dialog>
 
         <dialog id='zona'><div class="spinner"></div></dialog>
