@@ -222,7 +222,7 @@ function paginacion(vector, numEl) {
     inicio = (pagina - 1) * elemens;
 
     /* Instrucciones para mostrar la página */
-    elGaleria.style.display = 'none';
+    elGaleria.style.display = 'none'; // Para evitar el Flash Of Unestiled Content (FOUC)
     vector.slice(inicio, elemens).forEach(
         (foto, i) => {elGaleria.innerHTML += `<div><a href="${foto}" target="_blank">` 
         + `<img class="foto" src="${foto}" alt="Foto ${inicio + i + 1}" title="Foto ${inicio + i + 1}" />`
