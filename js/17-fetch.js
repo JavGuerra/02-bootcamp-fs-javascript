@@ -25,6 +25,8 @@ Referencias:
 https://lemoncode.net/lemoncode-blog/2018/1/29/javascript-asincrono
 https://www.neoguias.com/javascript-asincrono/
 https://lenguajejs.com/javascript/asincronia/que-es/
+
+https://rosolutions.com.mx/blog/index.php/2018/10/29/manejo-de-errores-al-utilizar-fetch/
 */
 
 
