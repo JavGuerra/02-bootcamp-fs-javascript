@@ -102,7 +102,13 @@ hacer = data => {
 
     let urlFoto = data.message;
     console.log(urlFoto);
-    elPerrito.setAttribute('src', urlFoto);
+
+    medidas(urlFoto)
+    .then(mide => { 
+        elPerrito.setAttribute('width', mide.ancho);
+        elPerrito.setAttribute('height', mide.alto);
+        elPerrito.setAttribute('src', urlFoto);
+    })
 
     ponSpin(false);
 };
