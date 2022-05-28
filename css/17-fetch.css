@@ -84,7 +84,7 @@ footer p .letras::before {
   content: "{";
 }
 
-#lista {
+#raza {
   padding: 0 1.5em;
   width: 200px;
   height: 40px;
@@ -94,7 +94,7 @@ footer p .letras::before {
   box-shadow: inset 3px 3px 8px rgba(0, 0, 0, 0.25);
 }
 
-#lista:focus,
+#raza:focus,
 #aceptar:focus {
   outline: 2px solid LightSeaGreen;
 }
@@ -241,7 +241,7 @@ footer p {
     padding: 20px;
   }
 
-  #lista {
+  #raza {
     width: 300px;
   }
 }
