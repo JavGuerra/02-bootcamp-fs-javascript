@@ -45,7 +45,7 @@ let razas  = [];
 let hacer;
 
 elPerrito = elemento('#perrito');
-elLista   = elemento('#lista');
+elCampo   = elemento('#lista');
 elRazas   = elemento('#razas');
 btnEnviar = elemento('#enviar');
 btnAcepta = elemento('#aceptar');
@@ -58,7 +58,7 @@ elZona    = elemento('#zona');
 btnAcepta.onclick = cierraVentanaModal;
 btnEnviar.onclick = evento => muestraGaleria(evento);
 btnInactivo(btnEnviar, true);
-elLista.value = '';
+elCampo.value = '';
 
 
 /* Consulta la API en la ruta dada y ejecuta la función callback() */
@@ -100,9 +100,9 @@ consultaAPI(url + all, hacer);
 hacer = data => {
     ponSpin(true);
 
-    let foto = data.message;
-    console.log(foto);
-    elPerrito.setAttribute('src', foto);
+    let urlFoto = data.message;
+    console.log(urlFoto);
+    elPerrito.setAttribute('src', urlFoto);
 
     ponSpin(false);
 };
@@ -114,7 +114,7 @@ consultaAPI(url + rnd, hacer);
 hacer = data => {
     ponSpin(true);
 
-    data.message.forEach(foto => {console.log(foto)});
+    data.message.forEach(urlFoto => {console.log(urlFoto)});
 
     ponSpin(false);
 };
@@ -134,14 +134,14 @@ function muestraGaleria(evento) {
     pagina = 1;
 
     let raza = form.lista.value.trim().toLowerCase();
-    elLista.value = raza;
+    elCampo.value = raza;
 
     if(raza) {
         if (razas.indexOf(raza) != -1) {
 
             let hacer = data => {
                 let galeria = [];
-                data.message.forEach(foto => {galeria.push(foto)})
+                data.message.forEach(urlFoto => {galeria.push(urlFoto)})
                 paginacion(galeria, nFotos);
             };
 
@@ -222,14 +222,33 @@ function paginacion(vector, numEl) {
     inicio = (pagina - 1) * elemens;
 
     /* Instrucciones para mostrar la página */
-    elGaleria.style.display = 'none'; // Para evitar el Flash Of Unestiled Content (FOUC)
     vector.slice(inicio, elemens).forEach(
-        (foto, i) => {elGaleria.innerHTML += `<div><a href="${foto}" target="_blank">` 
-        + `<img class="foto" src="${foto}" alt="Foto ${inicio + i + 1}" title="Foto ${inicio + i + 1}" />`
-        + '</a></div>'}
-    );
-    setTimeout(() => { // TODO Hasta que no esté pintada la galería...
-        elGaleria.style.display = 'flex';
-        elNavegac.innerHTML = `<span class="cuenta">Fotos: ${inicio + 1} a ${elemens} de ${totElem}</span>`;
-    }, 500);
+        (urlFoto, i) => {
+            medidas(urlFoto)
+            .then(img => { // Para evitar el Flash Of Unestiled Content (FOUC)
+                elGaleria.innerHTML += `<div><a href="${urlFoto}" target="_blank">` 
+                + `<img class="foto" src="${urlFoto}" width="${img.ancho}" height="${img.alto}"`
+                + `alt="Foto ${inicio + i + 1}" title="Foto ${inicio + i + 1}" /></a></div>`
+            })
+            .catch(err => {
+                console.error(err);
+                abreVentanaModal(err);
+            });
+        }
+    )
+    elNavegac.innerHTML = `<span class="cuenta">Fotos: ${inicio + 1} a ${elemens} de ${totElem}</span>`;
+}
+
+
+/* Obtiene el ancho y alto de una imagen. Resuelve con un objeto */
+function medidas(url) {
+    return new Promise((resolve, reject) => {
+        try {
+            const img = new Image();
+            img.onload = () => {
+                resolve({ ancho: img.width, alto: img.height });
+            };
+            img.src = url;
+        } catch (err) { reject(err); }
+    });
 }
