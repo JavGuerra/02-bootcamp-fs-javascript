@@ -66,7 +66,7 @@ function consultaAPI(ruta, callback) {
     fetch(ruta)
         .then(respuesta => {
             // fetch() no maneja errores de conexión, luego...
-            if (!respuesta.ok) throw Error(respuesta.status);
+            if (!respuesta.ok) throw Error(respuesta.statusText);
             return respuesta.json();
         })
         .then(data => callback(data))
