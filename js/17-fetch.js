@@ -224,6 +224,8 @@ function paginacion(vector, numEl) {
     /* Instrucciones para mostrar la página */
     vector.slice(inicio, elemens).forEach(
         (urlFoto, i) => {
+            ponSpin(true);
+
             medidas(urlFoto)
             .then(img => { // Para evitar el Flash Of Unestiled Content (FOUC)
                 elGaleria.innerHTML += `<div><a href="${urlFoto}" target="_blank">` 
@@ -234,6 +236,8 @@ function paginacion(vector, numEl) {
                 console.error(err);
                 abreVentanaModal(err);
             });
+
+            ponSpin(false);
         }
     )
     elNavegac.innerHTML = `<span class="cuenta">Fotos: ${inicio + 1} a ${elemens} de ${totElem}</span>`;
@@ -241,14 +245,14 @@ function paginacion(vector, numEl) {
 
 
 /* Obtiene el ancho y alto de una imagen. Resuelve con un objeto */
-function medidas(url) {
+function medidas(urlFoto) {
     return new Promise((resolve, reject) => {
         try {
             const img = new Image();
             img.onload = () => {
                 resolve({ ancho: img.width, alto: img.height });
             };
-            img.src = url;
+            img.src = urlFoto;
         } catch (err) { reject(err); }
     });
 }
