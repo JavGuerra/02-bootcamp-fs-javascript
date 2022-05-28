@@ -37,7 +37,7 @@ const all = 'breeds/list/all';
 const rnd = 'breeds/image/random';
 const gal = 'breed/dachshund/images';
 const form = document.formulario;
-let spin  = intervalo = 0;
+let spin  =  intervalo = 0;
 let mensaje = '';
 let nFotos = 25;
 let pagina = 1;
@@ -45,7 +45,7 @@ let razas  = [];
 let hacer;
 
 elPerrito = elemento('#perrito');
-elCampo   = elemento('#lista');
+elCampo   = elemento('#raza');
 elRazas   = elemento('#razas');
 btnEnviar = elemento('#enviar');
 btnAcepta = elemento('#aceptar');
@@ -65,17 +65,16 @@ elCampo.value = '';
 function consultaAPI(ruta, callback) {
     ponSpin(true);
     fetch(ruta)
-        .then(respuesta => {
-            // fetch() no maneja errores de conexión, luego...
+        .then(respuesta => { // fetch() no maneja errores de conexión, luego...
             if (!respuesta.ok) throw Error(respuesta.statusText);
             return respuesta.json();
         })
         .then(data => callback(data))
-        .finally(ponSpin(false))
         .catch(err => {
             console.error(err);
             abreVentanaModal(err);
         })
+        .finally(ponSpin(false));
 }
 
 
@@ -86,14 +85,13 @@ hacer = data => {
         console.log(raza);
         elRazas.innerHTML += `<option value="${raza}" />`;
     }
-    // El botón sólo se activa cuando 'razas' está completa
-    // impidiendo así realizar búsquedas hasta entonces.
+    // btnEnviar se activa sólo cuando 'razas' está completa.
     btnInactivo(btnEnviar, false);
 };
 consultaAPI(url + all, hacer);
 
 
-/* Obtiene una imagen al azar de la API */
+/* Obtiene de la API una imagen al azar con sus medidas */
 hacer = data => {
     let urlFoto = data.message;
     console.log(urlFoto);
@@ -111,13 +109,13 @@ hacer = data => {
 consultaAPI(url + rnd, hacer);
 
 
-/* Obtiene las imágenes de una raza concreta de la API */
+/* Obtiene las url de las imágenes de una raza concreta de la API */
 hacer = data => { data.message.forEach(urlFoto => {console.log(urlFoto)}) };
 consultaAPI(url + gal, hacer);
 
 
-/* Muestra la galería de las imágenes de una raza concreta
- obtenidas de la API que hemos seleccionado en el campo 'lista' */
+/* obtiene de la API y muestra la galería de imágenes de una
+   raza concreta que hemos seleccionado en el campo 'raza' */
 function muestraGaleria(evento) {
     evento.preventDefault();
     btnInactivo(btnEnviar, true);
@@ -126,7 +124,7 @@ function muestraGaleria(evento) {
     elNavegac.textContent = '';
     pagina = 1;
 
-    let raza = form.lista.value.trim().toLowerCase();
+    let raza = form.raza.value.trim().toLowerCase();
     elCampo.value = raza;
 
     if(raza) {
@@ -241,7 +239,7 @@ function medidas(urlFoto) {
                 resolve({ ancho: img.width, alto: img.height });
             };
             img.onerror = () => {
-                // ¿TODO?  throw new Error('Imagen no encontrada.')
+                // ¿TODO?  throw Error('Imagen no encontrada.')
                 reject(new Error('Imagen no encontrada.'));
             };
             img.src = urlFoto;
