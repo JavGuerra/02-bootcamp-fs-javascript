@@ -230,8 +230,6 @@ function paginacion(vector, numEl) {
     // Mostrando la galería
     vector.slice(inicio, elemens).forEach(
         (urlFoto, i) => {
-            ponSpin(true);
-
             medidas(urlFoto)
             .then(mide => { // Para evitar el Flash Of Unestiled Content (FOUC)
                 elGaleria.innerHTML += `<div><a href="${urlFoto}" target="_blank"><img ` 
@@ -242,8 +240,6 @@ function paginacion(vector, numEl) {
                 console.error(err);
                 abreVentanaModal(err);
             });
-
-            ponSpin(false);
         }
     )
     info = `<span class="cuenta">Fotos: ${inicio + 1} a ${elemens} de ${totElem}</span>`;
@@ -255,11 +251,16 @@ function paginacion(vector, numEl) {
 function medidas(urlFoto) {
     return new Promise((resolve, reject) => {
         try {
+            ponSpin(true);
             const img = new Image();
             img.onload = () => {
+                ponSpin(false);
                 resolve({ ancho: img.width, alto: img.height });
             };
             img.src = urlFoto;
-        } catch (err) { reject(err); }
+        } catch (err) {
+            ponSpin(false);
+            reject(err);
+        }
     });
 }
