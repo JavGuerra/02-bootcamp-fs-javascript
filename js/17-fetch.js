@@ -150,7 +150,7 @@ function muestraGaleria(evento) {
             consultaAPI(url + gal, hacer);
             
         } else {
-            mensaje = `No hay información de la raza: «${form.lista.value.trim()}».`;
+            mensaje = `No hay información de la raza: «${raza}».`;
             console.log(mensaje);
             abreVentanaModal(mensaje);
         }
@@ -208,7 +208,7 @@ function compruebaSpin() {
 
 /* Pagina los elementos de un vector  en función del número de elementos dado */
 function paginacion(vector, numEl) {
-    let elemens, inicio;
+    let elemens, inicio, info;
     let totElem = vector.length;
  
     if (totElem > numEl) {
@@ -221,7 +221,7 @@ function paginacion(vector, numEl) {
 
     inicio = (pagina - 1) * elemens;
 
-    /* Instrucciones para mostrar la página */
+    // Mostrando la galería
     vector.slice(inicio, elemens).forEach(
         (urlFoto, i) => {
             ponSpin(true);
@@ -240,7 +240,8 @@ function paginacion(vector, numEl) {
             ponSpin(false);
         }
     )
-    elNavegac.innerHTML = `<span class="cuenta">Fotos: ${inicio + 1} a ${elemens} de ${totElem}</span>`;
+    info = `<span class="cuenta">Fotos: ${inicio + 1} a ${elemens} de ${totElem}</span>`;
+    elNavegac.innerHTML = info;
 }
 
 
