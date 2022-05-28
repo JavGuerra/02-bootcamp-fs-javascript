@@ -63,6 +63,7 @@ elCampo.value = '';
 
 /* Consulta la API en la ruta dada y ejecuta la función callback() */
 function consultaAPI(ruta, callback) {
+    ponSpin(true);
     fetch(ruta)
         .then(respuesta => {
             // fetch() no maneja errores de conexión, luego...
@@ -70,6 +71,7 @@ function consultaAPI(ruta, callback) {
             return respuesta.json();
         })
         .then(data => callback(data))
+        .finally(ponSpin(false))
         .catch(err => {
             console.error(err);
             abreVentanaModal(err);
@@ -79,8 +81,6 @@ function consultaAPI(ruta, callback) {
 
 /* Obtiene la lista de razas de la API */
 hacer = data => {
-    ponSpin(true);
-
     for(raza in data.message) {
         razas.push(raza);
         console.log(raza);
@@ -89,42 +89,30 @@ hacer = data => {
     // El botón sólo se activa cuando 'razas' está completa
     // impidiendo así realizar búsquedas hasta entonces.
     btnInactivo(btnEnviar, false);
-
-    ponSpin(false);
 };
-
 consultaAPI(url + all, hacer);
 
 
 /* Obtiene una imagen al azar de la API */
 hacer = data => {
-    ponSpin(true);
-
     let urlFoto = data.message;
     console.log(urlFoto);
-
     medidas(urlFoto)
     .then(mide => { 
         elPerrito.setAttribute('width', mide.ancho);
         elPerrito.setAttribute('height', mide.alto);
         elPerrito.setAttribute('src', urlFoto);
     })
-
-    ponSpin(false);
+    .catch(err => {
+        console.error(err);
+        abreVentanaModal(err);
+    });
 };
-
 consultaAPI(url + rnd, hacer);
 
 
 /* Obtiene las imágenes de una raza concreta de la API */
-hacer = data => {
-    ponSpin(true);
-
-    data.message.forEach(urlFoto => {console.log(urlFoto)});
-
-    ponSpin(false);
-};
-
+hacer = data => { data.message.forEach(urlFoto => {console.log(urlFoto)}) };
 consultaAPI(url + gal, hacer);
 
 
@@ -132,7 +120,6 @@ consultaAPI(url + gal, hacer);
  obtenidas de la API que hemos seleccionado en el campo 'lista' */
 function muestraGaleria(evento) {
     evento.preventDefault();
-    ponSpin(true);
     btnInactivo(btnEnviar, true);
 
     elGaleria.textContent = '';
@@ -150,9 +137,7 @@ function muestraGaleria(evento) {
                 data.message.forEach(urlFoto => {galeria.push(urlFoto)})
                 paginacion(galeria, nFotos);
             };
-
             let gal = 'breed/' + raza + '/images';
-
             consultaAPI(url + gal, hacer);
             
         } else {
@@ -165,7 +150,6 @@ function muestraGaleria(evento) {
     }
     
     btnInactivo(btnEnviar, false);
-    ponSpin(false);
 }
 
 
@@ -253,14 +237,16 @@ function medidas(urlFoto) {
         try {
             ponSpin(true);
             const img = new Image();
-            img.onload = () => {
-                ponSpin(false);
+            img.onload  = () => {
                 resolve({ ancho: img.width, alto: img.height });
             };
+            img.onerror = () => {
+                // ¿TODO?  throw new Error('Imagen no encontrada.')
+                reject(new Error('Imagen no encontrada.'));
+            };
             img.src = urlFoto;
-        } catch (err) {
-            ponSpin(false);
-            reject(err);
         }
+        catch (err) { reject(err) }
+        finally  { ponSpin(false) }
     });
 }
