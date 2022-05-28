@@ -227,9 +227,9 @@ function paginacion(vector, numEl) {
             ponSpin(true);
 
             medidas(urlFoto)
-            .then(img => { // Para evitar el Flash Of Unestiled Content (FOUC)
-                elGaleria.innerHTML += `<div><a href="${urlFoto}" target="_blank">` 
-                + `<img class="foto" src="${urlFoto}" width="${img.ancho}" height="${img.alto}"`
+            .then(mide => { // Para evitar el Flash Of Unestiled Content (FOUC)
+                elGaleria.innerHTML += `<div><a href="${urlFoto}" target="_blank"><img ` 
+                + `class="foto" src="${urlFoto}" width="${mide.ancho}" height="${mide.alto}"`
                 + `alt="Foto ${inicio + i + 1}" title="Foto ${inicio + i + 1}" /></a></div>`
             })
             .catch(err => {
