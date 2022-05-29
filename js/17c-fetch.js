@@ -19,3 +19,30 @@ Pasos:
     - Consigue que se imprima por consola la url del repositorio de cada usuario.
     - Consigue que se imprima por consola el nombre de cada usuario.
 */
+
+
+const url = 'https://api.github.com/users/';
+const listaUsuarios = ['jgthms', 'mauricesvay', 'xet7', 'javguerra'];
+let   listaPromesas = listaUsuarios.map(usuario => fetch(url + usuario));
+
+Promise.all([...listaPromesas])
+    .then(listaRespuestas => {
+        listaRespuestas.forEach(respuesta => {
+            procesa(respuesta)
+                .then( data => {
+                    console.log('Nombre: ' + data.name );
+                    console.log('URL: ' + data.html_url);
+                    console.log('\n');
+                })
+                .catch(err => {console.error(err)});       
+        })
+    })
+    .catch(err => {console.error(err)})
+    .finally(console.log('Total promesas: ' + listaPromesas.length));
+
+function procesa(respuesta) {
+    return new Promise ((resolve, reject) => {
+        if (respuesta.ok) resolve (respuesta.json());
+        else reject (`Error ${respuesta.status}: ${respuesta.url} ${respuesta.statusText}`);
+    })
+}
