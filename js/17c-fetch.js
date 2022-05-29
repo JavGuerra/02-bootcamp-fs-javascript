@@ -25,6 +25,9 @@ const url = 'https://api.github.com/users/';
 const listaUsuarios = ['jgthms', 'mauricesvay', 'xet7', 'javguerra'];
 let   listaPromesas = listaUsuarios.map(usuario => fetch(url + usuario));
 
+console.log('\nResultado:');
+console.log(`Hay ${listaPromesas.length} promesas.\n\n`);
+
 Promise.all([...listaPromesas])
     .then(listaRespuestas => {
         listaRespuestas.forEach(respuesta => {
@@ -38,7 +41,6 @@ Promise.all([...listaPromesas])
         })
     })
     .catch(err => {console.error(err)})
-    .finally(console.log('Total promesas: ' + listaPromesas.length));
 
 /* Devuelve una promesa */
 function comprueba(respuesta) {
