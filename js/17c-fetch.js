@@ -28,8 +28,8 @@ let   listaPromesas = listaUsuarios.map(usuario => fetch(url + usuario));
 Promise.all([...listaPromesas])
     .then(listaRespuestas => {
         listaRespuestas.forEach(respuesta => {
-            procesa(respuesta)
-                .then( data => {
+            comprueba(respuesta)
+                .then(data => {
                     console.log('Nombre: ' + data.name );
                     console.log('URL: ' + data.html_url);
                     console.log('\n');
@@ -40,7 +40,8 @@ Promise.all([...listaPromesas])
     .catch(err => {console.error(err)})
     .finally(console.log('Total promesas: ' + listaPromesas.length));
 
-function procesa(respuesta) {
+/* Devuelve una promesa */
+function comprueba(respuesta) {
     return new Promise ((resolve, reject) => {
         if (respuesta.ok) resolve (respuesta.json());
         else reject (`Error ${respuesta.status}: ${respuesta.url} ${respuesta.statusText}`);
