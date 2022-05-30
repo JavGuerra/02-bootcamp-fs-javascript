@@ -28,6 +28,7 @@ const listaUsuarios = ['jgthms', 'mauricesvay', 'xet7', 'javguerra'];
 let   listaPromesas = listaUsuarios.map( async (usuario) => {
     const respuesta = await fetch(url + usuario);
     return respuesta.json();
+    // TODO Comprobar si error de conexión.
 });
 
 console.log('\nResultado:');
