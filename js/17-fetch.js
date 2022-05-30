@@ -225,7 +225,7 @@ function siguiente() {
 
 /* Va a la última página */
 function final() {
-    longitud = galeria.length;
+    let longitud = galeria.length;
     pagina = Math.ceil(longitud / nFotos);
     paginacion(galeria, pagina, nFotos);
 }
