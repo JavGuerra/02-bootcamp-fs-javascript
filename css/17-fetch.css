@@ -68,12 +68,14 @@ a:hover {
 }
 
 #enviar:hover,
-#aceptar:hover {
+#aceptar:hover,
+#navegacion button:hover:enabled {
   box-shadow: rgba(0, 0, 0, 0.25) 3px 3px 3px;
 }
 
 #enviar:disabled {
   background-color: darkgray;
+  cursor: default;
 }
 
 footer p .letras {
@@ -95,7 +97,8 @@ footer p .letras::before {
 }
 
 #raza:focus,
-#aceptar:focus {
+#aceptar:focus,
+#navegacion button:focus {
   outline: 2px solid LightSeaGreen;
 }
 
@@ -176,7 +179,28 @@ footer p .letras::before {
 
 .cuenta {
   font-size: 1.25em;
+  vertical-align: middle;
+  margin-left: .5em;
+  margin-right: .5em;
   color: DimGray;
+}
+
+#navegacion button {
+  width: 2em;
+  height: 2em;
+  padding-top: 5px;
+  font-weight: bolder;
+  border: 1px solid gray;
+  border-radius: 7px;
+  margin-left: .25em;
+  margin-right: .25em;
+  cursor: pointer;
+}
+
+#navegacion button:disabled {
+  color: gray;
+  border: 1px solid lightgray;
+  cursor: default;
 }
 
 #error,

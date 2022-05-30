@@ -39,24 +39,34 @@ const gal = 'breed/dachshund/images';
 const form = document.formulario;
 let spin  =  intervalo = 0;
 let mensaje = '';
-let nFotos = 25;
-let pagina = 1;
-let razas  = [];
+let nFotos  = 25;
+let pagina  = 1;
+let razas   = [];
+let galeria = [];
 let hacer;
 
 elPerrito = elemento('#perrito');
-elCampo   = elemento('#raza');
-elRazas   = elemento('#razas');
-btnEnviar = elemento('#enviar');
+elCampo   = elemento('#raza'   );
+elRazas   = elemento('#razas'  );
+btnEnviar = elemento('#enviar' );
 btnAcepta = elemento('#aceptar');
 elGaleria = elemento('#galeria');
-elNavegac = elemento('#navegacion');
-elDialogo = elemento('#error');
-elMsgErr  = elemento('#msgErr');
-elZona    = elemento('#zona');
+elPaginac = elemento('#pagina' );
+btnIrInic = elemento('#irInic' );
+btnAnteri = elemento('#anteri' );
+btnSiguie = elemento('#siguie' );
+btnIrFin  = elemento('#irFin'  );
+elDialogo = elemento('#error'  );
+elMsgErr  = elemento('#msgErr' );
+elZona    = elemento('#zona'   );
 
 btnAcepta.onclick = cierraVentanaModal;
 btnEnviar.onclick = evento => muestraGaleria(evento);
+btnIrInic.onclick = inicial;
+btnAnteri.onclick = anterior;
+btnSiguie.onclick = siguiente;
+btnIrFin.onclick  = final;
+botonera(false);
 btnInactivo(btnEnviar, true);
 elCampo.value = '';
 
@@ -121,8 +131,10 @@ function muestraGaleria(evento) {
     btnInactivo(btnEnviar, true);
 
     elGaleria.textContent = '';
-    elNavegac.textContent = '';
-    pagina = 1;
+    elPaginac.textContent = '';
+    botonera(false);
+    galeria = [];
+    pagina  = 1;
 
     let raza = form.raza.value.trim().toLowerCase();
     elCampo.value = raza;
@@ -131,9 +143,8 @@ function muestraGaleria(evento) {
         if (razas.indexOf(raza) != -1) {
 
             let hacer = data => {
-                let galeria = [];
                 data.message.forEach(urlFoto => {galeria.push(urlFoto)})
-                paginacion(galeria, nFotos);
+                paginacion(galeria, pagina, nFotos);
             };
             let gal = 'breed/' + raza + '/images';
             consultaAPI(url + gal, hacer);
@@ -148,6 +159,132 @@ function muestraGaleria(evento) {
     }
     
     btnInactivo(btnEnviar, false);
+}
+
+
+/* Pagina los elementos de un vector en función de página y elementos por página */
+function paginacion(vector, pagina, elementos) {
+    let longitud, numPags, inicio;
+    longitud = vector.length;
+    if (longitud) {
+        // Averigua el elemento de inicio
+        numPags = Math.ceil(longitud / elementos);
+        if (pagina > numPags) pagina = numPags;
+        if (pagina < 1) pagina = 1;
+        inicio = (pagina - 1) * elementos;
+        // Ajusta el número de elementos si se requiere
+        if (longitud < elementos) {
+            elementos = longitud;
+        } else if (longitud - inicio < elementos) {
+            elementos = longitud - inicio;
+        }
+        // Resuelve
+        ctrlBotonesPag(pagina, numPags);
+        listaElementos(vector, inicio, elementos); 
+    }
+}
+
+
+/* Activa o desactiva los botones según la página */
+function ctrlBotonesPag(pagina, numPags) {
+    btnInactivo(btnIrInic, false);
+    btnInactivo(btnAnteri, false);
+    btnInactivo(btnSiguie, false);
+    btnInactivo(btnIrFin,  false);
+    if (pagina == 1) {
+        btnInactivo(btnIrInic, true);
+        btnInactivo(btnAnteri, true);
+    }
+    if (pagina == numPags) {
+        btnInactivo(btnSiguie, true);
+        btnInactivo(btnIrFin,  true);
+    }
+}
+
+
+/* Va a la primera página */
+function inicial() {
+    pagina = 1;
+    paginacion(galeria, pagina, nFotos);
+}
+
+
+/* Va a la página anterior */
+function anterior() {
+    pagina--;
+    paginacion(galeria, pagina, nFotos);
+}
+
+
+/* Va a la página siguiente */
+function siguiente() {
+    pagina++;
+    paginacion(galeria, pagina, nFotos);
+}
+
+
+/* Va a la última página */
+function final() {
+    longitud = galeria.length;
+    pagina = Math.ceil(longitud / nFotos);
+    paginacion(galeria, pagina, nFotos);
+}
+
+
+/* Activa o desactiva la botonera */
+function botonera(status) {
+    btnIrInic.style.display = status ? 'initial' : 'none';
+    btnAnteri.style.display = status ? 'initial' : 'none';
+    btnSiguie.style.display = status ? 'initial' : 'none';
+    btnIrFin.style.display  = status ? 'initial' : 'none';
+}
+
+
+/* Muestra la cantidad de elementos de un vector desde la posición dada */
+function listaElementos(vector, inicio, elementos) {
+    let longitud = vector.length;
+    let primero  = inicio + 1;
+    let fin = inicio + elementos;
+    elGaleria.textContent = '';
+    elPaginac.textContent = '';
+    botonera(false);
+    vector.slice(inicio, fin).forEach(
+        (urlFoto, i) => {
+            medidas(urlFoto) // Para evitar el Flash Of Unestiled Content (FOUC)
+            .then(mide => {
+                elGaleria.innerHTML += `<div><a href="${urlFoto}" target="_blank"><img ` 
+                + `class="foto" src="${urlFoto}" width="${mide.ancho}" height="${mide.alto}"`
+                + `alt="Foto ${primero + i}" title="Foto ${primero + i}" /></a></div>`
+            })
+            .catch(err => {
+                console.error(err);
+                abreVentanaModal(err);
+            });
+        }
+    )
+    elPaginac.innerHTML = `Fotos: ${primero} a ${fin} de ${longitud}`;
+    botonera(true);
+}
+
+
+/* Obtiene el ancho y alto de una imagen. Resuelve con un objeto */
+function medidas(urlFoto) {
+    return new Promise((resolve, reject) => {
+        try {
+            ponSpin(true);
+            const img = new Image();
+            img.onload  = () => {
+                resolve({ ancho: img.width, alto: img.height });
+            };
+            img.onerror = () => {
+                // ¿TODO?  throw Error('Imagen no encontrada.')
+                reject(new Error('Imagen no encontrada.'));
+            };
+            img.src = urlFoto;
+        }
+        catch (err) { reject(err) }
+        finally  { ponSpin(false) }
+    });
 }
 
 
@@ -191,60 +328,4 @@ function compruebaSpin() {
         intervalo = 0;
         elZona.close(); 
     }
-}
-
-
-/* Pagina los elementos de un vector  en función del número de elementos dado */
-function paginacion(vector, numEl) {
-    let elemens, inicio, info;
-    let totElem = vector.length;
- 
-    if (totElem > numEl) {
-        elemens = numEl;
-        // TODO botones anterior - siguiente
-    } else {
-        elemens = totElem;
-        // TODO Controlar la última página, que puede tener menos numEl
-    }
-
-    inicio = (pagina - 1) * elemens;
-
-    // Mostrando la galería
-    vector.slice(inicio, elemens).forEach(
-        (urlFoto, i) => {
-            medidas(urlFoto)
-            .then(mide => { // Para evitar el Flash Of Unestiled Content (FOUC)
-                elGaleria.innerHTML += `<div><a href="${urlFoto}" target="_blank"><img ` 
-                + `class="foto" src="${urlFoto}" width="${mide.ancho}" height="${mide.alto}"`
-                + `alt="Foto ${inicio + i + 1}" title="Foto ${inicio + i + 1}" /></a></div>`
-            })
-            .catch(err => {
-                console.error(err);
-                abreVentanaModal(err);
-            });
-        }
-    )
-    info = `<span class="cuenta">Fotos: ${inicio + 1} a ${elemens} de ${totElem}</span>`;
-    elNavegac.innerHTML = info;
-}
-
-
-/* Obtiene el ancho y alto de una imagen. Resuelve con un objeto */
-function medidas(urlFoto) {
-    return new Promise((resolve, reject) => {
-        try {
-            ponSpin(true);
-            const img = new Image();
-            img.onload  = () => {
-                resolve({ ancho: img.width, alto: img.height });
-            };
-            img.onerror = () => {
-                // ¿TODO?  throw Error('Imagen no encontrada.')
-                reject(new Error('Imagen no encontrada.'));
-            };
-            img.src = urlFoto;
-        }
-        catch (err) { reject(err) }
-        finally  { ponSpin(false) }
-    });
 }
