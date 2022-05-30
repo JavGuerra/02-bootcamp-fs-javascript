@@ -21,9 +21,14 @@ Pasos:
 */
 
 
+// Indicaciones de Borja: cambios en el map hacen que listaRespuestas devuelva promesas
+
 const url = 'https://api.github.com/users/';
 const listaUsuarios = ['jgthms', 'mauricesvay', 'xet7', 'javguerra'];
-let   listaPromesas = listaUsuarios.map(usuario => fetch(url + usuario));
+let   listaPromesas = listaUsuarios.map( async (usuario) => {
+    const respuesta = await fetch(url + usuario);
+    return respuesta.json();
+});
 
 console.log('\nResultado:');
 console.log(`Hay ${listaPromesas.length} promesas.\n\n`);
@@ -31,13 +36,9 @@ console.log(`Hay ${listaPromesas.length} promesas.\n\n`);
 Promise.all(listaPromesas)
     .then(listaRespuestas => {
         listaRespuestas.forEach(respuesta => {
-            comprueba(respuesta)
-                .then(data => {
-                    console.log('Nombre: ' + data.name );
-                    console.log('URL: ' + data.html_url);
-                    console.log('\n');
-                })
-                .catch(err => {console.error(err)});       
+            console.log('Nombre: ' + respuesta.name );
+            console.log('URL: ' + respuesta.html_url);
+            console.log('\n');  
         })
     })
     .catch(err => {console.error(err)})
