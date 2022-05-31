@@ -11,6 +11,9 @@
     <meta name='date' content='May. 26, 2022'>
     <title>JavaScript</title>
     <link rel="prefetch" href="https://dog.ceo/api/" as="fetch">
+    <link rel="preload" href="fonts/puppybellies.medium.ttf" as="font">
+    <link rel="preload" href="img/dogs.png" as="image">
+    <link rel="preload" href="css/17-fetch.css" as="styles">
     <link rel="stylesheet" href="css/17-fetch.css">
     <script defer src="js/17-fetch.js"></script>
 </head>
@@ -63,7 +66,7 @@
             </div>
         </dialog>
 
-        <dialog id='zona'><div class="spinner"></div></dialog>
+        <dialog id='zona'><div class="spinner" aria-label="Cargando..."></div></dialog>
     </main>
 
     <footer>
