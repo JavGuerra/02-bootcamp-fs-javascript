@@ -31,7 +31,7 @@ console.log(`Hay ${listaPromesas.length} promesas.\n\n`);
 Promise.all(listaPromesas)
     .then(listaRespuestas => {
         listaRespuestas.forEach(respuesta => {
-            comprueba(respuesta)
+            comprueba(respuesta) // alt: Promise.resolve(respuesta.json())
                 .then(data => {
                     console.log('Nombre: ' + data.name );
                     console.log('URL: ' + data.html_url);
