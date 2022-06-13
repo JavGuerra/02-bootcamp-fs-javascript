@@ -40,7 +40,7 @@ h1 {
 }
 
 h1::before {
-  content: "} " / "";
+  content: "} ";
 }
 
 a {
@@ -64,7 +64,7 @@ a:hover {
 }
 
 #enviar::before {
-  content: "+" / "";
+  content: "+";
 }
 
 #enviar:hover,
@@ -83,7 +83,7 @@ footer p .letras {
 }
 
 footer p .letras::before {
-  content: "{" / "";
+  content: "{";
 }
 
 #raza {
@@ -170,11 +170,11 @@ footer p .letras::before {
 }
 
 #error h2::before {
-  content: "i " / "";
+  content: "i ";
 }
 
 #error h2::after {
-  content: " !" / "";
+  content: " !";
 }
 
 .cuenta {
