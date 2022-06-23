@@ -21,6 +21,7 @@
     { "titulo": "16b. Cronómetro",  "enlace": "16b-cronometro.html"  },
     { "titulo": "17. Fetch",        "enlace": "17-fetch.html"        },
     { "titulo": "17b. Fetch",       "enlace": "17b-fetch.html"       },
-    { "titulo": "17c. Fetch",       "enlace": "17c-fetch.html"       }
+    { "titulo": "17c. Fetch",       "enlace": "17c-fetch.html"       },
+    { "titulo": "18. Firebase",     "enlace": "firebase.html"        }
 
 ]
