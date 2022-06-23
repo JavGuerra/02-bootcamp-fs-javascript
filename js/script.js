@@ -4,7 +4,7 @@ fetch('js/listado.json')
     const lista = document.getElementById('listado');
     let article;
     for (tarea of data) {
-        let article = document.createElement('article');
+        article = document.createElement('article');
         article.innerHTML =
          `<a target="_blank" href="${tarea.enlace}">${tarea.titulo}</a>`;
         lista.appendChild(article);
