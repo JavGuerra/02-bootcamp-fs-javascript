@@ -45,7 +45,7 @@ function loginUser(e, auth, db) {
     signInWithEmailAndPassword(auth, correo, passwd)
       .then(response => {
 
-        console.log('Usuario autenticado correctamente.', response);
+        console.log('Usuario autenticado correctamente.');
         const userId = response.user.uid;
 
         // TODO Mostrar datos
@@ -73,7 +73,7 @@ function signUpUser(e, auth, db) {
     if (passwd !== '' && passwd2 !== '' && passwd === passwd2) {
       createUserWithEmailAndPassword(auth, correo, passwd)
         .then(response => {
-          console.log('Usuario creado correctamente.', response);
+          console.log('Usuario creado correctamente.');
           const userId = response.user.uid;
           const data = {
             nombre: nombre,
@@ -112,7 +112,7 @@ function getUserData(db, userId) {
   get(child(ref(db), `users/${userId}`))
     .then((snapshot) => {
       if (snapshot.exists()) {
-        console.log('Datos de usuario obtenidos correctamente.', snapshot.val());
+        console.log('Datos de usuario obtenidos correctamente.');
         el('#dataNombre').innerHTML = snapshot.val().nombre;
         el('#datoEdad'  ).innerHTML = snapshot.val().edad;
         el('#datoDirec' ).innerHTML = snapshot.val().direcc;
