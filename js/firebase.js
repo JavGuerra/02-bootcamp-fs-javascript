@@ -25,8 +25,11 @@ const auth = getAuth(app);
 const db   = getDatabase(app);
 
 function el(el) { return document.querySelector(el) }
-
 function showEl(el, status) { el.style.display = status ? 'initial' : 'none' }
+function setInactiveBtn(button, status) {
+  button.disabled = status;
+  button.setAttribute('aria-disabled', status);
+}
 
 el('#envSalir').onclick = (e) => logoutUser(e, auth);
 
@@ -37,8 +40,9 @@ onAuthStateChanged(auth, (user) => {
     showEl(el('#login'), false);
     showEl(el('#alta' ), false);
     showEl(el('#datos'), true );
+    window.scroll(0, 0);
 
-    // getUserData(db, userId);
+    // getUserData(db, user.uid);
 
   } else {
 
@@ -56,10 +60,13 @@ onAuthStateChanged(auth, (user) => {
       mode = !mode;
       showEl(el('#login'), mode);
       showEl(el('#alta'), !mode);
+      window.scroll(0, 0);
     }
 
 
     function loginUser(e, auth, db) {
+      setInactiveBtn(el('#envLogin'), true);
+
       if (document.formLogin.checkValidity()) {
         e.preventDefault();
 
@@ -77,13 +84,18 @@ onAuthStateChanged(auth, (user) => {
             
             showEl(el('#login'), false);
             showEl(el('#datos'), true);
+            window.scroll(0, 0);
           })
           .catch(error => alert(error.code, error.message));
       }
+
+      setInactiveBtn(el('#envLogin'), false);
     }
 
 
     function signUpUser(e, auth, db) {
+      setInactiveBtn(el('#envAlta'), true);
+
       if (document.formAlta.checkValidity()) {
         e.preventDefault();
 
@@ -116,7 +128,10 @@ onAuthStateChanged(auth, (user) => {
           alert('Las contraseñas no coinciden.');
         }
       }
+
+      setInactiveBtn(el('#envAlta'), false);
     }
+
 
     function getUserData(db, userId) {
       get(child(ref(db), `users/${userId}`))
@@ -146,14 +161,19 @@ onAuthStateChanged(auth, (user) => {
 
 });
 
+
 function logoutUser(e, auth) {
   e.preventDefault();
+  setInactiveBtn(el('#envSalir'), true);
 
   signOut(auth)
     .then(() => {
       console.log('Cerrada sesión de usuario correctamente.');
       showEl(el('#datos'), false);
       showEl(el('#login'), true);
+      window.scroll(0, 0);
     })
     .catch(error => alert(error.code, error.message));
+
+  setInactiveBtn(el('#envSalir'), false);
 }
