@@ -24,6 +24,10 @@ const app  = initFirebase();
 const auth = getAuth(app);
 const db   = getDatabase(app);
 
+function el(el) { return document.querySelector(el) }
+
+function showEl(el, status) { el.style.display = status ? 'initial' : 'none' }
+
 onAuthStateChanged(auth, (user) => {
 
   if (user) {
@@ -46,6 +50,13 @@ onAuthStateChanged(auth, (user) => {
     el('#lnkLogin').onclick = switchMode;
     el('#lnkAlta' ).onclick = switchMode;
 
+
+    function switchMode() {
+      mode = !mode;
+      showEl(el('#login'), mode);
+      showEl(el('#alta'), !mode);
+    }
+    
 
     function loginUser(e, auth, db) {
       if (document.formLogin.checkValidity()) {
@@ -142,19 +153,6 @@ onAuthStateChanged(auth, (user) => {
         set(ref(db, `users/${userId}`), data);
       }
       catch (error) {alert(error.code, error.message)};
-    }
-
-
-    function el(el) { return document.querySelector(el) }
-
-
-    function showEl(el, status) { el.style.display = status ? 'initial' : 'none' }
-
-
-    function switchMode() {
-      mode = !mode;
-      showEl(el('#login'), mode);
-      showEl(el('#alta'), !mode);
     }
 
   }
