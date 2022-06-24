@@ -28,6 +28,8 @@ function el(el) { return document.querySelector(el) }
 
 function showEl(el, status) { el.style.display = status ? 'initial' : 'none' }
 
+el('#envSalir').onclick = (e) => logoutUser(e, auth);
+
 onAuthStateChanged(auth, (user) => {
 
   if (user) {
@@ -46,7 +48,6 @@ onAuthStateChanged(auth, (user) => {
 
     el('#envLogin').onclick = (e) => loginUser(e, auth, db);
     el('#envAlta' ).onclick = (e) => signUpUser(e, auth, db);
-    el('#envSalir').onclick = (e) => logoutUser(e, auth);
     el('#lnkLogin').onclick = switchMode;
     el('#lnkAlta' ).onclick = switchMode;
 
@@ -56,7 +57,7 @@ onAuthStateChanged(auth, (user) => {
       showEl(el('#login'), mode);
       showEl(el('#alta'), !mode);
     }
-    
+
 
     function loginUser(e, auth, db) {
       if (document.formLogin.checkValidity()) {
@@ -117,20 +118,6 @@ onAuthStateChanged(auth, (user) => {
       }
     }
 
-
-    function logoutUser(e, auth) {
-      e.preventDefault();
-
-      signOut(auth)
-        .then(() => {
-          console.log('Cerrada sesión de usuario correctamente.');
-          showEl(el('#datos'), false);
-          showEl(el('#login'), true);
-        })
-        .catch(error => alert(error.code, error.message));
-    }
-
-
     function getUserData(db, userId) {
       get(child(ref(db), `users/${userId}`))
         .then((snapshot) => {
@@ -158,3 +145,15 @@ onAuthStateChanged(auth, (user) => {
   }
 
 });
+
+function logoutUser(e, auth) {
+  e.preventDefault();
+
+  signOut(auth)
+    .then(() => {
+      console.log('Cerrada sesión de usuario correctamente.');
+      showEl(el('#datos'), false);
+      showEl(el('#login'), true);
+    })
+    .catch(error => alert(error.code, error.message));
+}
