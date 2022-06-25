@@ -42,3 +42,7 @@ input, button:enabled {
 .enlinea {
     display: inline-block;
 }
+
+#alta, #datos {
+    display: none;
+}
