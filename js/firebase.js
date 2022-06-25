@@ -107,28 +107,33 @@ onAuthStateChanged(auth, (user) => {
         const passwd2 = document.formAlta.passwd2.value;
 
         if (passwd !== '' && passwd2 !== '' && passwd === passwd2) {
-          createUserWithEmailAndPassword(auth, correo, passwd)
-            .then(response => {
-              console.log('Usuario creado correctamente.');
-              const userId = response.user.uid;
-              const data = {
-                nombre: nombre,
-                edad: edad,
-                direcc: direcc,
-                correo: correo
-              };
+          if (passwd.length() >= 6) {
+            createUserWithEmailAndPassword(auth, correo, passwd)
+              .then(response => {
+                console.log('Usuario creado correctamente.');
+                const userId = response.user.uid;
+                const data = {
+                  nombre: nombre,
+                  edad: edad,
+                  direcc: direcc,
+                  correo: correo
+                };
 
-              // TODO subir datos
-              // setUserData(db, userId, data);
+                // TODO subir datos
+                // setUserData(db, userId, data);
 
-              switchMode();
-            })
-            .catch(error => alert(error.code, error.message));
+                switchMode();
+              })
+              .catch(error => alert(error.code, error.message));
+            } else {
+              alert('El password debe tener al menos 6 caracteres.');
+            }
         } else {
           alert('Las contraseñas no coinciden.');
         }
+        
       }
-
+    
       setInactiveBtn(el('#envAlta'), false);
     }
 
@@ -158,7 +163,6 @@ onAuthStateChanged(auth, (user) => {
     }
 
   }
-
 });
 
 
