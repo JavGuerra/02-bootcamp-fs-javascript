@@ -1,0 +1,64 @@
+:root {
+	--texto: FireBrick;
+	--texto-seleccion: White;
+	--texto-seleccion-sombra: FireBrick;
+	--fondo: BlanchedAlmond;
+	--fondo-hover: PeachPuff;
+	--fondo-seleccion: LightSalmon;
+	--fondo-seleccion-hover: DarkSalmon;
+	--borde: PeachPuff;
+	--borde-seleccion: LightSalmon;
+	--borde-seleccion-hover: DarkSalmon;
+	--sombra: rgba(0,0,0,0.2);
+}
+
+body {
+    margin: 2em auto;
+    max-width: 50em;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+
+#botones {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content:center;
+	
+}
+
+.oculta {
+	display: none;
+}
+
+.etiqueta-boton {
+	display: block;
+	text-align: center;
+	font-weight: bold;
+	padding: 1em 2em;
+	margin: 0.5em;
+	color:  var(--texto);
+	background: var(--fondo);
+	border: 2px solid var(--borde);
+	border-radius: 0.5em;
+	box-shadow: 0 3px 0 var(--sombra);
+	transition: 0.3s;
+	cursor: pointer;
+	user-select: none;
+}
+
+.etiqueta-boton:hover {
+	background: var(--fondo-hover);
+}
+
+input:checked + .etiqueta-boton {
+	color: var(--texto-seleccion);
+	text-shadow: 1px 1px 0px var(--texto-seleccion-sombra);
+	background: var(--fondo-seleccion);
+	border: 2px solid var(--borde-seleccion);
+}
+
+input:checked + .etiqueta-boton:hover {
+	background: var(--fondo-seleccion-hover);
+	border: 2px solid var(--borde-seleccion-hover);
+}
+
